@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="DebugView">
+      <UniqueIdentifier>{8bddeaa1-a5f5-4cdf-a5a0-42454755d99a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lock">
+      <UniqueIdentifier>{5b672722-88df-4909-bcbf-540cd12d6ac2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dump跟踪">
+      <UniqueIdentifier>{7ac66f69-7912-4c6c-b084-54e0699f7203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DllLoad">
+      <UniqueIdentifier>{874e5172-403c-4f15-82f3-d4b2734b794d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="日记类">
+      <UniqueIdentifier>{da491fbe-e8ce-41b3-9ba7-7a34cade72f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="文件管理">
+      <UniqueIdentifier>{f47e4700-5070-4e59-ac1b-260a82e1bc2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tinyxml">
+      <UniqueIdentifier>{ce8f0db1-e564-4109-a30e-89412c0cac6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tinyxml2">
+      <UniqueIdentifier>{2582fc44-973a-4b8e-90dc-be1c74e36dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemSettings">
+      <UniqueIdentifier>{b28390bc-4a3b-415c-9f1e-3cdb25bc47df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread_pool">
+      <UniqueIdentifier>{62371f7f-3061-456a-a4a7-e85dae4d60e7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WisdomMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Dump\Crash_Dumper.cpp">
+      <Filter>Dump跟踪</Filter>
+    </ClCompile>
+    <ClCompile Include="LiteLog\LiteLog.cpp">
+      <Filter>日记类</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugView\DebugView.cpp">
+      <Filter>DebugView</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManager\FileManange.cpp">
+      <Filter>文件管理</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinystr.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxml.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxmlerror.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxmlparser.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\TinyXmlTool.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2\tinyxml2.cpp">
+      <Filter>tinyxml2</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2\tinyxml2test.cpp">
+      <Filter>tinyxml2</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\TinyXmlTest.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemSettings\GetCpuUseage.cpp">
+      <Filter>SystemSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemSettings\SystemSettings.cpp">
+      <Filter>SystemSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="thread_pool\thread_pool.cpp">
+      <Filter>thread_pool</Filter>
+    </ClCompile>
+    <ClCompile Include="thread_pool\testThreadPool.cpp">
+      <Filter>thread_pool</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WisdomUtils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoLockClass.h">
+      <Filter>Lock</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoLockMacro.h">
+      <Filter>Lock</Filter>
+    </ClInclude>
+    <ClInclude Include="DllLoader.h">
+      <Filter>DllLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="Dump\Crash_Dumper.h">
+      <Filter>Dump跟踪</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugView\DebugView.h">
+      <Filter>DebugView</Filter>
+    </ClInclude>
+    <ClInclude Include="head.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager\FileManange.h">
+      <Filter>文件管理</Filter>
+    </ClInclude>
+    <ClInclude Include="LiteLog\LiteLog.h">
+      <Filter>日记类</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml\tinystr.h">
+      <Filter>tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml\tinyxml.h">
+      <Filter>tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml\TinyXmlTool.h">
+      <Filter>tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml2\tinyxml2.h">
+      <Filter>tinyxml2</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemSettings\GetCpuUseage.h">
+      <Filter>SystemSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemSettings\SystemSettings.h">
+      <Filter>SystemSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="thread_pool\thread_pool.h">
+      <Filter>thread_pool</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+/Python_caller/Debug
+/Python_caller/Release
+/Python_caller/x64
+/SuperWisdomUtils/x64
+/SuperWisdomUtils/Debug
+/SuperWisdomUtils/Release
+/ZeroMQ/Debug
+/ZeroMQ/Release
+/OpencvTest/Debug
+/OpencvTest/Release
+/SuperWisdomUtils/.vs
+/SuperWisdomUtils/Curl_test/Debug
+/SuperWisdomUtils/Curl_test/Release

@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\zmq.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zmq_utils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\address.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\array.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\atomic_counter.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\atomic_ptr.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\blob.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\clock.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\command.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\config.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ctx.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\curve_client.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\curve_server.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dbuffer.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dealer.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\decoder.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\devpoll.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dist.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\encoder.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\epoll.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\err.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fd.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fq.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\i_decoder.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\i_encoder.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\i_engine.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\i_poll_events.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\io_object.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\io_thread.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ip.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ipc_address.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ipc_connecter.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ipc_listener.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\kqueue.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lb.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\likely.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mailbox.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mechanism.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\msg.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mtrie.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mutex.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\null_mechanism.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\object.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\options.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\own.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pair.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pgm_receiver.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pgm_sender.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pgm_socket.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pipe.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plain_mechanism.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\poll.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\poller.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\poller_base.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\precompiled.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\proxy.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pub.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pull.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\push.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\random.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\raw_decoder.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\raw_encoder.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reaper.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rep.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\req.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\router.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\select.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\session_base.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\signaler.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\socket_base.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stdint.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stream.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stream_engine.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sub.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tcp.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tcp_address.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tcp_connecter.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tcp_listener.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thread.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\trie.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\v1_decoder.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\v1_encoder.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\v2_decoder.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\v2_encoder.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\v2_protocol.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\windows.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wire.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\xpub.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\xsub.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ypipe.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ypipe_base.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ypipe_conflate.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\yqueue.hpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\address.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\clock.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\curve_client.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\curve_server.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dealer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\devpoll.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dist.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\epoll.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\err.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fq.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io_object.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io_thread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ip.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ipc_address.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ipc_connecter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ipc_listener.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kqueue.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lb.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mailbox.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mechanism.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\msg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mtrie.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\null_mechanism.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\object.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\options.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\own.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pair.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pgm_receiver.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pgm_sender.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pgm_socket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pipe.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plain_mechanism.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\poll.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\poller_base.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\precompiled.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\proxy.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pub.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pull.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\push.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\random.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\raw_decoder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\raw_encoder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reaper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rep.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\req.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\router.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\select.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\session_base.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\signaler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\socket_base.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stream.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stream_engine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sub.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tcp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tcp_address.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tcp_connecter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tcp_listener.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\trie.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\v1_decoder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\v1_encoder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\v2_decoder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\v2_encoder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\xpub.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\xsub.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\zmq.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\zmq_utils.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\version.rc">
+      <Filter>源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
