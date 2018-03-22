@@ -88,8 +88,22 @@ namespace WisdomUtils
 		dumpInfo.ExceptionPointers = pException;  
 		dumpInfo.ThreadId = ::GetCurrentThreadId();  
 		dumpInfo.ClientPointers = TRUE;  
+		MINIDUMP_TYPE mdt = (MINIDUMP_TYPE)(
+
+			MiniDumpWithPrivateReadWriteMemory
+			| MiniDumpWithDataSegs
+			| MiniDumpWithFullMemory
+			| MiniDumpWithHandleData
+			| MiniDumpWithUnloadedModules
+			| MiniDumpWithIndirectlyReferencedMemory
+			| MiniDumpWithProcessThreadData
+			| MiniDumpWithFullMemoryInfo
+			| MiniDumpWithThreadInfo
+			| MiniDumpWithPrivateWriteCopyMemory
+			| MiniDumpWithTokenInformation
+			/*| MiniDumpWithModuleHeaders*/);
 		//    ::MiniDumpWriteDump(::GetCurrentProcess(), ::GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);  
-		BOOL bRet = ::MiniDumpWriteDump(::GetCurrentProcess(), ::GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);  
+		BOOL bRet = ::MiniDumpWriteDump(::GetCurrentProcess(), ::GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
 		if (bRet)
 		{
 			ShellExecute(NULL,L"open",L"DebugReport.exe",NULL,NULL,SW_HIDE);

@@ -80,7 +80,12 @@
     <ClCompile Include="DebugView\DebugView.cpp" />
     <ClCompile Include="Dump\Crash_Dumper.cpp" />
     <ClCompile Include="FileManager\FileManange.cpp" />
+    <ClCompile Include="Json\jsoncpp.cpp" />
+    <ClCompile Include="Json\testJson.cpp" />
+    <ClCompile Include="Json\WSJson.cpp" />
     <ClCompile Include="LiteLog\LiteLog.cpp" />
+    <ClCompile Include="log\Logger.cpp" />
+    <ClCompile Include="log\LogManager.cpp" />
     <ClCompile Include="SystemSettings\GetCpuUseage.cpp" />
     <ClCompile Include="SystemSettings\SystemSettings.cpp" />
     <ClCompile Include="thread_pool\testThreadPool.cpp" />
@@ -103,7 +108,13 @@
     <ClInclude Include="Dump\Crash_Dumper.h" />
     <ClInclude Include="FileManager\FileManange.h" />
     <ClInclude Include="head.h" />
+    <ClInclude Include="Json\json\json-forwards.h" />
+    <ClInclude Include="Json\json\json.h" />
+    <ClInclude Include="Json\WSJson.h" />
     <ClInclude Include="LiteLog\LiteLog.h" />
+    <ClInclude Include="log\Logger.h" />
+    <ClInclude Include="log\LogManager.h" />
+    <ClInclude Include="log\log_deffine.h" />
     <ClInclude Include="SystemSettings\GetCpuUseage.h" />
     <ClInclude Include="SystemSettings\SystemSettings.h" />
     <ClInclude Include="thread_pool\thread_pool.h" />
@@ -112,6 +123,9 @@
     <ClInclude Include="tinyxml\tinyxml.h" />
     <ClInclude Include="tinyxml\TinyXmlTool.h" />
     <ClInclude Include="WisdomUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Debug\SuperWisdomUtils.exe.dmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

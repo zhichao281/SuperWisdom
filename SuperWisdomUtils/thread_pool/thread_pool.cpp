@@ -9,20 +9,19 @@
 #include <functional>
 #include <windows.h>
 #include <iostream>
-
 using namespace netlib;
 
 ThreadPool::ThreadPool(int threadNumber)
-:threadNumber_(threadNumber),
-running_(true),
-threads_(threadNumber_)
+:m_nThreadNumber(threadNumber),
+m_bRunning(true),
+m_vecThread(m_nThreadNumber)
 {
-	threads_.clear();
+	m_vecThread.clear();
 }
 
 ThreadPool::~ThreadPool()
 {
-	if (running_)
+	if (m_bRunning)
 	{
 		stop();
 	}
@@ -30,11 +29,10 @@ ThreadPool::~ThreadPool()
 
 bool ThreadPool::start(void)
 {
-	for (int i = 0; i < threadNumber_; i++)
+	for (int i = 0; i < m_nThreadNumber; i++)
 	{
-		threads_.push_back(std::make_shared<std::thread>(std::bind(&ThreadPool::threadWork, this)));//循环创建线程       
+		m_vecThread.push_back(std::make_shared<std::thread>(std::bind(&ThreadPool::threadWork, this)));//循环创建线程       
 	}
-	Sleep(500);
 	std::cout << "start" << std::endl;
 
 	return true;
@@ -43,10 +41,10 @@ bool ThreadPool::start(void)
 bool ThreadPool::stop(void)
 {
 	std::cout << "stop" << std::endl;
-	if (running_)
+	if (m_bRunning)
 	{
-		running_ = false;
-		for (auto t : threads_)
+		m_bRunning = false;
+		for (auto t : m_vecThread)
 		{			
 			t->join();  //循环等待线程终止			
 		}
@@ -56,8 +54,7 @@ bool ThreadPool::stop(void)
 
 bool ThreadPool::IsRunning()
 {
-
-	return running_;
+	return m_bRunning;
 }
 
 ThreadPool * netlib::ThreadPool::GetInstance()
@@ -70,9 +67,9 @@ ThreadPool * netlib::ThreadPool::GetInstance()
 	}
 
 	s_pThreadPool = new ThreadPool(10);
-
+	s_pThreadPool->start();
 	return s_pThreadPool;
-	return nullptr;
+
 }
 
 
@@ -87,27 +84,27 @@ bPriority	是否要优先执行
 */
 bool ThreadPool::append(ThreadTask task,  bool bPriority /* = false */)
 {
-	std::lock_guard<std::mutex> guard(mutex_);
-	tasks_.push_front(task);   //将该任务加入任务队列
-	condition_empty_.notify_one();//唤醒某个线程来执行此任务
+	std::lock_guard<std::mutex> guard(m_mutex);
+	m_taskList.push_front(task);   //将该任务加入任务队列
+	m_condition_empty.notify_one();//唤醒某个线程来执行此任务
 	return true;
 }
 
 void ThreadPool::threadWork(void)
 {
 	ThreadTask task = nullptr;
-	while (running_)
+	while (m_bRunning)
 	{
 		{
-			std::lock_guard<std::mutex> guard(mutex_);
-			if (tasks_.empty())
+			std::lock_guard<std::mutex> guard(m_mutex);
+			if (m_taskList.empty())
 			{
-				condition_empty_.wait(mutex_);  //等待有任务到来被唤醒
+				m_condition_empty.wait(m_mutex);  //等待有任务到来被唤醒
 			}
-			if (!tasks_.empty())
+			if (!m_taskList.empty())
 			{
-				task = tasks_.front();  //从任务队列中获取最开始任务
-				tasks_.pop_front();     //将取走的任务弹出任务队列
+				task = m_taskList.front();  //从任务队列中获取最开始任务
+				m_taskList.pop_front();     //将取走的任务弹出任务队列
 			}
 			else
 			{

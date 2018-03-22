@@ -38,17 +38,19 @@ namespace netlib
 		// 获取线程池实例
 		static ThreadPool* GetInstance();
 
-	private:
-
+private:
 		//线程所执行的工作函数
 		void threadWork(void);
 
-		std::mutex mutex_;                                              //互斥锁
-		std::condition_variable_any condition_empty_;                   //当任务队列为空时的条件变量
-		std::list<ThreadTask> tasks_;                                   //任务队列
-		bool running_;                                                  //线程池是否在运行
-		int threadNumber_;                                              //线程数
-		std::vector<std::shared_ptr<std::thread>> threads_;             //用来保存线程对象指针
+private:
+		std::mutex m_mutex;                                        //互斥锁
+
+		bool m_bRunning;                                           //线程池是否在运行
+		int m_nThreadNumber;                                       //线程数
+
+		std::condition_variable_any m_condition_empty;             //当任务队列为空时的条件变量
+		std::list<ThreadTask> m_taskList;                          //任务队列
+		std::vector<std::shared_ptr<std::thread>> m_vecThread;     //用来保存线程对象指针
 	};
 }
 

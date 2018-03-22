@@ -43,6 +43,12 @@
     <Filter Include="thread_pool">
       <UniqueIdentifier>{62371f7f-3061-456a-a4a7-e85dae4d60e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Json">
+      <UniqueIdentifier>{7fdbb269-2098-4077-b401-6d728edcec22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{08488c95-9535-4a53-8c1d-e9147d88c259}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WisdomMain.cpp">
@@ -96,6 +102,21 @@
     <ClCompile Include="thread_pool\testThreadPool.cpp">
       <Filter>thread_pool</Filter>
     </ClCompile>
+    <ClCompile Include="Json\jsoncpp.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="log\Logger.cpp">
+      <Filter>log</Filter>
+    </ClCompile>
+    <ClCompile Include="log\LogManager.cpp">
+      <Filter>log</Filter>
+    </ClCompile>
+    <ClCompile Include="Json\WSJson.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="Json\testJson.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WisdomUtils.h">
@@ -146,5 +167,26 @@
     <ClInclude Include="thread_pool\thread_pool.h">
       <Filter>thread_pool</Filter>
     </ClInclude>
+    <ClInclude Include="Json\json\json.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\json\json-forwards.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="log\log_deffine.h">
+      <Filter>log</Filter>
+    </ClInclude>
+    <ClInclude Include="log\Logger.h">
+      <Filter>log</Filter>
+    </ClInclude>
+    <ClInclude Include="log\LogManager.h">
+      <Filter>log</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\WSJson.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Debug\SuperWisdomUtils.exe.dmp" />
   </ItemGroup>
 </Project>
