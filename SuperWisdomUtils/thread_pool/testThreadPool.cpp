@@ -85,8 +85,9 @@ std::string utf8_to_gb2312(std::string const &strUtf8)
 #include "../log/LogManager.h"
 #include "thread_pool.h"
 
-void threadmain(void)
+void ma11in(void)
 {
+	
 	CLogManager::GetInstance();
 	g_logPtr.reset(new Logger);
 	LOG_INFO("main");

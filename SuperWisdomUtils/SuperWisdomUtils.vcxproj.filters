@@ -46,8 +46,11 @@
     <Filter Include="Json">
       <UniqueIdentifier>{7fdbb269-2098-4077-b401-6d728edcec22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="log">
-      <UniqueIdentifier>{08488c95-9535-4a53-8c1d-e9147d88c259}</UniqueIdentifier>
+    <Filter Include="Log">
+      <UniqueIdentifier>{03e3995a-02d7-4ddc-940f-720d10a5f4b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gtest">
+      <UniqueIdentifier>{c9bf3f8d-9b19-426e-bd5e-50846218159d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -105,17 +108,26 @@
     <ClCompile Include="Json\jsoncpp.cpp">
       <Filter>Json</Filter>
     </ClCompile>
-    <ClCompile Include="log\Logger.cpp">
-      <Filter>log</Filter>
-    </ClCompile>
-    <ClCompile Include="log\LogManager.cpp">
-      <Filter>log</Filter>
-    </ClCompile>
     <ClCompile Include="Json\WSJson.cpp">
       <Filter>Json</Filter>
     </ClCompile>
     <ClCompile Include="Json\testJson.cpp">
       <Filter>Json</Filter>
+    </ClCompile>
+    <ClCompile Include="log\Logger.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="log\LogManager.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="gtest-1.7.0\gtest\gtest_main.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="gtest-1.7.0\gtest\gtest-all.cc">
+      <Filter>gtest</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>gtest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,17 +185,20 @@
     <ClInclude Include="Json\json\json-forwards.h">
       <Filter>Json</Filter>
     </ClInclude>
-    <ClInclude Include="log\log_deffine.h">
-      <Filter>log</Filter>
-    </ClInclude>
-    <ClInclude Include="log\Logger.h">
-      <Filter>log</Filter>
-    </ClInclude>
-    <ClInclude Include="log\LogManager.h">
-      <Filter>log</Filter>
-    </ClInclude>
     <ClInclude Include="Json\WSJson.h">
       <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="log\log_deffine.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="log\Logger.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="log\LogManager.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="gtest-1.7.0\gtest\gtest.h">
+      <Filter>gtest</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

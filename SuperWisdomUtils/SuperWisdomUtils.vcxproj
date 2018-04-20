@@ -42,6 +42,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>E:\study\SuperWisdom\SuperWisdomUtils\gtest-1.7.0;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -80,6 +81,8 @@
     <ClCompile Include="DebugView\DebugView.cpp" />
     <ClCompile Include="Dump\Crash_Dumper.cpp" />
     <ClCompile Include="FileManager\FileManange.cpp" />
+    <ClCompile Include="gtest-1.7.0\gtest\gtest-all.cc" />
+    <ClCompile Include="gtest-1.7.0\gtest\gtest_main.cc" />
     <ClCompile Include="Json\jsoncpp.cpp" />
     <ClCompile Include="Json\testJson.cpp" />
     <ClCompile Include="Json\WSJson.cpp" />
@@ -88,6 +91,7 @@
     <ClCompile Include="log\LogManager.cpp" />
     <ClCompile Include="SystemSettings\GetCpuUseage.cpp" />
     <ClCompile Include="SystemSettings\SystemSettings.cpp" />
+    <ClCompile Include="test.cpp" />
     <ClCompile Include="thread_pool\testThreadPool.cpp" />
     <ClCompile Include="thread_pool\thread_pool.cpp" />
     <ClCompile Include="tinyxml2\tinyxml2.cpp" />
@@ -107,6 +111,7 @@
     <ClInclude Include="DllLoader.h" />
     <ClInclude Include="Dump\Crash_Dumper.h" />
     <ClInclude Include="FileManager\FileManange.h" />
+    <ClInclude Include="gtest-1.7.0\gtest\gtest.h" />
     <ClInclude Include="head.h" />
     <ClInclude Include="Json\json\json-forwards.h" />
     <ClInclude Include="Json\json\json.h" />
