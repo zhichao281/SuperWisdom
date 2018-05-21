@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "Logger.h"
 #include <time.h>
 #include <string>
@@ -8,6 +10,7 @@
 #include <time.h>
 #include <memory>
 #include <crtdbg.h>
+
 std::unique_ptr<Logger> g_logPtr;
 // 
 #ifdef _WIN32  
@@ -130,7 +133,7 @@ void Logger::Write2Caching(int log_level_,const char * strInfo, ...)
 		printf("return strInfo");
 		return;
 	}
-	char pTemp[2048*10] = {0};
+	char pTemp[2048*100] = {0};
 	strcpy(pTemp, GetWsCurrentTime().c_str());
 	strcat(pTemp, logLevelToString(log_level_));
 	va_list arg_ptr;

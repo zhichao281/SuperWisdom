@@ -2,7 +2,7 @@
 #include "Logger.h"
 #include <windows.h>
 #include <thread>
-
+#define _CRT_SECURE_NO_WARNINGS
 class CLogManager
 {
 private:
