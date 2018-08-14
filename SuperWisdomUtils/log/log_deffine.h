@@ -8,12 +8,20 @@ typedef enum EnumLogLevel
 	LogLevelDebug =  1,
 	LogLevelInfo  =  2,  
 	LogLevelWarring  =  3,
-	LoglevelError =  4
+	LoglevelError =  4,
+	loglevelClose =5
 };
 
 
 void  _log_write(EnumLogLevel nLevel, const char *pformat, ...);
 
+void  _log_level(int nLevel);
+
+void  _log_filename(const char *pfilename);
+
+#define  LOG_LEVEL( _level ) _log_level(_level);
+
+#define  LOG_FILENAME( _file ) _log_filename(_file);
 
 #define LOG_INFO(format, ...) _log_write(LogLevelInfo, ": [%s<%04d>] "format"\r\n", __FUNCTION__, __LINE__,  ##__VA_ARGS__)
 

@@ -123,11 +123,12 @@ Logger::~Logger()
 
 void Logger::Write2Caching(int log_level_,const char * strInfo, ...)
 {
-	if (log_level_ < m_log_level_)
+	if (log_level_  < m_log_level_)
 	{
 		printf("return log_level_ < m_log_level_");
 		return;
 	}
+
 	if(!strInfo)
 	{
 		printf("return strInfo");
@@ -208,6 +209,44 @@ void Logger::DoWriteLog()
 	GenerateLogName();	
 }
 
+void  Logger::SetLogLevel(int log_level_)
+{
+	m_log_level_ = log_level_;
+
+}
+void  Logger::SetLogFileName(const char * pStrFileName)
+{
+	if (m_strCurLogName != pStrFileName)
+	{
+		m_strCurLogName = pStrFileName;
+
+		time_t curTime = time(NULL);
+		curTime = curTime / (3600 * 24);
+		char temp[1024] = { 0 };
+		m_nCurrentDay = curTime;
+		//2013-01-01.log
+		sprintf(temp, "%s/%s-%s.log", m_strLogPath.c_str(), Time2String(m_nCurrentDay*(3600 * 24)).c_str(), m_strCurLogName.c_str());
+		if (m_pFileStream)
+		{
+			fclose(m_pFileStream);
+			m_pFileStream = NULL;
+		}
+		m_pFileStream = fopen(temp, "ab+");
+		for (int i = 0; i < 100; i++)
+		{
+			if (!m_pFileStream)
+			{
+				sprintf(temp, "%s/%s-%s_%03d.log", m_strLogPath.c_str(), Time2String(m_nCurrentDay*(3600 * 24)).c_str(), m_strCurLogName.c_str(), i);
+				m_pFileStream = fopen(temp, "ab+");
+				if (m_pFileStream)
+				{
+					break;
+				}
+			}
+		}
+	}
+;
+}
 //������־�ļ������
 void Logger::GenerateLogName()
 {

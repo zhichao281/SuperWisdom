@@ -9,15 +9,21 @@ class Logger
 {
 public:
 	// 
-	Logger(int log_level_ = LogLevelDebug,const char * strLogPath = "log",const char* pStrFileName = "file");
+	Logger(int log_level_ = LogLevelDebug,const char * strLogPath = "Log",const char* pStrFileName = "client");
 	// 
 	virtual ~Logger();
 public:	
 	// 
 	void  Write2Caching(int log_level_,const char * strInfo, ...);
+
 	void  Write2Caching(const char * strInfo);
+
+
 	void DoWriteLog();
 
+	void  SetLogLevel(int log_level_);
+
+	void  SetLogFileName(const char * pStrFileName);
 private:
 
 	std::string Time2String(time_t time_t_);

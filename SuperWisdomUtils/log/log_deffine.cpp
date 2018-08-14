@@ -23,3 +23,21 @@ void  _log_write(EnumLogLevel nLevel, const char *pFmt, ...)
 		g_logPtr->Write2Caching(nLevel, pTemp);
 	}
 }
+void  _log_level(int nLevel)
+{
+	if (g_logPtr.get() == nullptr)
+	{
+		g_logPtr.reset(new Logger);
+	}
+	g_logPtr->SetLogLevel(nLevel);
+
+}
+
+void  _log_filename(const char *pfilename)
+{
+	if (g_logPtr.get() == nullptr)
+	{
+		g_logPtr.reset(new Logger);
+	}
+	g_logPtr->SetLogFileName(pfilename);
+}
