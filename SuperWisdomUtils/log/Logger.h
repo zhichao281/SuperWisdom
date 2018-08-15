@@ -30,7 +30,6 @@ private:
 	// 
 	void GenerateLogName();
 
-
 	// 
 	void CreateLogPath();
 
