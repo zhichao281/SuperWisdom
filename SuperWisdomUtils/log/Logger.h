@@ -23,6 +23,8 @@ public:
 
 	void  SetLogLevel(int log_level_);
 
+
+
 	void  SetLogFileName(const char * pStrFileName);
 private:
 
