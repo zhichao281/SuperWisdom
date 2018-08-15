@@ -38,7 +38,7 @@ int CreatDir(char *pDir)
 	{
 		return 0;
 	}
-	1
+	12
 
 	strcpy(pszDir, pDir);
 	iLen = strlen(pszDir);
