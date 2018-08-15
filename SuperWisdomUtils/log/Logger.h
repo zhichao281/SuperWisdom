@@ -29,6 +29,8 @@ private:
 	std::string Time2String(time_t time_t_);
 	// 
 	void GenerateLogName();
+
+
 	// 
 	void CreateLogPath();
 
