@@ -113,6 +113,7 @@
     <ClInclude Include="FileManager\FileManange.h" />
     <ClInclude Include="gtest-1.7.0\gtest\gtest.h" />
     <ClInclude Include="head.h" />
+    <ClInclude Include="HSingleton.h" />
     <ClInclude Include="Json\json\json-forwards.h" />
     <ClInclude Include="Json\json\json.h" />
     <ClInclude Include="Json\WSJson.h" />
@@ -128,9 +129,6 @@
     <ClInclude Include="tinyxml\tinyxml.h" />
     <ClInclude Include="tinyxml\TinyXmlTool.h" />
     <ClInclude Include="WisdomUtils.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Debug\SuperWisdomUtils.exe.dmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

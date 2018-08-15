@@ -200,8 +200,8 @@
     <ClInclude Include="gtest-1.7.0\gtest\gtest.h">
       <Filter>gtest</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Debug\SuperWisdomUtils.exe.dmp" />
+    <ClInclude Include="HSingleton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
