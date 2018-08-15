@@ -17,7 +17,7 @@ public:
 	void  Write2Caching(int log_level_,const char * strInfo, ...);
 
 	void  Write2Caching(const char * strInfo);
-
+	
 
 	void DoWriteLog();
 
