@@ -34,6 +34,7 @@ private:
 	void CreateLogPath();
 
 	const char* logLevelToString(int l);
+
 private:
 	// 
 	FILE * m_pFileStream;
