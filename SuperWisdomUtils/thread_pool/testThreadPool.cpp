@@ -85,6 +85,7 @@ std::string utf8_to_gb2312(std::string const &strUtf8)
 #include "../log/LogManager.h"
 #include "thread_pool.h"
 
+
 void ma11in(void)
 {
 	

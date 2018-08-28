@@ -1,5 +1,5 @@
 #pragma once
-#pragma execution_character_set("utf-8")
+
 
 #include <thread>
 #include <mutex>
@@ -16,7 +16,7 @@ namespace netlib
 	class ThreadPool
 	{
 	public:
-		typedef std::function<void(void )> ThreadTask;
+		typedef std::function<void(void)> ThreadTask;
 
 		ThreadPool(int threadNumber);
 
@@ -38,14 +38,25 @@ namespace netlib
 		// 获取线程池实例
 		static ThreadPool* GetInstance();
 
-private:
+		static void Destory()
+		{
+			if (nullptr != s_pThreadPool)
+			{
+				delete s_pThreadPool;
+				s_pThreadPool = nullptr;
+			}
+		};
+	public:
+
+		static ThreadPool*		s_pThreadPool;
+	private:
 		//线程所执行的工作函数
 		void threadWork(void);
 
-private:
+	private:
 		std::mutex m_mutex;                                        //互斥锁
 
-		bool m_bRunning;                                           //线程池是否在运行
+		volatile bool m_bRunning;                                           //线程池是否在运行
 		int m_nThreadNumber;                                       //线程数
 
 		std::condition_variable_any m_condition_empty;             //当任务队列为空时的条件变量
@@ -55,4 +66,4 @@ private:
 }
 
 #define GSThreadPool_AddFun(x)	netlib::ThreadPool::GetInstance()->append(x)
-#define GSThreadPool_Run()	netlib::ThreadPool::GetInstance()->start()
+#define GSThreadPool	netlib::ThreadPool::GetInstance()
