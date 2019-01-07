@@ -1,4 +1,5 @@
 /**
+*强大的Http请求类，封装了windows WinInet底层API
  * WinInet封装类，可用于windows上http请求, HttpClient.h
  * zhangyl 2016.07.15 mail: balloonwj@qq.com
  */
