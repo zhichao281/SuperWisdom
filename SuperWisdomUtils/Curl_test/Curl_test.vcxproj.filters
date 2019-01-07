@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ZIP">
+      <UniqueIdentifier>{31f62121-9887-43ec-b274-90458a10f5cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,9 +24,33 @@
     <ClCompile Include="CHttpClient.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Zip\unzip.cpp">
+      <Filter>ZIP</Filter>
+    </ClCompile>
+    <ClCompile Include="Zip\zip.cpp">
+      <Filter>ZIP</Filter>
+    </ClCompile>
+    <ClCompile Include="ZipCompress.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CHttpClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Zip\unzip.h">
+      <Filter>ZIP</Filter>
+    </ClInclude>
+    <ClInclude Include="Zip\zip.h">
+      <Filter>ZIP</Filter>
+    </ClInclude>
+    <ClInclude Include="ZipCompress.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NFile.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

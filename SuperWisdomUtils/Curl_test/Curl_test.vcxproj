@@ -80,9 +80,17 @@
   <ItemGroup>
     <ClCompile Include="CHttpClient.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NFile.cpp" />
+    <ClCompile Include="ZipCompress.cpp" />
+    <ClCompile Include="Zip\unzip.cpp" />
+    <ClCompile Include="Zip\zip.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CHttpClient.h" />
+    <ClInclude Include="NFile.h" />
+    <ClInclude Include="ZipCompress.h" />
+    <ClInclude Include="Zip\unzip.h" />
+    <ClInclude Include="Zip\zip.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -14,7 +14,7 @@
     <ProjectGuid>{B3B17314-4280-4A5F-B60B-C7CE72D658B3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SuperWisdomUtils</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -58,6 +58,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <UACExecutionLevel>AsInvoker</UACExecutionLevel>
+      <AdditionalDependencies>DXGI.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -84,14 +86,14 @@
     <ClCompile Include="gtest-1.7.0\gtest\gtest-all.cc" />
     <ClCompile Include="gtest-1.7.0\gtest\gtest_main.cc" />
     <ClCompile Include="Json\jsoncpp.cpp" />
-    <ClCompile Include="Json\testJson.cpp" />
     <ClCompile Include="Json\WSJson.cpp" />
     <ClCompile Include="LiteLog\LiteLog.cpp" />
     <ClCompile Include="log\Logger.cpp" />
     <ClCompile Include="log\LogManager.cpp" />
+    <ClCompile Include="log\log_deffine.cpp" />
+    <ClCompile Include="LSP\FixLSP.cpp" />
     <ClCompile Include="SystemSettings\GetCpuUseage.cpp" />
     <ClCompile Include="SystemSettings\SystemSettings.cpp" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="thread_pool\testThreadPool.cpp" />
     <ClCompile Include="thread_pool\thread_pool.cpp" />
     <ClCompile Include="tinyxml2\tinyxml2.cpp" />
@@ -103,6 +105,28 @@
     <ClCompile Include="tinyxml\TinyXmlTest.cpp" />
     <ClCompile Include="tinyxml\TinyXmlTool.cpp" />
     <ClCompile Include="WisdomMain.cpp" />
+    <ClCompile Include="ziptest.cpp" />
+    <ClCompile Include="zip\ZipOperation.cpp" />
+    <ClCompile Include="zip\zlib\adler32.c" />
+    <ClCompile Include="zip\zlib\compress.c" />
+    <ClCompile Include="zip\zlib\crc32.c" />
+    <ClCompile Include="zip\zlib\deflate.c" />
+    <ClCompile Include="zip\zlib\gzclose.c" />
+    <ClCompile Include="zip\zlib\gzlib.c" />
+    <ClCompile Include="zip\zlib\gzread.c" />
+    <ClCompile Include="zip\zlib\gzwrite.c" />
+    <ClCompile Include="zip\zlib\infback.c" />
+    <ClCompile Include="zip\zlib\inffast.c" />
+    <ClCompile Include="zip\zlib\inflate.c" />
+    <ClCompile Include="zip\zlib\inftrees.c" />
+    <ClCompile Include="zip\zlib\ioapi.c" />
+    <ClCompile Include="zip\zlib\iowin32.c" />
+    <ClCompile Include="zip\zlib\mztools.c" />
+    <ClCompile Include="zip\zlib\trees.c" />
+    <ClCompile Include="zip\zlib\uncompr.c" />
+    <ClCompile Include="zip\zlib\unzip.c" />
+    <ClCompile Include="zip\zlib\zip.c" />
+    <ClCompile Include="zip\zlib\zutil.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AutoLockClass.h" />
@@ -121,6 +145,7 @@
     <ClInclude Include="log\Logger.h" />
     <ClInclude Include="log\LogManager.h" />
     <ClInclude Include="log\log_deffine.h" />
+    <ClInclude Include="LSP\FixLSP.h" />
     <ClInclude Include="SystemSettings\GetCpuUseage.h" />
     <ClInclude Include="SystemSettings\SystemSettings.h" />
     <ClInclude Include="thread_pool\thread_pool.h" />
@@ -129,6 +154,25 @@
     <ClInclude Include="tinyxml\tinyxml.h" />
     <ClInclude Include="tinyxml\TinyXmlTool.h" />
     <ClInclude Include="WisdomUtils.h" />
+    <ClInclude Include="ZipOperation.h" />
+    <ClInclude Include="zip\ZipOperation.h" />
+    <ClInclude Include="zip\zlib\crc32.h" />
+    <ClInclude Include="zip\zlib\crypt.h" />
+    <ClInclude Include="zip\zlib\deflate.h" />
+    <ClInclude Include="zip\zlib\gzguts.h" />
+    <ClInclude Include="zip\zlib\inffast.h" />
+    <ClInclude Include="zip\zlib\inffixed.h" />
+    <ClInclude Include="zip\zlib\inflate.h" />
+    <ClInclude Include="zip\zlib\inftrees.h" />
+    <ClInclude Include="zip\zlib\ioapi.h" />
+    <ClInclude Include="zip\zlib\iowin32.h" />
+    <ClInclude Include="zip\zlib\mztools.h" />
+    <ClInclude Include="zip\zlib\trees.h" />
+    <ClInclude Include="zip\zlib\unzip.h" />
+    <ClInclude Include="zip\zlib\zconf.h" />
+    <ClInclude Include="zip\zlib\zip.h" />
+    <ClInclude Include="zip\zlib\zlib.h" />
+    <ClInclude Include="zip\zlib\zutil.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

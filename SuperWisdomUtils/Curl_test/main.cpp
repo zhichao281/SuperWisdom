@@ -38,15 +38,25 @@ private:
 	Deque deque; //к╚╤к╤сап
 };
 
-
+#include <tchar.h>
 #include "CHttpClient.h"
+#include "ZipCompress.h"
 void DownloadTest();
 void PostTest();
 void GetTest();
 int main()
 {
-	GetTest();
+	time_t start, stop;
+	start = time(NULL);
+	CZipCompress zipObj;
+	zipObj.Zip_UnPackFiles(L"E:\\1.zip",L"E:\\2");
+	stop = time(NULL);
+	printf("Use Time:%ld\n", (stop - start));
+
+
+	
 	system("pause");
+	GetTest();
  	Sequence *s1 = new Stack();
   	Sequence *s2 = new Queue();
 	s1->push(1); s1->pop();

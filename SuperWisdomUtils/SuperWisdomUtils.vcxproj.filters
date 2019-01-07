@@ -52,6 +52,15 @@
     <Filter Include="gtest">
       <UniqueIdentifier>{c9bf3f8d-9b19-426e-bd5e-50846218159d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Zip">
+      <UniqueIdentifier>{8b033a28-b59d-4f24-b6c5-832905dfed8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Zip\zlib">
+      <UniqueIdentifier>{53d635b2-4862-4277-acf9-696cfe355f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LSP">
+      <UniqueIdentifier>{5b68a0a0-ccce-4611-a04f-38c0a6437807}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WisdomMain.cpp">
@@ -111,9 +120,6 @@
     <ClCompile Include="Json\WSJson.cpp">
       <Filter>Json</Filter>
     </ClCompile>
-    <ClCompile Include="Json\testJson.cpp">
-      <Filter>Json</Filter>
-    </ClCompile>
     <ClCompile Include="log\Logger.cpp">
       <Filter>Log</Filter>
     </ClCompile>
@@ -126,8 +132,77 @@
     <ClCompile Include="gtest-1.7.0\gtest\gtest-all.cc">
       <Filter>gtest</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>gtest</Filter>
+    <ClCompile Include="log\log_deffine.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\ZipOperation.cpp">
+      <Filter>Zip</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\adler32.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\compress.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\crc32.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\deflate.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\gzclose.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\gzlib.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\gzread.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\gzwrite.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\infback.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\inffast.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\inflate.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\inftrees.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\ioapi.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\iowin32.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\mztools.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\trees.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\uncompr.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\unzip.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\zip.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zlib\zutil.c">
+      <Filter>Zip\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="ziptest.cpp">
+      <Filter>Zip</Filter>
+    </ClCompile>
+    <ClCompile Include="LSP\FixLSP.cpp">
+      <Filter>LSP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +277,66 @@
     </ClInclude>
     <ClInclude Include="HSingleton.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ZipOperation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\ZipOperation.h">
+      <Filter>Zip</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\crc32.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\crypt.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\deflate.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\gzguts.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\inffast.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\inffixed.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\inflate.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\inftrees.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\ioapi.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\iowin32.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\mztools.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\trees.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\unzip.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\zconf.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\zip.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\zlib.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zlib\zutil.h">
+      <Filter>Zip\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="LSP\FixLSP.h">
+      <Filter>LSP</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
