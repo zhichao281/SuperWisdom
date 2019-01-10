@@ -27,9 +27,6 @@
     <ClInclude Include="helpFunction.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="serverlistener.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="serverexceptions.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -37,6 +34,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="NSLog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerListener.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,7 +65,10 @@
     <ClCompile Include="requestparser.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="serverlistener.cpp">
+    <ClCompile Include="HttpServer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerListener.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
