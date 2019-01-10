@@ -7,12 +7,14 @@
 #ifndef __HTTP_CLIENT_H__
 #define __HTTP_CLIENT_H__
 
-#include <WinInet.h>
+
 #include <string>
 #include <vector>
-
-#pragma comment(lib, "wininet.lib")
-
+#include <stdio.h>
+#include <Windows.h>
+#include <tchar.h>
+#include <WinInet.h>
+#pragma comment(lib, "WinInet.lib")
 
 #if defined(UNICODE) || defined(_UNICODE)
 typedef std::wstring tstring;
@@ -65,7 +67,7 @@ public:
 
 private:
     // 状态回调函数
-    static void __stdcall StatusCallback(HINTERNET hInternet, DWORD dwContext,  DWORD dwInternetStatus, LPVOIDlpStatusInfo, DWORD dwStatusInfoLen);
+    static void __stdcall StatusCallback(HINTERNET hInternet, DWORD dwContext,  DWORD dwInternetStatus, LPVOID lpStatusInfo, DWORD dwStatusInfoLen);
     // 解析Url函数(协议，主机名，端口，文件路径)
     BOOL ParseURL(LPCTSTR lpszUrl, LPTSTR lpszScheme, DWORD dwSchemeLength, LPTSTR lpszHostName, DWORD dwHostNameLength, WORD& nPort, LPTSTR lpszUrlPath, DWORD dwUrlPathLength);     
     // 等待事件函数

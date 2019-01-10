@@ -81,7 +81,7 @@ BOOL CHttpClient::OpenRequest(LPCTSTR lpszUrl, HTTP_REQ_METHOD nReqMethod/* = RE
     // DWORDdwSize = sizeof(dwTimeOut);
     // ::InternetQueryOption(m_hInternet,INTERNET_OPTION_CONNECT_TIMEOUT, (LPVOID)&dwTimeOut, &dwSize);
 
-    INTERNET_STATUS_CALLBACKlpCallBackFunc;    // 设置状态回调函数
+    INTERNET_STATUS_CALLBACK lpCallBackFunc;    // 设置状态回调函数
     lpCallBackFunc = ::InternetSetStatusCallback(m_hInternet, (INTERNET_STATUS_CALLBACK)&StatusCallback);
     if (INTERNET_INVALID_STATUS_CALLBACK == lpCallBackFunc)
     {
