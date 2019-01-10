@@ -85,6 +85,7 @@
     <ClCompile Include="FileManager\FileManange.cpp" />
     <ClCompile Include="gtest-1.7.0\gtest\gtest-all.cc" />
     <ClCompile Include="gtest-1.7.0\gtest\gtest_main.cc" />
+    <ClCompile Include="HttpClientLib\HttpClient.cpp" />
     <ClCompile Include="Json\jsoncpp.cpp" />
     <ClCompile Include="Json\WSJson.cpp" />
     <ClCompile Include="LiteLog\LiteLog.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="gtest-1.7.0\gtest\gtest.h" />
     <ClInclude Include="head.h" />
     <ClInclude Include="HSingleton.h" />
+    <ClInclude Include="HttpClientLib\HttpClient.h" />
     <ClInclude Include="Json\json\json-forwards.h" />
     <ClInclude Include="Json\json\json.h" />
     <ClInclude Include="Json\WSJson.h" />

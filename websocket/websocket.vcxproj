@@ -151,22 +151,21 @@
     <ClInclude Include="base64.h" />
     <ClInclude Include="debug_log.h" />
     <ClInclude Include="helpFunction.h" />
-    <ClInclude Include="network_interface.h" />
+    <ClInclude Include="NSLog.h" />
+    <ClInclude Include="requestparser.h" />
+    <ClInclude Include="serverexceptions.h" />
+    <ClInclude Include="serverlistener.h" />
     <ClInclude Include="sha1.h" />
-    <ClInclude Include="websocket_handler.h" />
-    <ClInclude Include="websocket_request.h" />
-    <ClInclude Include="websocket_respond.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="base64.cpp" />
     <ClCompile Include="debug_log.cpp" />
     <ClCompile Include="helpFunction.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="network_interface.cpp" />
+    <ClCompile Include="NSLog.cpp" />
+    <ClCompile Include="requestparser.cpp" />
+    <ClCompile Include="serverlistener.cpp" />
     <ClCompile Include="sha1.cpp" />
-    <ClCompile Include="websocket_handler.cpp" />
-    <ClCompile Include="websocket_request.cpp" />
-    <ClCompile Include="websocket_respond.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

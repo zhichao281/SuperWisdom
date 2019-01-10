@@ -21,39 +21,27 @@
     <ClInclude Include="debug_log.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="network_interface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="sha1.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="websocket_handler.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="websocket_request.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="websocket_respond.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="helpFunction.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="serverlistener.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="serverexceptions.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="requestparser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NSLog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="websocket_respond.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="websocket_request.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="websocket_handler.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="sha1.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="network_interface.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -66,6 +54,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="helpFunction.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NSLog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="requestparser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="serverlistener.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
