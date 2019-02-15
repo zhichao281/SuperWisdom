@@ -1,19 +1,17 @@
+#include "stdafx.h"
+
+
 #include "FixLSP.h"
-#include <Windows.h>
-#include <stdarg.h>
-#include <iostream>
 
-#define ForceWait//强行等待2秒的开关
+#include "LspFixExer.h"
 
-#ifdef ForceWait
-#include <Windows.h>
-#include <time.h>
-#endif
+
 
 
 
 CFixLSP::CFixLSP()
 {
+
 }
 
 CFixLSP::~CFixLSP()
@@ -23,23 +21,17 @@ CFixLSP::~CFixLSP()
 
 void CFixLSP::SlientFix()
 {
-	int nStart = time(0);
-	fixlspHelper.CallProc(true, fixlspHelper.GetApplicationPath(), " /slient");
-	int nWaitTime = time(0) - nStart;
-#ifdef ForceWait
-	if (nWaitTime <= 2)
-	{
-		HANDLE hEvent = CreateEvent(NULL, false, false, NULL);
-		WaitForSingleObject(hEvent, 2000);
-		CloseHandle(hEvent);
-	}
-#endif
+	CLspFixExer fixer;
+	fixer.InitLspList();
+	fixer.OnFix();
 
 }
 
 void CFixLSP::Restore()
 {
-	fixlspHelper.CallProc(true, fixlspHelper.GetApplicationPath(), " /restore");
+	CLspFixExer fixer;
+	fixer.InitLspList();
+	fixer.OnRestoreLsp();
 
 }
 
@@ -58,83 +50,31 @@ void CFixLSP::OnFixLSP(BOOL bSlient)
 			Restore();
 		}
 	});
-	fixlspThread.detach();
+	fixlspThread.join();
 }
 
-
-int FixLspHelper::CallProc(BOOL bWaitForProcessExit, const char* pProcessPath, const char* pCmdlineFmt, ...)
+/*
+*	Function:		IsExist
+*	Explanation:	判断文件或目录是否文件
+*	Input:			strPath		路径
+*	Return:			true 存在 false 不存在
+*/
+bool IsExist(std::string strPath)
 {
-	va_list ap;
-	va_start(ap, pCmdlineFmt);
-	const int nLen = 1024;
-	char szCmd[nLen] = "";	
-	vsprintf_s(szCmd, 1024,pCmdlineFmt, ap);
-	va_end(ap);
-	char szPath[nLen] = "";
+	unsigned long		ulAttr;
 
-	sprintf_s(szPath, 1024,"\"%s\" %s", pProcessPath, szCmd);
-	STARTUPINFOA si; 
-	PROCESS_INFORMATION pi;
-	ZeroMemory(&pi, sizeof(pi));
-	ZeroMemory(&si, sizeof(si));
-	si.cb = sizeof(si); 
-	GetStartupInfoA(&si); 	
-	si.wShowWindow = SW_HIDE;  //隐藏窗口 
-	si.dwFlags = STARTF_USESHOWWINDOW | STARTF_USESTDHANDLES;
-
-	BOOL hRes = CreateProcessA(NULL, szPath, NULL, NULL, TRUE, NULL, NULL, NULL, &si, &pi);
-
-	if (bWaitForProcessExit)
+	if (strPath.empty())
 	{
-		WaitForSingleObject(pi.hProcess, INFINITE);
+		return false;
 	}
 
-	return hRes == false ? GetLastError() : 0;
+	ulAttr = GetFileAttributesA((char *)strPath.c_str());
+
+	if (INVALID_FILE_ATTRIBUTES == ulAttr)
+	{
+		return false;
+	}
+
+	return true;
 }
 
-BOOL FixLspHelper::IsX64()
-{
-	// 获取操作系统位数
-	SYSTEM_INFO si;
-	typedef VOID(WINAPI *LPFN_GetNativeSystemInfo)(LPSYSTEM_INFO lpSystemInfo);
-#ifdef _UNICODE
-	LPFN_GetNativeSystemInfo fnGetNativeSystemInfo = (LPFN_GetNativeSystemInfo)GetProcAddress(GetModuleHandle(_T("kernel32")), "GetNativeSystemInfo");
-#else
-	LPFN_GetNativeSystemInfo fnGetNativeSystemInfo = (LPFN_GetNativeSystemInfo)GetProcAddress(GetModuleHandleA(_T("kernel32")), "GetNativeSystemInfo");
-#endif
-	if (NULL != fnGetNativeSystemInfo)
-	{
-		fnGetNativeSystemInfo(&si);
-	}
-	else
-	{
-		GetSystemInfo(&si);
-	}
-
-	if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64 ||
-		si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_IA64)
-	{
-	
-		return TRUE;
-	}
-	else
-	{
-		
-		return FALSE;
-	}
-}
-
-FixLspHelper::FixLspHelper()
-{
-	GetModuleFileNameA(NULL, szApplicationPath, 2048);
-	char* p = strrchr(szApplicationPath, '\\');
-	*p = 0;
-	char szFixLSPFileName[128] = "";
-	sprintf_s(szFixLSPFileName, 128,"\\fixlsp%s", FixLspHelper::IsX64() ? "x64.exe" : "x86.exe");
-	strcat_s(szApplicationPath, szFixLSPFileName);
-}
-
-char* FixLspHelper::GetApplicationPath()
-{
-	return szApplicationPath;
-}
