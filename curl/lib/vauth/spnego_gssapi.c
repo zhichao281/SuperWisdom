@@ -64,7 +64,7 @@ bool Curl_auth_is_spnego_supported(void)
  *
  * data        [in]     - The session handle.
  * userp       [in]     - The user name in the format User or Domain\User.
- * passdwp     [in]     - The user's password.
+ * passwdp     [in]     - The user's password.
  * service     [in]     - The service type such as http, smtp, pop or imap.
  * host        [in]     - The host name.
  * chlg64      [in]     - The optional base64 encoded challenge message.
@@ -179,6 +179,10 @@ CURLcode Curl_auth_decode_spnego_message(struct Curl_easy *data,
 
     return CURLE_OUT_OF_MEMORY;
   }
+
+  /* Free previous token */
+  if(nego->output_token.length && nego->output_token.value)
+    gss_release_buffer(&unused_status, &nego->output_token);
 
   nego->output_token = output_token;
 

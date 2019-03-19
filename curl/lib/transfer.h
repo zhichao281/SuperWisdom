@@ -7,7 +7,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2016, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2018, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -21,6 +21,10 @@
  * KIND, either express or implied.
  *
  ***************************************************************************/
+
+#define Curl_headersep(x) ((((x)==':') || ((x)==';')))
+char *Curl_checkheaders(const struct connectdata *conn,
+                        const char *thisheader);
 
 void Curl_init_CONNECT(struct Curl_easy *data);
 
@@ -47,9 +51,11 @@ int Curl_single_getsock(const struct connectdata *conn,
                         curl_socket_t *socks,
                         int numsocks);
 CURLcode Curl_readrewind(struct connectdata *conn);
-CURLcode Curl_fillreadbuffer(struct connectdata *conn, int bytes, int *nreadp);
+CURLcode Curl_fillreadbuffer(struct connectdata *conn, size_t bytes,
+                             size_t *nreadp);
 CURLcode Curl_retry_request(struct connectdata *conn, char **url);
 bool Curl_meets_timecondition(struct Curl_easy *data, time_t timeofdoc);
+CURLcode Curl_get_upload_buffer(struct Curl_easy *data);
 
 /* This sets up a forthcoming transfer */
 void
@@ -65,4 +71,3 @@ Curl_setup_transfer (struct connectdata *data,
 );
 
 #endif /* HEADER_CURL_TRANSFER_H */
-

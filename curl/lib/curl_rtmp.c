@@ -37,8 +37,10 @@
 /* The last #include file should be: */
 #include "memdebug.h"
 
-#ifdef _WIN32
+#if defined(WIN32) && !defined(USE_LWIPSOCK)
 #define setsockopt(a,b,c,d,e) (setsockopt)(a,b,c,(const char *)d,(int)e)
+#define SET_RCVTIMEO(tv,s)   int tv = s*1000
+#elif defined(LWIP_SO_SNDRCVTIMEO_NONSTANDARD)
 #define SET_RCVTIMEO(tv,s)   int tv = s*1000
 #else
 #define SET_RCVTIMEO(tv,s)   struct timeval tv = {s,0}
@@ -74,6 +76,7 @@ const struct Curl_handler Curl_handler_rtmp = {
   ZERO_NULL,                            /* perform_getsock */
   rtmp_disconnect,                      /* disconnect */
   ZERO_NULL,                            /* readwrite */
+  ZERO_NULL,                            /* connection_check */
   PORT_RTMP,                            /* defport */
   CURLPROTO_RTMP,                       /* protocol */
   PROTOPT_NONE                          /* flags*/
@@ -94,6 +97,7 @@ const struct Curl_handler Curl_handler_rtmpt = {
   ZERO_NULL,                            /* perform_getsock */
   rtmp_disconnect,                      /* disconnect */
   ZERO_NULL,                            /* readwrite */
+  ZERO_NULL,                            /* connection_check */
   PORT_RTMPT,                           /* defport */
   CURLPROTO_RTMPT,                      /* protocol */
   PROTOPT_NONE                          /* flags*/
@@ -114,6 +118,7 @@ const struct Curl_handler Curl_handler_rtmpe = {
   ZERO_NULL,                            /* perform_getsock */
   rtmp_disconnect,                      /* disconnect */
   ZERO_NULL,                            /* readwrite */
+  ZERO_NULL,                            /* connection_check */
   PORT_RTMP,                            /* defport */
   CURLPROTO_RTMPE,                      /* protocol */
   PROTOPT_NONE                          /* flags*/
@@ -134,6 +139,7 @@ const struct Curl_handler Curl_handler_rtmpte = {
   ZERO_NULL,                            /* perform_getsock */
   rtmp_disconnect,                      /* disconnect */
   ZERO_NULL,                            /* readwrite */
+  ZERO_NULL,                            /* connection_check */
   PORT_RTMPT,                           /* defport */
   CURLPROTO_RTMPTE,                     /* protocol */
   PROTOPT_NONE                          /* flags*/
@@ -154,6 +160,7 @@ const struct Curl_handler Curl_handler_rtmps = {
   ZERO_NULL,                            /* perform_getsock */
   rtmp_disconnect,                      /* disconnect */
   ZERO_NULL,                            /* readwrite */
+  ZERO_NULL,                            /* connection_check */
   PORT_RTMPS,                           /* defport */
   CURLPROTO_RTMPS,                      /* protocol */
   PROTOPT_NONE                          /* flags*/
@@ -174,6 +181,7 @@ const struct Curl_handler Curl_handler_rtmpts = {
   ZERO_NULL,                            /* perform_getsock */
   rtmp_disconnect,                      /* disconnect */
   ZERO_NULL,                            /* readwrite */
+  ZERO_NULL,                            /* connection_check */
   PORT_RTMPS,                           /* defport */
   CURLPROTO_RTMPTS,                     /* protocol */
   PROTOPT_NONE                          /* flags*/
@@ -200,7 +208,7 @@ static CURLcode rtmp_connect(struct connectdata *conn, bool *done)
   RTMP *r = conn->proto.generic;
   SET_RCVTIMEO(tv, 10);
 
-  r->m_sb.sb_socket = conn->sock[FIRSTSOCKET];
+  r->m_sb.sb_socket = (int)conn->sock[FIRSTSOCKET];
 
   /* We have to know if it's a write before we send the
    * connect request packet

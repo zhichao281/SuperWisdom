@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2018, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -86,7 +86,7 @@ static CURLcode randit(struct Curl_easy *data, unsigned int *rnd)
 #endif
 
   if(!seeded) {
-    struct timeval now = curlx_tvnow();
+    struct curltime now = Curl_now();
     infof(data, "WARNING: Using weak random seed\n");
     randseed += (unsigned int)now.tv_usec + (unsigned int)now.tv_sec;
     randseed = randseed * 1103515245 + 12345;
@@ -157,6 +157,12 @@ CURLcode Curl_rand_hex(struct Curl_easy *data, unsigned char *rnd,
   unsigned char *bufp = buffer;
   DEBUGASSERT(num > 1);
 
+#ifdef __clang_analyzer__
+  /* This silences a scan-build warning about accessing this buffer with
+     uninitialized memory. */
+  memset(buffer, 0, sizeof(buffer));
+#endif
+
   if((num/2 >= sizeof(buffer)) || !(num&1))
     /* make sure it fits in the local buffer and that it is an odd number! */
     return CURLE_BAD_FUNCTION_ARGUMENT;
@@ -168,6 +174,8 @@ CURLcode Curl_rand_hex(struct Curl_easy *data, unsigned char *rnd,
     return result;
 
   while(num) {
+    /* clang-tidy warns on this line without this comment: */
+    /* NOLINTNEXTLINE(clang-analyzer-core.UndefinedBinaryOperatorResult) */
     *rnd++ = hex[(*bufp & 0xF0)>>4];
     *rnd++ = hex[*bufp & 0x0F];
     bufp++;

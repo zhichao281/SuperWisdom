@@ -43,7 +43,7 @@ struct dotdot {
 UNITTEST_START
 
   unsigned int i;
-  int fails=0;
+  int fails = 0;
   const struct dotdot pairs[] = {
     { "/a/b/c/./../../g", "/a/g" },
     { "mid/content=5/../6", "mid/6" },
@@ -74,18 +74,18 @@ UNITTEST_START
     { ".", "" },
   };
 
-  for(i=0; i < sizeof(pairs)/sizeof(pairs[0]); i++) {
+  for(i = 0; i < sizeof(pairs)/sizeof(pairs[0]); i++) {
     char *out = Curl_dedotdotify(pairs[i].input);
     abort_unless(out != NULL, "returned NULL!");
 
     if(strcmp(out, pairs[i].output)) {
-      fprintf(stderr, "Test %d: '%s' gave '%s' instead of '%s'\n",
+      fprintf(stderr, "Test %u: '%s' gave '%s' instead of '%s'\n",
               i, pairs[i].input, out, pairs[i].output);
       fail("Test case output mismatched");
       fails++;
     }
     else
-      fprintf(stderr, "Test %d: OK\n", i);
+      fprintf(stderr, "Test %u: OK\n", i);
     free(out);
   }
 

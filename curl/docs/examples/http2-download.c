@@ -51,7 +51,7 @@ static int num_transfers;
 static int hnd2num(CURL *hnd)
 {
   int i;
-  for(i=0; i< num_transfers; i++) {
+  for(i = 0; i< num_transfers; i++) {
     if(curl_hnd[i] == hnd)
       return i;
   }
@@ -65,39 +65,41 @@ void dump(const char *text, int num, unsigned char *ptr, size_t size,
   size_t i;
   size_t c;
 
-  unsigned int width=0x10;
+  unsigned int width = 0x10;
 
   if(nohex)
     /* without the hex output, we can fit more on screen */
     width = 0x40;
 
-  fprintf(stderr, "%d %s, %ld bytes (0x%lx)\n",
-          num, text, (long)size, (long)size);
+  fprintf(stderr, "%d %s, %lu bytes (0x%lx)\n",
+          num, text, (unsigned long)size, (unsigned long)size);
 
-  for(i=0; i<size; i+= width) {
+  for(i = 0; i<size; i += width) {
 
-    fprintf(stderr, "%4.4lx: ", (long)i);
+    fprintf(stderr, "%4.4lx: ", (unsigned long)i);
 
     if(!nohex) {
       /* hex not disabled, show it */
       for(c = 0; c < width; c++)
-        if(i+c < size)
-          fprintf(stderr, "%02x ", ptr[i+c]);
+        if(i + c < size)
+          fprintf(stderr, "%02x ", ptr[i + c]);
         else
           fputs("   ", stderr);
     }
 
-    for(c = 0; (c < width) && (i+c < size); c++) {
+    for(c = 0; (c < width) && (i + c < size); c++) {
       /* check for 0D0A; if found, skip past and start a new line of output */
-      if(nohex && (i+c+1 < size) && ptr[i+c]==0x0D && ptr[i+c+1]==0x0A) {
-        i+=(c+2-width);
+      if(nohex && (i + c + 1 < size) && ptr[i + c] == 0x0D &&
+         ptr[i + c + 1] == 0x0A) {
+        i += (c + 2 - width);
         break;
       }
       fprintf(stderr, "%c",
-              (ptr[i+c]>=0x20) && (ptr[i+c]<0x80)?ptr[i+c]:'.');
+              (ptr[i + c] >= 0x20) && (ptr[i + c]<0x80)?ptr[i + c]:'.');
       /* check again for 0D0A, to avoid an extra \n if it's at width */
-      if(nohex && (i+c+2 < size) && ptr[i+c+1]==0x0D && ptr[i+c+2]==0x0A) {
-        i+=(c+3-width);
+      if(nohex && (i + c + 2 < size) && ptr[i + c + 1] == 0x0D &&
+         ptr[i + c + 2] == 0x0A) {
+        i += (c + 3 - width);
         break;
       }
     }
@@ -187,7 +189,7 @@ int main(int argc, char **argv)
   CURL *easy[NUM_HANDLES];
   CURLM *multi_handle;
   int i;
-  int still_running; /* keep number of running handles */
+  int still_running = 0; /* keep number of running handles */
 
   if(argc > 1)
     /* if given a number, do that many transfers */
@@ -199,7 +201,7 @@ int main(int argc, char **argv)
   /* init a multi stack */
   multi_handle = curl_multi_init();
 
-  for(i=0; i<num_transfers; i++) {
+  for(i = 0; i<num_transfers; i++) {
     easy[i] = curl_easy_init();
     /* set options */
     setup(easy[i], i);
@@ -213,7 +215,7 @@ int main(int argc, char **argv)
   /* we start some action by calling perform right away */
   curl_multi_perform(multi_handle, &still_running);
 
-  do {
+  while(still_running) {
     struct timeval timeout;
     int rc; /* select() return code */
     CURLMcode mc; /* curl_multi_fdset() return code */
@@ -269,7 +271,7 @@ int main(int argc, char **argv)
     else {
       /* Note that on some platforms 'timeout' may be modified by select().
          If you need access to the original value save a copy beforehand. */
-      rc = select(maxfd+1, &fdread, &fdwrite, &fdexcep, &timeout);
+      rc = select(maxfd + 1, &fdread, &fdwrite, &fdexcep, &timeout);
     }
 
     switch(rc) {
@@ -282,11 +284,11 @@ int main(int argc, char **argv)
       curl_multi_perform(multi_handle, &still_running);
       break;
     }
-  } while(still_running);
+  }
 
   curl_multi_cleanup(multi_handle);
 
-  for(i=0; i<num_transfers; i++)
+  for(i = 0; i<num_transfers; i++)
     curl_easy_cleanup(easy[i]);
 
   return 0;

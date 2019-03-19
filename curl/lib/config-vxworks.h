@@ -384,9 +384,6 @@
 /* if zlib is available */
 #define HAVE_LIBZ 1
 
-/* Define to 1 if you have the <limits.h> header file. */
-#define HAVE_LIMITS_H 1
-
 /* if your compiler supports LL */
 #define HAVE_LL 1
 
@@ -849,9 +846,6 @@
 
 /* The size of `time_t', as computed by sizeof. */
 #define SIZEOF_TIME_T 4
-
-/* The size of `void*', as computed by sizeof. */
-#define SIZEOF_VOIDP 4
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1

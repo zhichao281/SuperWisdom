@@ -30,7 +30,6 @@ FAQ
   2.2 Does curl work/build with other SSL libraries?
   2.3 Where can I find a copy of LIBEAY32.DLL?
   2.4 Does curl support SOCKS (RFC 1928) ?
-  2.5 Install libcurl for both 32bit and 64bit?
 
  3. Usage Problems
   3.1 curl: (1) SSL is disabled, https: not supported
@@ -163,7 +162,7 @@ FAQ
   We pronounce curl with an initial k sound. It rhymes with words like girl
   and earl. This is a short WAV file to help you:
 
-     http://media.merriam-webster.com/soundc11/c/curl0001.wav
+     https://media.merriam-webster.com/soundc11/c/curl0001.wav
 
   There are numerous sub-projects and related projects that also use the word
   curl in the project names in various combinations, but you should take
@@ -219,9 +218,9 @@ FAQ
   very well at the side. Curl's output can be piped into another program or
   redirected to another file for the next program to interpret.
 
-  We focus on protocol related issues and improvements. If you wanna do more
+  We focus on protocol related issues and improvements. If you want to do more
   magic with the supported protocols than curl currently does, chances are good
-  we will agree. If you wanna add more protocols, we may very well agree.
+  we will agree. If you want to add more protocols, we may very well agree.
 
   If you want someone else to do all the work while you wait for us to
   implement it for you, that is not a very friendly attitude. We spend a
@@ -254,11 +253,10 @@ FAQ
   any way by the project.
 
   We still get help from companies. Haxx provides web site, bandwidth, mailing
-  lists etc, sourceforge.net hosts project services we take advantage from,
-  like the bug tracker, and GitHub hosts the primary git repository at
-  https://github.com/curl/curl. Also again, some companies have sponsored
-  certain parts of the development in the past and I hope some will continue to
-  do so in the future.
+  lists etc, GitHub hosts the primary git repository and other services like
+  the bug tracker at https://github.com/curl/curl. Also again, some companies
+  have sponsored certain parts of the development in the past and I hope some
+  will continue to do so in the future.
 
   If you want to support our project, consider a donation or a banner-program
   or even better: by helping us with coding, documenting or testing etc.
@@ -367,11 +365,11 @@ FAQ
   Comprehensible explanations of the meaning of such numbers and how to obtain
   them (resp.) are here
 
-  http://www.bis.doc.gov/licensing/exportingbasics.htm
-  http://www.bis.doc.gov/licensing/do_i_needaneccn.html
+  https://www.bis.doc.gov/licensing/exportingbasics.htm
+  https://www.bis.doc.gov/licensing/do_i_needaneccn.html
 
   An incomprehensible description of the two numbers above is here
-  http://www.access.gpo.gov/bis/ear/pdf/ccl5-pt2.pdf
+  https://www.bis.doc.gov/index.php/documents/new-encryption/1653-ccl5-pt2-3
 
   1.14 How do I submit my patch?
 
@@ -448,7 +446,7 @@ FAQ
   backends.
 
   curl can be built to use one of the following SSL alternatives: OpenSSL,
-  GnuTLS, yassl, NSS, PolarSSL, axTLS, Secure Transport (native iOS/OS X),
+  GnuTLS, yassl, NSS, PolarSSL, MesaLink, Secure Transport (native iOS/OS X),
   WinSSL (native Windows) or GSKit (native IBM i). They all have their pros
   and cons, and we try to maintain a comparison of them here:
   https://curl.haxx.se/docs/ssl-compared.html
@@ -465,32 +463,6 @@ FAQ
   2.4 Does curl support SOCKS (RFC 1928) ?
 
   Yes, SOCKS 4 and 5 are supported.
-
-  2.5 Install libcurl for both 32bit and 64bit?
-
-  In curl's configure procedure one of the regular include files gets created
-  with platform specific information. The file 'curl/curlbuild.h' in the
-  installed libcurl file tree is therefore somewhat tied to that particular
-  platform.
-
-  To allow applications to get built for either 32bit or 64bit you need to
-  install libcurl headers for both setups and unfortunately curl doesn't do
-  this automatically.
-
-  A commonly used procedure is this:
-
-     $ ./configure [32bit platform]
-     $ mv curl/curlbuild.h curl/curlbuild-32bit.h
-     $ ./configure [64bit platform]
-     $ mv curl/curlbuild.h curl/curlbuild-64bit.h
-
-  Then you make a toplevel curl/curlbuild.h replacement that only does this:
-
-     #ifdef IS_32BIT
-     #include "curlbuild-32bit.h"
-     else
-     #include "curlbuild-64bit.h"
-     #endif
 
 
 3. Usage problems
@@ -901,7 +873,7 @@ FAQ
 
     4.5.3 "403 Forbidden"
 
-    The server understood the request, but is refusing to fulfil it.
+    The server understood the request, but is refusing to fulfill it.
     Authorization will not help and the request SHOULD NOT be repeated.
 
     4.5.4 "404 Not Found"
@@ -1025,7 +997,7 @@ FAQ
   compilers or prior curl versions it may set a time that appears one hour off.
   This happens due to a flaw in how Windows stores and uses file modification
   times and it is not easily worked around. For more details read this:
-  http://www.codeproject.com/datetime/dstbugs.asp
+  https://www.codeproject.com/Articles/1144/Beating-the-Daylight-Savings-Time-bug-and-getting
 
   4.14 Redirects work in browser but not with curl!
 
@@ -1445,7 +1417,7 @@ FAQ
   timed out.
 
   The most flexible way is by writing your own time-out logic and using
-  CURLOPT_PROGRESSFUNCTION (perhaps in combination with other callbacks) and
+  CURLOPT_XFERINFOFUNCTION (perhaps in combination with other callbacks) and
   use that to figure out exactly when the right condition is met when the
   transfer should get stopped.
 

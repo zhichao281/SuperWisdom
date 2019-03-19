@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 2013 - 2016, Linus Nielsen Feltzing, <linus@haxx.se>
+ * Copyright (C) 2013 - 2018, Linus Nielsen Feltzing, <linus@haxx.se>
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -63,14 +63,14 @@ static int parse_url_file(const char *filename)
     return 0;
 
   while(!feof(f)) {
-    if(fscanf(f, "%d %s\n", &filetime, buf)) {
+    if(fscanf(f, "%d %199s\n", &filetime, buf)) {
       urltime[num_handles] = filetime;
       urlstring[num_handles] = strdup(buf);
       num_handles++;
       continue;
     }
 
-    if(fscanf(f, "blacklist_site %s\n", buf)) {
+    if(fscanf(f, "blacklist_site %199s\n", buf)) {
       site_blacklist[blacklist_num_sites] = strdup(buf);
       blacklist_num_sites++;
       continue;
@@ -88,13 +88,13 @@ static int parse_url_file(const char *filename)
 static void free_urls(void)
 {
   int i;
-  for(i = 0;i < num_handles;i++) {
+  for(i = 0; i < num_handles; i++) {
     Curl_safefree(urlstring[i]);
   }
-  for(i = 0;i < blacklist_num_servers;i++) {
+  for(i = 0; i < blacklist_num_servers; i++) {
     Curl_safefree(server_blacklist[i]);
   }
-  for(i = 0;i < blacklist_num_sites;i++) {
+  for(i = 0; i < blacklist_num_sites; i++) {
     Curl_safefree(site_blacklist[i]);
   }
 }
@@ -103,7 +103,7 @@ static int create_handles(void)
 {
   int i;
 
-  for(i = 0;i < num_handles;i++) {
+  for(i = 0; i < num_handles; i++) {
     handles[i] = curl_easy_init();
   }
   return 0;
@@ -113,7 +113,7 @@ static void setup_handle(char *base_url, CURLM *m, int handlenum)
 {
   char urlbuf[256];
 
-  snprintf(urlbuf, sizeof(urlbuf), "%s%s", base_url, urlstring[handlenum]);
+  msnprintf(urlbuf, sizeof(urlbuf), "%s%s", base_url, urlstring[handlenum]);
   curl_easy_setopt(handles[handlenum], CURLOPT_URL, urlbuf);
   curl_easy_setopt(handles[handlenum], CURLOPT_VERBOSE, 1L);
   curl_easy_setopt(handles[handlenum], CURLOPT_FAILONERROR, 1L);
@@ -126,7 +126,7 @@ static void remove_handles(void)
 {
   int i;
 
-  for(i = 0;i < num_handles;i++) {
+  for(i = 0; i < num_handles; i++) {
     if(handles[i])
       curl_easy_cleanup(handles[i]);
   }
@@ -189,13 +189,14 @@ int test(char *URL)
     abort_on_test_timeout();
 
     /* See how the transfers went */
-    while((msg = curl_multi_info_read(m, &msgs_left))) {
-      if(msg->msg == CURLMSG_DONE) {
-        int i, found = 0;
+    do {
+      msg = curl_multi_info_read(m, &msgs_left);
+      if(msg && msg->msg == CURLMSG_DONE) {
+        int i;
 
         /* Find out which handle this message is about */
         for(i = 0; i < num_handles; i++) {
-          found = (msg->easy_handle == handles[i]);
+          int found = (msg->easy_handle == handles[i]);
           if(found)
             break;
         }
@@ -203,7 +204,7 @@ int test(char *URL)
         printf("Handle %d Completed with status %d\n", i, msg->data.result);
         curl_multi_remove_handle(m, handles[i]);
       }
-    }
+    } while(msg);
 
     if(handlenum == num_handles && !running) {
       break; /* done */
@@ -228,7 +229,7 @@ int test(char *URL)
     interval.tv_sec = 0;
     interval.tv_usec = 1000;
 
-    select_test(maxfd+1, &rd, &wr, &exc, &interval);
+    select_test(maxfd + 1, &rd, &wr, &exc, &interval);
 
     abort_on_test_timeout();
   }

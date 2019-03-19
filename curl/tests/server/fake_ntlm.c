@@ -6,7 +6,7 @@
  *                             \___|\___/|_| \_\_____|
  *
  * Copyright (C) 2010, Mandy Wu, <mandy.wu@intel.com>
- * Copyright (C) 2011 - 2013, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 2011 - 2018, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -37,7 +37,7 @@
 /* include memdebug.h last */
 #include "memdebug.h"
 
-#define LOGFILE "log/fake_ntlm%d.log"
+#define LOGFILE "log/fake_ntlm%ld.log"
 
 const char *serverlogfile;
 
@@ -63,7 +63,8 @@ static char *printable(char *inbuf, size_t inlength)
     inlength = strlen(inbuf);
 
   if(inlength) {
-    outincr = ((inlength/2) < (HEX_STR_LEN+1)) ? HEX_STR_LEN+1 : inlength/2;
+    outincr = ((inlength/2) < (HEX_STR_LEN + 1)) ?
+      HEX_STR_LEN + 1 : inlength/2;
     outsize = inlength + outincr;
   }
   else
@@ -74,11 +75,11 @@ static char *printable(char *inbuf, size_t inlength)
     return NULL;
 
   if(!inlength) {
-    snprintf(&outbuf[0], outsize, "%s", NOTHING_STR);
+    msnprintf(&outbuf[0], outsize, "%s", NOTHING_STR);
     return outbuf;
   }
 
-  for(i=0; i<inlength; i++) {
+  for(i = 0; i<inlength; i++) {
 
     if(o > outsize - (HEX_STR_LEN + 1)) {
       newsize = outsize + outincr;
@@ -96,7 +97,7 @@ static char *printable(char *inbuf, size_t inlength)
       o++;
     }
     else {
-      snprintf(&outbuf[o], outsize - o, HEX_FMT_STR, inbuf[i]);
+      msnprintf(&outbuf[o], outsize - o, HEX_FMT_STR, inbuf[i]);
       o += HEX_STR_LEN;
     }
 
@@ -173,7 +174,7 @@ int main(int argc, char *argv[])
   }
 
   /* logmsg cannot be used until this file name is set */
-  snprintf(logfilename, sizeof(logfilename), LOGFILE, testnum);
+  msnprintf(logfilename, sizeof(logfilename), LOGFILE, testnum);
   serverlogfile = logfilename;
 
   logmsg("fake_ntlm (user: %s) (proto: %s) (domain: %s) (cached creds: %s)",
@@ -186,7 +187,7 @@ int main(int argc, char *argv[])
   }
 
   filename = test2file(testnum);
-  stream=fopen(filename, "rb");
+  stream = fopen(filename, "rb");
   if(!stream) {
     error = errno;
     logmsg("fopen() failed with error: %d %s", error, strerror(error));
@@ -204,7 +205,7 @@ int main(int argc, char *argv[])
     }
   }
 
-  stream=fopen(filename, "rb");
+  stream = fopen(filename, "rb");
   if(!stream) {
     error = errno;
     logmsg("fopen() failed with error: %d %s", error, strerror(error));
@@ -224,7 +225,7 @@ int main(int argc, char *argv[])
 
   while(fgets(buf, sizeof(buf), stdin)) {
     if(strcmp(buf, type1_input) == 0) {
-      stream=fopen(filename, "rb");
+      stream = fopen(filename, "rb");
       if(!stream) {
         error = errno;
         logmsg("fopen() failed with error: %d %s", error, strerror(error));
@@ -246,7 +247,7 @@ int main(int argc, char *argv[])
       fflush(stdout);
     }
     else if(strncmp(buf, type3_input, strlen(type3_input)) == 0) {
-      stream=fopen(filename, "rb");
+      stream = fopen(filename, "rb");
       if(!stream) {
         error = errno;
         logmsg("fopen() failed with error: %d %s", error, strerror(error));

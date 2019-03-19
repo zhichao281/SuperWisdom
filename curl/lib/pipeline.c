@@ -6,7 +6,7 @@
  *                             \___|\___/|_| \_\_____|
  *
  * Copyright (C) 2013, Linus Nielsen Feltzing, <linus@haxx.se>
- * Copyright (C) 2013 - 2017, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 2013 - 2018, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -82,7 +82,8 @@ bool Curl_pipeline_penalized(struct Curl_easy *data,
       penalized = TRUE;
 
     infof(data, "Conn: %ld (%p) Receive pipe weight: (%"
-          CURL_FORMAT_CURL_OFF_T "/%zu), penalized: %s\n",
+          CURL_FORMAT_CURL_OFF_T "/%" CURL_FORMAT_CURL_OFF_T
+          "), penalized: %s\n",
           conn->connection_id, (void *)conn, recv_size,
           conn->chunk.datasize, penalized?"TRUE":"FALSE");
     return penalized;
@@ -109,8 +110,8 @@ CURLcode Curl_add_handle_to_pipeline(struct Curl_easy *handle,
   pipeline = &conn->send_pipe;
 
   result = addHandleToPipeline(handle, pipeline);
-
-  if(pipeline == &conn->send_pipe && sendhead != conn->send_pipe.head) {
+  if((conn->bundle->multiuse == BUNDLE_PIPELINING) &&
+     (pipeline == &conn->send_pipe && sendhead != conn->send_pipe.head)) {
     /* this is a new one as head, expire it */
     Curl_pipeline_leave_write(conn); /* not in use yet */
     Curl_expire(conn->send_pipe.head->ptr, 0, EXPIRE_RUN_NOW);
@@ -230,39 +231,33 @@ CURLMcode Curl_pipeline_set_site_blacklist(char **sites,
   return CURLM_OK;
 }
 
+struct blacklist_node {
+  struct curl_llist_element list;
+  char server_name[1];
+};
+
 bool Curl_pipeline_server_blacklisted(struct Curl_easy *handle,
                                       char *server_name)
 {
   if(handle->multi && server_name) {
-    struct curl_llist *blacklist =
+    struct curl_llist *list =
       Curl_multi_pipelining_server_bl(handle->multi);
 
-    if(blacklist) {
-      struct curl_llist_element *curr;
-
-      curr = blacklist->head;
-      while(curr) {
-        char *bl_server_name;
-
-        bl_server_name = curr->ptr;
-        if(strncasecompare(bl_server_name, server_name,
-                           strlen(bl_server_name))) {
-          infof(handle, "Server %s is blacklisted\n", server_name);
-          return TRUE;
-        }
-        curr = curr->next;
+    struct curl_llist_element *e = list->head;
+    while(e) {
+      struct blacklist_node *bl = (struct blacklist_node *)e;
+      if(strncasecompare(bl->server_name, server_name,
+                         strlen(bl->server_name))) {
+        infof(handle, "Server %s is blacklisted\n", server_name);
+        return TRUE;
       }
+      e = e->next;
     }
 
     DEBUGF(infof(handle, "Server %s is not blacklisted\n", server_name));
   }
   return FALSE;
 }
-
-struct blacklist_node {
-  struct curl_llist_element list;
-  char server_name[1];
-};
 
 CURLMcode Curl_pipeline_set_server_blacklist(char **servers,
                                              struct curl_llist *list)
@@ -286,8 +281,7 @@ CURLMcode Curl_pipeline_set_server_blacklist(char **servers,
       }
       strcpy(n->server_name, *servers);
 
-      Curl_llist_insert_next(list, list->tail, n->server_name,
-                             &n->list);
+      Curl_llist_insert_next(list, list->tail, n, &n->list);
       servers++;
     }
   }

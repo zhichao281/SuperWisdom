@@ -5,7 +5,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2016, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2018, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -50,15 +50,15 @@ int tool_debug_cb(CURL *handle, curl_infotype type,
   FILE *output = config->errors;
   const char *text;
   struct timeval tv;
-  struct tm *now;
   char timebuf[20];
   time_t secs;
-  static time_t epoch_offset;
-  static int    known_offset;
 
   (void)handle; /* not used */
 
   if(config->tracetime) {
+    struct tm *now;
+    static time_t epoch_offset;
+    static int    known_offset;
     tv = tvnow();
     if(!known_offset) {
       epoch_offset = time(NULL) - tv.tv_sec;
@@ -66,8 +66,8 @@ int tool_debug_cb(CURL *handle, curl_infotype type,
     }
     secs = epoch_offset + tv.tv_sec;
     now = localtime(&secs);  /* not thread safe but we don't care */
-    snprintf(timebuf, sizeof(timebuf), "%02d:%02d:%02d.%06ld ",
-             now->tm_hour, now->tm_min, now->tm_sec, (long)tv.tv_usec);
+    msnprintf(timebuf, sizeof(timebuf), "%02d:%02d:%02d.%06ld ",
+              now->tm_hour, now->tm_min, now->tm_sec, (long)tv.tv_usec);
   }
   else
     timebuf[0] = 0;
@@ -101,14 +101,14 @@ int tool_debug_cb(CURL *handle, curl_infotype type,
     static const char * const s_infotype[] = {
       "*", "<", ">", "{", "}", "{", "}"
     };
-    size_t i;
-    size_t st = 0;
     static bool newl = FALSE;
     static bool traced_data = FALSE;
 
     switch(type) {
     case CURLINFO_HEADER_OUT:
       if(size > 0) {
+        size_t st = 0;
+        size_t i;
         for(i = 0; i < size - 1; i++) {
           if(data[i] == '\n') { /* LF */
             if(!newl) {
@@ -146,7 +146,7 @@ int tool_debug_cb(CURL *handle, curl_infotype type,
         if(!config->isatty || ((output != stderr) && (output != stdout))) {
           if(!newl)
             fprintf(output, "%s%s ", timebuf, s_infotype[type]);
-          fprintf(output, "[%zd bytes data]\n", size);
+          fprintf(output, "[%zu bytes data]\n", size);
           newl = FALSE;
           traced_data = TRUE;
         }
@@ -229,7 +229,7 @@ static void dump(const char *timebuf, const char *text,
     /* without the hex output, we can fit more on screen */
     width = 0x40;
 
-  fprintf(stream, "%s%s, %zd bytes (0x%zx)\n", timebuf, text, size, size);
+  fprintf(stream, "%s%s, %zu bytes (0x%zx)\n", timebuf, text, size, size);
 
   for(i = 0; i < size; i += width) {
 
@@ -238,37 +238,40 @@ static void dump(const char *timebuf, const char *text,
     if(tracetype == TRACE_BIN) {
       /* hex not disabled, show it */
       for(c = 0; c < width; c++)
-        if(i+c < size)
-          fprintf(stream, "%02x ", ptr[i+c]);
+        if(i + c < size)
+          fprintf(stream, "%02x ", ptr[i + c]);
         else
           fputs("   ", stream);
     }
 
-    for(c = 0; (c < width) && (i+c < size); c++) {
+    for(c = 0; (c < width) && (i + c < size); c++) {
       /* check for 0D0A; if found, skip past and start a new line of output */
       if((tracetype == TRACE_ASCII) &&
-         (i+c+1 < size) && (ptr[i+c] == 0x0D) && (ptr[i+c+1] == 0x0A)) {
-        i += (c+2-width);
+         (i + c + 1 < size) && (ptr[i + c] == 0x0D) &&
+         (ptr[i + c + 1] == 0x0A)) {
+        i += (c + 2 - width);
         break;
       }
 #ifdef CURL_DOES_CONVERSIONS
       /* repeat the 0D0A check above but use the host encoding for CRLF */
       if((tracetype == TRACE_ASCII) &&
-         (i+c+1 < size) && (ptr[i+c] == '\r') && (ptr[i+c+1] == '\n')) {
-        i += (c+2-width);
+         (i + c + 1 < size) && (ptr[i + c] == '\r') &&
+         (ptr[i + c + 1] == '\n')) {
+        i += (c + 2 - width);
         break;
       }
       /* convert to host encoding and print this character */
-      fprintf(stream, "%c", convert_char(infotype, ptr[i+c]));
+      fprintf(stream, "%c", convert_char(infotype, ptr[i + c]));
 #else
       (void)infotype;
-      fprintf(stream, "%c", ((ptr[i+c] >= 0x20) && (ptr[i+c] < 0x80)) ?
-              ptr[i+c] : UNPRINTABLE_CHAR);
+      fprintf(stream, "%c", ((ptr[i + c] >= 0x20) && (ptr[i + c] < 0x80)) ?
+              ptr[i + c] : UNPRINTABLE_CHAR);
 #endif /* CURL_DOES_CONVERSIONS */
       /* check again for 0D0A, to avoid an extra \n if it's at width */
       if((tracetype == TRACE_ASCII) &&
-         (i+c+2 < size) && (ptr[i+c+1] == 0x0D) && (ptr[i+c+2] == 0x0A)) {
-        i += (c+3-width);
+         (i + c + 2 < size) && (ptr[i + c + 1] == 0x0D) &&
+         (ptr[i + c + 2] == 0x0A)) {
+        i += (c + 3 - width);
         break;
       }
     }
@@ -276,4 +279,3 @@ static void dump(const char *timebuf, const char *text,
   }
   fflush(stream);
 }
-

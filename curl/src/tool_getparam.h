@@ -41,6 +41,7 @@ typedef enum {
   PARAM_NO_MEM,
   PARAM_NEXT_OPERATION,
   PARAM_NO_PREFIX,
+  PARAM_NUMBER_TOO_LARGE,
   PARAM_LAST
 } ParameterError;
 
@@ -61,4 +62,3 @@ ParameterError parse_args(struct GlobalConfig *config, int argc,
                           argv_item_t argv[]);
 
 #endif /* HEADER_CURL_TOOL_GETPARAM_H */
-

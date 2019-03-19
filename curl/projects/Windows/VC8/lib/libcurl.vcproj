@@ -3653,6 +3653,10 @@
 			>
 			</File>
 			<File
+				RelativePath="..\..\..\..\lib\curl_ctype.c"
+			>
+			</File>
+			<File
 				RelativePath="..\..\..\..\lib\curl_des.c"
 			>
 			</File>
@@ -3689,6 +3693,14 @@
 			>
 			</File>
 			<File
+				RelativePath="..\..\..\..\lib\curl_path.c"
+			>
+			</File>
+			<File
+				RelativePath="..\..\..\..\lib\curl_range.c"
+			>
+			</File>
+			<File
 				RelativePath="..\..\..\..\lib\curl_rtmp.c"
 			>
 			</File>
@@ -3706,6 +3718,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\lib\dict.c"
+			>
+			</File>
+			<File
+				RelativePath="..\..\..\..\lib\doh.c"
 			>
 			</File>
 			<File
@@ -3857,6 +3873,10 @@
 			>
 			</File>
 			<File
+				RelativePath="..\..\..\..\lib\mime.c"
+			>
+			</File>
+			<File
 				RelativePath="..\..\..\..\lib\mprintf.c"
 			>
 			</File>
@@ -3901,6 +3921,10 @@
 			>
 			</File>
 			<File
+				RelativePath="..\..\..\..\lib\psl.c"
+			>
+			</File>
+			<File
 				RelativePath="..\..\..\..\lib\rand.c"
 			>
 			</File>
@@ -3918,6 +3942,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\lib\sendf.c"
+			>
+			</File>
+			<File
+				RelativePath="..\..\..\..\lib\setopt.c"
+			>
+			</File>
+			<File
+				RelativePath="..\..\..\..\lib\sha256.c"
 			>
 			</File>
 			<File
@@ -3961,6 +3993,10 @@
 			>
 			</File>
 			<File
+				RelativePath="..\..\..\..\lib\ssh-libssh.c"
+			>
+			</File>
+			<File
 				RelativePath="..\..\..\..\lib\strcase.c"
 			>
 			</File>
@@ -3998,6 +4034,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\lib\transfer.c"
+			>
+			</File>
+			<File
+				RelativePath="..\..\..\..\lib\urlapi.c"
 			>
 			</File>
 			<File
@@ -4065,6 +4105,10 @@
 			>
 			</File>
 			<File
+				RelativePath="..\..\..\..\lib\curl_ctype.h"
+			>
+			</File>
+			<File
 				RelativePath="..\..\..\..\lib\curl_des.h"
 			>
 			</File>
@@ -4121,7 +4165,15 @@
 			>
 			</File>
 			<File
+				RelativePath="..\..\..\..\lib\curl_path.h"
+			>
+			</File>
+			<File
 				RelativePath="..\..\..\..\lib\curl_printf.h"
+			>
+			</File>
+			<File
+				RelativePath="..\..\..\..\lib\curl_range.h"
 			>
 			</File>
 			<File
@@ -4145,6 +4197,10 @@
 			>
 			</File>
 			<File
+				RelativePath="..\..\..\..\lib\curl_sha256.h"
+			>
+			</File>
+			<File
 				RelativePath="..\..\..\..\lib\curl_sspi.h"
 			>
 			</File>
@@ -4158,6 +4214,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\lib\dict.h"
+			>
+			</File>
+			<File
+				RelativePath="..\..\..\..\lib\doh.h"
 			>
 			</File>
 			<File
@@ -4265,6 +4325,10 @@
 			>
 			</File>
 			<File
+				RelativePath="..\..\..\..\lib\mime.h"
+			>
+			</File>
+			<File
 				RelativePath="..\..\..\..\lib\multihandle.h"
 			>
 			</File>
@@ -4305,6 +4369,10 @@
 			>
 			</File>
 			<File
+				RelativePath="..\..\..\..\lib\psl.h"
+			>
+			</File>
+			<File
 				RelativePath="..\..\..\..\lib\rand.h"
 			>
 			</File>
@@ -4318,6 +4386,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\lib\sendf.h"
+			>
+			</File>
+			<File
+				RelativePath="..\..\..\..\lib\setopt.h"
 			>
 			</File>
 			<File
@@ -4402,6 +4474,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\lib\transfer.h"
+			>
+			</File>
+			<File
+				RelativePath="..\..\..\..\lib\urlapi-int.h"
 			>
 			</File>
 			<File
@@ -4512,10 +4588,6 @@
 				Name="Source Files"
 				>
 				<File
-					RelativePath="..\..\..\..\lib\vtls\axtls.c"
-				>
-				</File>
-				<File
 					RelativePath="..\..\..\..\lib\vtls\cyassl.c"
 				>
 				</File>
@@ -4533,6 +4605,10 @@
 				</File>
 				<File
 					RelativePath="..\..\..\..\lib\vtls\mbedtls.c"
+				>
+				</File>
+				<File
+					RelativePath="..\..\..\..\lib\vtls\mesalink.c"
 				>
 				</File>
 				<File
@@ -4556,6 +4632,10 @@
 				>
 				</File>
 				<File
+					RelativePath="..\..\..\..\lib\vtls\schannel_verify.c"
+				>
+				</File>
+				<File
 					RelativePath="..\..\..\..\lib\vtls\vtls.c"
 				>
 				</File>
@@ -4563,10 +4643,6 @@
 			<Filter
 				Name="Header Files"
 				>
-				<File
-					RelativePath="..\..\..\..\lib\vtls\axtls.h"
-				>
-				</File>
 				<File
 					RelativePath="..\..\..\..\lib\vtls\cyassl.h"
 				>
@@ -4585,6 +4661,10 @@
 				</File>
 				<File
 					RelativePath="..\..\..\..\lib\vtls\mbedtls.h"
+				>
+				</File>
+				<File
+					RelativePath="..\..\..\..\lib\vtls\mesalink.h"
 				>
 				</File>
 				<File
