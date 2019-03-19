@@ -92,7 +92,6 @@
     <ClCompile Include="log\Logger.cpp" />
     <ClCompile Include="log\LogManager.cpp" />
     <ClCompile Include="log\log_deffine.cpp" />
-    <ClCompile Include="LSP\FixLSP.cpp" />
     <ClCompile Include="SystemSettings\GetCpuUseage.cpp" />
     <ClCompile Include="SystemSettings\SystemSettings.cpp" />
     <ClCompile Include="thread_pool\testThreadPool.cpp" />
@@ -147,7 +146,6 @@
     <ClInclude Include="log\Logger.h" />
     <ClInclude Include="log\LogManager.h" />
     <ClInclude Include="log\log_deffine.h" />
-    <ClInclude Include="LSP\FixLSP.h" />
     <ClInclude Include="SystemSettings\GetCpuUseage.h" />
     <ClInclude Include="SystemSettings\SystemSettings.h" />
     <ClInclude Include="thread_pool\thread_pool.h" />

@@ -58,9 +58,6 @@
     <Filter Include="Zip\zlib">
       <UniqueIdentifier>{53d635b2-4862-4277-acf9-696cfe355f94}</UniqueIdentifier>
     </Filter>
-    <Filter Include="LSP">
-      <UniqueIdentifier>{5b68a0a0-ccce-4611-a04f-38c0a6437807}</UniqueIdentifier>
-    </Filter>
     <Filter Include="http">
       <UniqueIdentifier>{6d43f9ca-c74d-4bcf-9fa0-b78845f3b983}</UniqueIdentifier>
     </Filter>
@@ -204,9 +201,6 @@
     <ClCompile Include="ziptest.cpp">
       <Filter>Zip</Filter>
     </ClCompile>
-    <ClCompile Include="LSP\FixLSP.cpp">
-      <Filter>LSP</Filter>
-    </ClCompile>
     <ClCompile Include="HttpClientLib\HttpClient.cpp">
       <Filter>http</Filter>
     </ClCompile>
@@ -340,9 +334,6 @@
     </ClInclude>
     <ClInclude Include="zip\zlib\zutil.h">
       <Filter>Zip\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="LSP\FixLSP.h">
-      <Filter>LSP</Filter>
     </ClInclude>
     <ClInclude Include="HttpClientLib\HttpClient.h">
       <Filter>http</Filter>

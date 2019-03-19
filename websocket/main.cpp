@@ -123,6 +123,9 @@ void handleRequestBody(const char* pBodyData, int nBodyLen)
 }
 
 
+
+
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	HTTP_SERVER->SetHttpRequestBodyCallBack(handleRequestBody);
