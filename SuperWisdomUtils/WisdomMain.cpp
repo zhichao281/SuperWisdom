@@ -162,10 +162,13 @@ BOOL FileAttributes(LPCSTR lpszFilePath/*文件路径*/)
 	return TRUE;
 }
 
-int main111()
+#include "Download.h"
+int main()
 {	
 
-
+	http_downloadfile("http://s.funnycore.com/funnyCore_190116_2695.exe",
+		"d:\\趣核安装包\\", "", false,nullptr);
+	system("pause");
 	std::list<std::pair<std::string, bool>> filelist;
 
 	filelist= WisdomUtils::CFileManange::GetDirFiles("C:\\Users\\Administrator\\Desktop\\扫描件");

@@ -14,8 +14,17 @@ std::string WStringToString(const std::wstring &wstr)
 
 
 
-int main()
+int zipmain()
 {
+	//1. locale("")：调用构造函数创建一个local，其中的空字符串具有特殊含义：使用客户环境中缺省的locale（《C++标准程序库—自修教程与参考手册》P697）。例如在简体中文系统上，会返回简体中文的locale。
+	//2. locale::global(locale(""))：将“C++标准IO库的全局locale”设为“客户环境中缺省的locale”。注意它还会设置C标准库的locale环境，造成与“setlocale(LC_ALL, "")”类似的效果（《C++标准程序库—自修教程与参考手册》P698）。
+	//3. wcout.imbue(locale(""))：使wcout使用“客户环境中缺省的locale”。
+
+	//	就这样，使C标准库、C++标准IO库（尤其是wcout）均正确的设置了地区环境，与客户环境中缺省环境完全匹配。
+	locale::global(locale(""));
+	wcout.imbue(locale(""));
+
+
 
 	CHttpClient http;
 

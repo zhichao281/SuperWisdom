@@ -42,10 +42,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>E:\study\SuperWisdom\SuperWisdomUtils\gtest-1.7.0;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>gtest-1.7.0;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>gtest-1.7.0;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -81,6 +82,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DebugView\DebugView.cpp" />
+    <ClCompile Include="Download.cpp" />
     <ClCompile Include="Dump\Crash_Dumper.cpp" />
     <ClCompile Include="FileManager\FileManange.cpp" />
     <ClCompile Include="gtest-1.7.0\gtest\gtest-all.cc" />
@@ -131,8 +133,10 @@
   <ItemGroup>
     <ClInclude Include="AutoLockClass.h" />
     <ClInclude Include="AutoLockMacro.h" />
+    <ClInclude Include="auto_tchar.h" />
     <ClInclude Include="DebugView\DebugView.h" />
     <ClInclude Include="DllLoader.h" />
+    <ClInclude Include="Download.h" />
     <ClInclude Include="Dump\Crash_Dumper.h" />
     <ClInclude Include="FileManager\FileManange.h" />
     <ClInclude Include="gtest-1.7.0\gtest\gtest.h" />

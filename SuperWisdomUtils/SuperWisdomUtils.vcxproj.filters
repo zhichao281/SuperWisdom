@@ -204,6 +204,9 @@
     <ClCompile Include="HttpClientLib\HttpClient.cpp">
       <Filter>http</Filter>
     </ClCompile>
+    <ClCompile Include="Download.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WisdomUtils.h">
@@ -337,6 +340,12 @@
     </ClInclude>
     <ClInclude Include="HttpClientLib\HttpClient.h">
       <Filter>http</Filter>
+    </ClInclude>
+    <ClInclude Include="Download.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="auto_tchar.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
