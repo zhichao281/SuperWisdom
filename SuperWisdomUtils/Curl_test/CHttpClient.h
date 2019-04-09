@@ -2,8 +2,12 @@
 *封装Libcurl下载库
 */
 #pragma once
+//libcurl采用静态库引用
+#define  CURL_STATICLIB
+
 #include "include/curl/curl.h"
 #include <string>
+
 using std::string;
 
 

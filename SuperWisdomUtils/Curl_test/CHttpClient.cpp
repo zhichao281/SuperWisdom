@@ -1,6 +1,8 @@
 #include "CHttpClient.h"
 #include "include/curl/curl.h"
 #pragma comment(lib, "lib/libcurl.lib")
+
+
 #include <string>
 #include <assert.h>
 

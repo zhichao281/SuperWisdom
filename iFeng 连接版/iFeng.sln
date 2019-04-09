@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iFeng", "iFeng\iFeng.vcxproj", "{252BE907-A9D5-497C-A09A-52A40E6620C8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iFengUI", "iFengUI\iFengUI.vcxproj", "{9D2EE540-DC9F-4632-BB18-35C2C8044AFE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{252BE907-A9D5-497C-A09A-52A40E6620C8} = {252BE907-A9D5-497C-A09A-52A40E6620C8}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{252BE907-A9D5-497C-A09A-52A40E6620C8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{252BE907-A9D5-497C-A09A-52A40E6620C8}.Debug|Win32.Build.0 = Debug|Win32
+		{252BE907-A9D5-497C-A09A-52A40E6620C8}.Release|Win32.ActiveCfg = Release|Win32
+		{252BE907-A9D5-497C-A09A-52A40E6620C8}.Release|Win32.Build.0 = Release|Win32
+		{9D2EE540-DC9F-4632-BB18-35C2C8044AFE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9D2EE540-DC9F-4632-BB18-35C2C8044AFE}.Debug|Win32.Build.0 = Debug|Win32
+		{9D2EE540-DC9F-4632-BB18-35C2C8044AFE}.Release|Win32.ActiveCfg = Release|Win32
+		{9D2EE540-DC9F-4632-BB18-35C2C8044AFE}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
