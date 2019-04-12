@@ -1,6 +1,6 @@
 
 
-#include "WSJson.h"
+#include "NSJson.h"
 
 #include <fstream>
 #include <stdexcept>
@@ -66,19 +66,19 @@ int StrTrim(std::string &strBuf, std::string strChars /* = " " */)
 
 
 /*
- *	Function:		GSJsonObject
+ *	Function:		NSJsonObject
  *	Explanation:	构造函数
  */
-WSJsonObject::WSJsonObject()
+NSJsonObject::NSJsonObject()
 {
 
 }
 
 /*
- *	Function:		~GSJsonObject
+ *	Function:		~NSJsonObject
  *	Explanation:	析构函数
  */
-WSJsonObject::~WSJsonObject()
+NSJsonObject::~NSJsonObject()
 {
 
 }
@@ -88,7 +88,7 @@ WSJsonObject::~WSJsonObject()
  *	Explanation:	获取Json::Value对象
  *	Return:			Json::Value对象
  */
-Json::Value WSJsonObject::_GetValue()
+Json::Value NSJsonObject::_GetValue()
 {
 	return m_Obj;
 }
@@ -100,7 +100,7 @@ Json::Value WSJsonObject::_GetValue()
  *  Output:			输出
  *	Return:			TRUE 成功 FALSE 失败
  */
-void WSJsonObject::_SetValue(Json::Value Value)
+void NSJsonObject::_SetValue(Json::Value Value)
 {
 	m_Obj = Value;
 }
@@ -111,7 +111,7 @@ void WSJsonObject::_SetValue(Json::Value Value)
  *	Input:			Key			键
 					Value		值
  */
-void WSJsonObject::Put(std::string Key, int Value, bool Isbool /* = false */)
+void NSJsonObject::Put(std::string Key, int Value, bool Isbool /* = false */)
 {
 	if (!Isbool)
 	{
@@ -131,42 +131,42 @@ void WSJsonObject::Put(std::string Key, int Value, bool Isbool /* = false */)
 	
 }
 
-void WSJsonObject::Put(std::string Key, unsigned int Value)
+void NSJsonObject::Put(std::string Key, unsigned int Value)
 {
 	m_Obj[Key] = Value;
 }
 
-void WSJsonObject::Put(std::string Key, __int64 Value)
+void NSJsonObject::Put(std::string Key, __int64 Value)
 {
 	m_Obj[Key] = Value;
 }
 
-void WSJsonObject::Put(std::string Key, unsigned __int64 Value)
+void NSJsonObject::Put(std::string Key, unsigned __int64 Value)
 {
 	m_Obj[Key] = Value;
 }
 
-void WSJsonObject::Put(std::string Key, double Value)
+void NSJsonObject::Put(std::string Key, double Value)
 {
 	m_Obj[Key] = Value;
 }
 
-void WSJsonObject::Put(std::string Key, float Value)
+void NSJsonObject::Put(std::string Key, float Value)
 {
 	m_Obj[Key] = Value;
 }
 
-void WSJsonObject::Put(std::string Key, std::string Value)
+void NSJsonObject::Put(std::string Key, std::string Value)
 {
 	m_Obj[Key] = Value;
 }
 
-void WSJsonObject::Put(std::string Key, WSJsonObject JsonObj)
+void NSJsonObject::Put(std::string Key, NSJsonObject JsonObj)
 {
 	m_Obj[Key] = JsonObj.Value;
 }
 
-void WSJsonObject::Put(std::string Key, WSJsonArray JsonArr)
+void NSJsonObject::Put(std::string Key, NSJsonArray JsonArr)
 {
 	m_Obj[Key] = JsonArr.Value;
 }
@@ -177,47 +177,47 @@ void WSJsonObject::Put(std::string Key, WSJsonArray JsonArr)
  *	Input:			Key			键
  *	Return:			true 是 false 不是
  */
-bool WSJsonObject::IsInt(std::string Key)
+bool NSJsonObject::IsInt(std::string Key)
 {
 	return m_Obj[Key].isInt();
 }
 
-bool WSJsonObject::IsUInt(std::string Key)
+bool NSJsonObject::IsUInt(std::string Key)
 {
 	return m_Obj[Key].isUInt();
 }
 
-bool WSJsonObject::IsInt64(std::string Key)
+bool NSJsonObject::IsInt64(std::string Key)
 {
 	return m_Obj[Key].isInt64();
 }
 
-bool WSJsonObject::IsUInt64(std::string Key)
+bool NSJsonObject::IsUInt64(std::string Key)
 {
 	return m_Obj[Key].isUInt64();
 }
 
-bool WSJsonObject::IsBool(std::string Key)
+bool NSJsonObject::IsBool(std::string Key)
 {
 	return m_Obj[Key].isBool();
 }
 
-bool WSJsonObject::IsDouble(std::string Key)
+bool NSJsonObject::IsDouble(std::string Key)
 {
 	return m_Obj[Key].isDouble();
 }
 
-bool WSJsonObject::IsString(std::string Key)
+bool NSJsonObject::IsString(std::string Key)
 {
 	return m_Obj[Key].isString();
 }
 
-bool WSJsonObject::IsObject(std::string Key)
+bool NSJsonObject::IsObject(std::string Key)
 {
 	return m_Obj[Key].isObject();
 }
 
-bool WSJsonObject::IsArray(std::string Key)
+bool NSJsonObject::IsArray(std::string Key)
 {
 	return m_Obj[Key].isArray();
 }
@@ -228,9 +228,9 @@ bool WSJsonObject::IsArray(std::string Key)
  *	Input:			Key			键
  *	Return:			对应的值（）
  */
-bool WSJsonObject::GetBool(std::string Key)
+bool NSJsonObject::GetBool(std::string Key)
 {
-	if (IsNull(Key))
+	if (IsNull(Key) || m_Obj[Key].isBool() == false)
 	{
 		throw std::invalid_argument("key not exist");
 		//_THROW(std::invalid_argument, "key not exist");
@@ -240,9 +240,9 @@ bool WSJsonObject::GetBool(std::string Key)
 	return m_Obj[Key].asBool();
 }
 
-int WSJsonObject::GetInt(std::string Key)
+int NSJsonObject::GetInt(std::string Key)
 {
-	if (IsNull(Key))
+	if (IsNull(Key) || m_Obj[Key].isInt() == false)
 	{
 		//_THROW(std::invalid_argument, "key not exist");
 		return _GetDefaultInt(Key);
@@ -251,9 +251,9 @@ int WSJsonObject::GetInt(std::string Key)
 	return m_Obj[Key].asInt();
 }
 
-unsigned int WSJsonObject::GetUInt(std::string Key)
+unsigned int NSJsonObject::GetUInt(std::string Key)
 {
-	if (IsNull(Key))
+	if (IsNull(Key) ||  m_Obj[Key].isUInt() == false)
 	{
 		//_THROW(std::invalid_argument, "key not exist");
 		return _GetDefaultInt(Key);
@@ -262,7 +262,7 @@ unsigned int WSJsonObject::GetUInt(std::string Key)
 	return m_Obj[Key].asUInt();
 }
 
-__int64 WSJsonObject::GetInt64(std::string Key)
+__int64 NSJsonObject::GetInt64(std::string Key)
 {
 	if (IsNull(Key))
 	{
@@ -273,7 +273,7 @@ __int64 WSJsonObject::GetInt64(std::string Key)
 	return m_Obj[Key].asInt64();
 }
 
-unsigned __int64 WSJsonObject::GetUInt64(std::string Key)
+unsigned __int64 NSJsonObject::GetUInt64(std::string Key)
 {
 	if (IsNull(Key))
 	{
@@ -284,9 +284,9 @@ unsigned __int64 WSJsonObject::GetUInt64(std::string Key)
 	return m_Obj[Key].asUInt64();
 }
 
-double WSJsonObject::GetDouble(std::string Key)
+double NSJsonObject::GetDouble(std::string Key)
 {
-	if (IsNull(Key))
+	if (IsNull(Key) || m_Obj[Key].isDouble() == false)
 	{
 		//_THROW(std::invalid_argument, "key not exist");
 		return _GetDefaultFloat(Key);
@@ -295,7 +295,7 @@ double WSJsonObject::GetDouble(std::string Key)
 	return m_Obj[Key].asDouble();
 }
 
-float WSJsonObject::GetFloat(std::string Key)
+float NSJsonObject::GetFloat(std::string Key)
 {
 	if (IsNull(Key))
 	{
@@ -306,9 +306,9 @@ float WSJsonObject::GetFloat(std::string Key)
 	return m_Obj[Key].asFloat();
 }
 
-std::string WSJsonObject::GetString(std::string Key)
+std::string NSJsonObject::GetString(std::string Key)
 {
-	if (IsNull(Key))
+if (IsNull(Key) || m_Obj[Key].isString() == false)
 	{
 		//_THROW(std::invalid_argument, "key not exist");
 		return _GetDefaultString(Key);
@@ -317,11 +317,11 @@ std::string WSJsonObject::GetString(std::string Key)
 	return m_Obj[Key].asString();
 }
 
-WSJsonObject WSJsonObject::Get(std::string Key)
+NSJsonObject NSJsonObject::Get(std::string Key)
 {
-	WSJsonObject			Obj;
+	NSJsonObject			Obj;
 
-	if (IsNull(Key))
+	if (IsNull(Key) || m_Obj[Key].isObject() == false)
 	{
 		//_THROW(std::invalid_argument, "key not exist");
 		return _GetDefaultObject(Key);
@@ -332,11 +332,11 @@ WSJsonObject WSJsonObject::Get(std::string Key)
 	return Obj;
 }
 
-WSJsonArray WSJsonObject::GetArr(std::string Key)
+NSJsonArray NSJsonObject::GetArr(std::string Key)
 {
-	WSJsonArray			Arr;
+	NSJsonArray			Arr;
 
-	if (IsNull(Key))
+	if (IsNull(Key) || m_Obj[Key].isArray() == false)
 	{
 		//_THROW(std::invalid_argument, "key not exist");
 		return _GetDefaultArray(Key);
@@ -354,9 +354,9 @@ WSJsonArray WSJsonObject::GetArr(std::string Key)
 					Default		默认值
  *	Return:			值
  */
-bool WSJsonObject::OptGetBool(std::string Key, bool Default /* = false */)
+bool NSJsonObject::OptGetBool(std::string Key, bool Default /* = false */)
 {
-	if (IsNull(Key))
+	if (IsNull(Key) || m_Obj[Key].isBool() == false)
 	{
 		return Default;
 	}
@@ -364,9 +364,9 @@ bool WSJsonObject::OptGetBool(std::string Key, bool Default /* = false */)
 	return m_Obj[Key].asBool();
 }
 
-int WSJsonObject::OptGetInt(std::string Key, int Default /* = 0 */)
+int NSJsonObject::OptGetInt(std::string Key, int Default /* = 0 */)
 {
-	if (IsNull(Key))
+if (IsNull(Key) || m_Obj[Key].isInt() == false)
 	{
 		return Default;
 	}
@@ -374,9 +374,9 @@ int WSJsonObject::OptGetInt(std::string Key, int Default /* = 0 */)
 	return m_Obj[Key].asInt();
 }
 
-unsigned int WSJsonObject::OptGetUInt(std::string Key, unsigned int Default /* = 0 */)
+unsigned int NSJsonObject::OptGetUInt(std::string Key, unsigned int Default /* = 0 */)
 {
-	if (IsNull(Key))
+		if (IsNull(Key) || m_Obj[Key].isUInt() == false)
 	{
 		return Default;
 	}
@@ -384,7 +384,7 @@ unsigned int WSJsonObject::OptGetUInt(std::string Key, unsigned int Default /* =
 	return m_Obj[Key].asUInt();
 }
 
-__int64 WSJsonObject::OptGetInt64(std::string Key, __int64 Default /* = 0 */)
+__int64 NSJsonObject::OptGetInt64(std::string Key, __int64 Default /* = 0 */)
 {
 	if (IsNull(Key))
 	{
@@ -394,7 +394,7 @@ __int64 WSJsonObject::OptGetInt64(std::string Key, __int64 Default /* = 0 */)
 	return m_Obj[Key].asInt64();
 }
 
-unsigned __int64 WSJsonObject::OptGetUInt64(std::string Key, unsigned __int64 Default /* = 0 */)
+unsigned __int64 NSJsonObject::OptGetUInt64(std::string Key, unsigned __int64 Default /* = 0 */)
 {
 	if (IsNull(Key))
 	{
@@ -404,9 +404,9 @@ unsigned __int64 WSJsonObject::OptGetUInt64(std::string Key, unsigned __int64 De
 	return m_Obj[Key].asUInt64();
 }
 
-double WSJsonObject::OptGetDouble(std::string Key, double Default /* = 0 */)
+double NSJsonObject::OptGetDouble(std::string Key, double Default /* = 0 */)
 {
-	if (IsNull(Key))
+	if (IsNull(Key) || m_Obj[Key].isDouble() == false )
 	{
 		return Default;
 	}
@@ -414,7 +414,7 @@ double WSJsonObject::OptGetDouble(std::string Key, double Default /* = 0 */)
 	return m_Obj[Key].asDouble();
 }
 
-float WSJsonObject::OptGetFloat(std::string Key, float Default /* = 0 */)
+float NSJsonObject::OptGetFloat(std::string Key, float Default /* = 0 */)
 {
 	if (IsNull(Key))
 	{
@@ -424,9 +424,9 @@ float WSJsonObject::OptGetFloat(std::string Key, float Default /* = 0 */)
 	return m_Obj[Key].asFloat();
 }
 
-std::string WSJsonObject::OptGetString(std::string Key, std::string Default /* = "" */)
+std::string NSJsonObject::OptGetString(std::string Key, std::string Default /* = "" */)
 {
-	if (IsNull(Key))
+	if (IsNull(Key) || m_Obj[Key].isString() == false)
 	{
 		return Default;
 	}
@@ -434,11 +434,11 @@ std::string WSJsonObject::OptGetString(std::string Key, std::string Default /* =
 	return m_Obj[Key].asString();
 }
 
-WSJsonObject WSJsonObject::OptGet(std::string Key, WSJsonObject Default /* = GSJsonObj_NULL */)
+NSJsonObject NSJsonObject::OptGet(std::string Key, NSJsonObject Default /* = NSJsonObj_NULL */)
 {
-	WSJsonObject			Obj;
+	NSJsonObject			Obj;
 
-	if (IsNull(Key))
+	if (IsNull(Key) || m_Obj[Key].isObject() == false)
 	{
 		return Default;
 	}
@@ -454,7 +454,7 @@ WSJsonObject WSJsonObject::OptGet(std::string Key, WSJsonObject Default /* = GSJ
 *	Input:			Key			键
 *	Return:			true 空 false 非空
 */
-bool WSJsonObject::IsNull(std::string Key /* = "" */)
+bool NSJsonObject::IsNull(std::string Key /* = "" */)
 {
 	if (Key.empty())
 	{
@@ -471,7 +471,7 @@ bool WSJsonObject::IsNull(std::string Key /* = "" */)
  *	Explanation:	获取所有Key
  *	Return:			Key列表
  */
-std::vector<std::string> WSJsonObject::GetKeys()
+std::vector<std::string> NSJsonObject::GetKeys()
 {
 	std::vector<std::string>		vecList;
 	Json::Value::Members	memList;
@@ -491,7 +491,7 @@ std::vector<std::string> WSJsonObject::GetKeys()
  *	Explanation:	移除键值对
  *	Input:			Key			键
  */
-void WSJsonObject::Remove(std::string Key)
+void NSJsonObject::Remove(std::string Key)
 {
 	if (IsNull(Key))
 	{
@@ -506,7 +506,7 @@ void WSJsonObject::Remove(std::string Key)
  *	Explanation:	获取键值对总数
  *	Return:			键值对总数
  */
-unsigned int WSJsonObject::Size()
+unsigned int NSJsonObject::Size()
 {
 	return m_Obj.size();
 }
@@ -518,7 +518,7 @@ unsigned int WSJsonObject::Size()
  *  Output:			输出
  *	Return:			TRUE 成功 FALSE 失败
  */
-int WSJsonObject::Compare(WSJsonObject JsonObj)
+int NSJsonObject::Compare(NSJsonObject JsonObj)
 {
 	return m_Obj.compare(JsonObj.Value);
 }
@@ -527,7 +527,7 @@ int WSJsonObject::Compare(WSJsonObject JsonObj)
  *	Function:		Clear
  *	Explanation:	清空
  */
-void WSJsonObject::Clear()
+void NSJsonObject::Clear()
 {
 	m_Obj.clear();
 }
@@ -537,7 +537,7 @@ void WSJsonObject::Clear()
  *	Explanation:	获取Json格式字符串
  *	Return:			Json格式字符串
  */
-std::string WSJsonObject::ToString(bool bStyled /* = true */)
+std::string NSJsonObject::ToString(bool bStyled /* = true */)
 {
 	if (bStyled)
 	{
@@ -552,52 +552,52 @@ std::string WSJsonObject::ToString(bool bStyled /* = true */)
 
 /*
  *	Function:		ToArray
- *	Explanation:	转换成GSJsonArray
- *	Return:			GSJsonArray
+ *	Explanation:	转换成NSJsonArray
+ *	Return:			NSJsonArray
  */
-WSJsonArray WSJsonObject::ToArray()
+NSJsonArray NSJsonObject::ToArray()
 {
-	WSJsonArray			JsonArr;
+	NSJsonArray			JsonArr;
 
 	JsonArr.Value = m_Obj;
 
 	return JsonArr;
 }
 
-bool WSJsonObject::_GetDefaultBool(std::string key)
+bool NSJsonObject::_GetDefaultBool(std::string key)
 {
-	//WSLOG_WARN("key %s not exist", key.c_str());
+	//GSLOG_WARN("key %s not exist", key.c_str());
 	return false;
 }
 
-int WSJsonObject::_GetDefaultInt(std::string key)
+int NSJsonObject::_GetDefaultInt(std::string key)
 {
-	//WSLOG_WARN("key %s not exist", key.c_str());
+	//GSLOG_WARN("key %s not exist", key.c_str());
 	return 0;
 }
 
-float WSJsonObject::_GetDefaultFloat(std::string key)
+float NSJsonObject::_GetDefaultFloat(std::string key)
 {
-	//WSLOG_WARN("key %s not exist", key.c_str());
+	//GSLOG_WARN("key %s not exist", key.c_str());
 	return 0.0;
 }
 
-std::string WSJsonObject::_GetDefaultString(std::string key)
+std::string NSJsonObject::_GetDefaultString(std::string key)
 {
-	//WSLOG_WARN("key %s not exist", key.c_str());
+	//GSLOG_WARN("key %s not exist", key.c_str());
 	return "";
 }
 
-WSJsonObject WSJsonObject::_GetDefaultObject(std::string key)
+NSJsonObject NSJsonObject::_GetDefaultObject(std::string key)
 {
-	//WSLOG_WARN("key %s not exist", key.c_str());
-	return WSJsonObject();
+	//GSLOG_WARN("key %s not exist", key.c_str());
+	return NSJsonObject();
 }
 
-WSJsonArray WSJsonObject::_GetDefaultArray(std::string key)
+NSJsonArray NSJsonObject::_GetDefaultArray(std::string key)
 {
-	//WSLOG_WARN("key %s not exist", key.c_str());
-	return WSJsonArray();
+	//GSLOG_WARN("key %s not exist", key.c_str());
+	return NSJsonArray();
 }
 
 
@@ -605,14 +605,14 @@ WSJsonArray WSJsonObject::_GetDefaultArray(std::string key)
 
 
 /*
- *	Function:		GSJsonArray
+ *	Function:		NSJsonArray
  *	Explanation:	构造函数
  */
-WSJsonArray::WSJsonArray() : m_Obj(Json::arrayValue)
+NSJsonArray::NSJsonArray() : m_Obj(Json::arrayValue)
 {
 }
 
-WSJsonArray::WSJsonArray(const std::vector<int> &vectList)
+NSJsonArray::NSJsonArray(const std::vector<int> &vectList)
 {
 	for (auto item : vectList)
 	{
@@ -620,7 +620,7 @@ WSJsonArray::WSJsonArray(const std::vector<int> &vectList)
 	}
 }
 
-WSJsonArray::WSJsonArray(const std::vector<std::string> &vectList)
+NSJsonArray::NSJsonArray(const std::vector<std::string> &vectList)
 {
 	for (auto item : vectList)
 	{
@@ -629,10 +629,10 @@ WSJsonArray::WSJsonArray(const std::vector<std::string> &vectList)
 }
 
 /*
- *	Function:		~GSJsonArray
+ *	Function:		~NSJsonArray
  *	Explanation:	析构函数
  */
-WSJsonArray::~WSJsonArray()
+NSJsonArray::~NSJsonArray()
 {
 
 }
@@ -642,7 +642,7 @@ WSJsonArray::~WSJsonArray()
 *	Explanation:	获取Json::Value对象
 *	Return:			Json::Value对象
 */
-Json::Value WSJsonArray::_GetValue()
+Json::Value NSJsonArray::_GetValue()
 {
 	return m_Obj;
 }
@@ -654,7 +654,7 @@ Json::Value WSJsonArray::_GetValue()
 *  Output:			输出
 *	Return:			TRUE 成功 FALSE 失败
 */
-void WSJsonArray::_SetValue(Json::Value Value)
+void NSJsonArray::_SetValue(Json::Value Value)
 {
 	m_Obj = Value;
 }
@@ -664,7 +664,7 @@ void WSJsonArray::_SetValue(Json::Value Value)
  *	Explanation:	是否为空对象
  *	Return:			true 是 false 不是
  */
-bool WSJsonArray::IsNull()
+bool NSJsonArray::IsNull()
 {
 	return m_Obj.isNull();
 }
@@ -674,20 +674,20 @@ bool WSJsonArray::IsNull()
  *	Explanation:	数组个数
  *	Return:			数组个数
  */
-unsigned int WSJsonArray::Size()
+unsigned int NSJsonArray::Size()
 {
 	return m_Obj.size();
 }
 
 /*
  *	Function:		Get
- *	Explanation:	获取GSJsonObject
+ *	Explanation:	获取NSJsonObject
  *	Input:			unIndex		索引
- *	Return:			GSJsonObject
+ *	Return:			NSJsonObject
  */
-WSJsonObject WSJsonArray::Get(unsigned int unIndex)
+NSJsonObject NSJsonArray::Get(unsigned int unIndex)
 {
-	WSJsonObject			JsonObj;
+	NSJsonObject			JsonObj;
 
 	if (!m_Obj.isValidIndex(unIndex))
 	{
@@ -702,7 +702,7 @@ WSJsonObject WSJsonArray::Get(unsigned int unIndex)
 	return JsonObj;
 }
 
-std::string WSJsonArray::GetString(unsigned int unIndex)
+std::string NSJsonArray::GetString(unsigned int unIndex)
 {
 	std::string				strValue;
 
@@ -719,7 +719,7 @@ std::string WSJsonArray::GetString(unsigned int unIndex)
 	return strValue;
 }
 
-int WSJsonArray::GetInt(unsigned int unIndex)
+int NSJsonArray::GetInt(unsigned int unIndex)
 {
 	int						nValue;
 
@@ -736,7 +736,7 @@ int WSJsonArray::GetInt(unsigned int unIndex)
 	return nValue;
 }
 
-bool WSJsonArray::GetBool(unsigned int unIndex)
+bool NSJsonArray::GetBool(unsigned int unIndex)
 {
 	bool					bValue;
 
@@ -758,7 +758,7 @@ bool WSJsonArray::GetBool(unsigned int unIndex)
  *	Explanation:	添加
  *	Input:			JsonObj		json对象
  */
-void WSJsonArray::Add(WSJsonObject JsonObj)
+void NSJsonArray::Add(NSJsonObject JsonObj)
 {
 	if (!m_Obj.isArray())
 	{
@@ -768,12 +768,12 @@ void WSJsonArray::Add(WSJsonObject JsonObj)
 	m_Obj.append(JsonObj.Value);
 }
 
-void WSJsonArray::AddInt(int nValue)
+void NSJsonArray::AddInt(int nValue)
 {
 	m_Obj.append(nValue);
 }
 
-void WSJsonArray::AddString(std::string strValue)
+void NSJsonArray::AddString(std::string strValue)
 {
 	m_Obj.append(strValue);
 }
@@ -783,7 +783,7 @@ void WSJsonArray::AddString(std::string strValue)
  *	Explanation:	移除
  *	Input:			unIndex		索引
  */
-void WSJsonArray::Remove(unsigned int unIndex)
+void NSJsonArray::Remove(unsigned int unIndex)
 {
 	m_Obj.removeIndex(unIndex, NULL);
 }
@@ -792,19 +792,19 @@ void WSJsonArray::Remove(unsigned int unIndex)
  *	Function:		Clear
  *	Explanation:	清空
  */
-void WSJsonArray::Clear()
+void NSJsonArray::Clear()
 {
 	m_Obj.clear();
 }
 
 /*
  *	Function:		ToObject
- *	Explanation:	转换成GSJsonObject
- *	Return:			GSJsonObject
+ *	Explanation:	转换成NSJsonObject
+ *	Return:			NSJsonObject
  */
-WSJsonObject WSJsonArray::ToObject()
+NSJsonObject NSJsonArray::ToObject()
 {
-	WSJsonObject			JsonObj;
+	NSJsonObject			JsonObj;
 
 	JsonObj.Value = m_Obj;
 
@@ -816,7 +816,7 @@ WSJsonObject WSJsonArray::ToObject()
  *	Explanation:	获取Json格式字符串
  *	Return:			Json格式字符串
  */
-std::string WSJsonArray::ToString(bool bStyled /* = true */)
+std::string NSJsonArray::ToString(bool bStyled /* = true */)
 {
 	if (bStyled)
 	{
@@ -831,19 +831,19 @@ std::string WSJsonArray::ToString(bool bStyled /* = true */)
 
 
 /*
- *	Function:		GSJson
+ *	Function:		NSJson
  *	Explanation:	构造函数
  */
-GSJson::GSJson()
+NSJson::NSJson()
 {
 
 }
 
 /*
- *	Function:		~GSJson
+ *	Function:		~NSJson
  *	Explanation:	析构函数
  */
-GSJson::~GSJson()
+NSJson::~NSJson()
 {
 
 }
@@ -852,11 +852,11 @@ GSJson::~GSJson()
  *	Function:		ParseStr
  *	Explanation:	解析Json格式字符串
  *	Input:			strJson		
- *	Return:			GSJsonObject
+ *	Return:			NSJsonObject
  */
-WSJsonObject GSJson::ParseStr(std::string strJson)
+NSJsonObject NSJson::ParseStr(std::string strJson)
 {
-	WSJsonObject			JsonObj;
+	NSJsonObject			JsonObj;
 	Json::CharReaderBuilder builder;
 	Json::Value				jsonItem;
 
@@ -881,11 +881,11 @@ WSJsonObject GSJson::ParseStr(std::string strJson)
  *	Function:		ParaseFile
  *	Explanation:	读取文件，解析json
  *	Input:			strFile		文件路径
- *	Return:			GSJsonObject
+ *	Return:			NSJsonObject
  */
-WSJsonObject GSJson::ParaseFile(std::string strFile)
+NSJsonObject NSJson::ParaseFile(std::string strFile)
 {
-	WSJsonObject			JsonObj;
+	NSJsonObject			JsonObj;
 	Json::Value				jsonItem;
 	std::ifstream			Stream; //标准输入流
 
@@ -921,7 +921,7 @@ WSJsonObject GSJson::ParaseFile(std::string strFile)
 					JsonObj		Json对象
  *	Return:			true 成功 false 失败
  */
-bool GSJson::SaveToFile(std::string strFile, WSJsonObject JsonObj)
+bool NSJson::SaveToFile(std::string strFile, NSJsonObject JsonObj)
 {
 	std::string				strJson;
 	std::ofstream			Stream;

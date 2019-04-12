@@ -1,12 +1,12 @@
 /**  * @copyright (C) 2016 ChinaNetCenter Inc. All rights reserved.
 *
 * @file paintWidget.h
-* @summary  GSJsonObject	Json对象
-*			GSJsonArray		Json数组
-*			GSJson			Json解析
+* @summary  NSJsonObject	Json对象
+*			NSJsonArray		Json数组
+*			NSJson			Json解析
 *
 * @version 1.0
-* @author zhengzc@wangsu.com
+* @author  zhichao281@163.com
 * @date 2018-03-05 14:25:06
 *
 * @others
@@ -15,11 +15,10 @@
 *
 */
 
-
-#ifndef GSJsonH
-#define GSJsonH
+#pragma  once
 
 #define JSON_HAS_INT64
+
 #include "json/json.h"
 #include <string>
 #include <vector>
@@ -27,19 +26,19 @@
 using namespace std;
 
 
-class WSJsonArray;
-class WSJsonObject
+class NSJsonArray;
+class NSJsonObject
 {
 
-#define WSJsonObj_NULL WSJsonObject()
+#define WSJsonObj_NULL NSJsonObject()
 
 public:
 
 	// 构造函数
-	WSJsonObject();
+	NSJsonObject();
 
 	// 析构函数
-	~WSJsonObject();
+	~NSJsonObject();
 
 public:
 
@@ -68,9 +67,9 @@ public:
 
 	void		Put(std::string Key, std::string Value);
 
-	void		Put(std::string Key, WSJsonObject JsonObj);
+	void		Put(std::string Key, NSJsonObject JsonObj);
 
-	void		Put(std::string Key, WSJsonArray JsonArr);
+	void		Put(std::string Key, NSJsonArray JsonArr);
 
 	// 判断指定键的值的类型
 	bool		IsInt(std::string Key);
@@ -96,8 +95,8 @@ public:
 	int					_GetDefaultInt(std::string key);
 	float				_GetDefaultFloat(std::string key);
 	std::string			_GetDefaultString(std::string key);
-	WSJsonObject		_GetDefaultObject(std::string key);
-	WSJsonArray			_GetDefaultArray(std::string key);
+	NSJsonObject		_GetDefaultObject(std::string key);
+	NSJsonArray			_GetDefaultArray(std::string key);
 
 	// 获取值（Key对应的键值对必须存在）
 	bool				GetBool(std::string Key);
@@ -116,9 +115,9 @@ public:
 
 	std::string			GetString(std::string Key);
 
-	WSJsonObject		Get(std::string Key);
+	NSJsonObject		Get(std::string Key);
 
-	WSJsonArray			GetArr(std::string Key);
+	NSJsonArray			GetArr(std::string Key);
 
 
 	// 获取值（Key对应的键值可以不存在）
@@ -138,7 +137,7 @@ public:
 
 	std::string			OptGetString(std::string Key, std::string Default = "");
 
-	WSJsonObject		OptGet(std::string Key, WSJsonObject Default = WSJsonObj_NULL);
+	NSJsonObject		OptGet(std::string Key, NSJsonObject Default = WSJsonObj_NULL);
 
 
 	// 判断指定键的值是否为空(若Name为空则判断当前对象)
@@ -154,7 +153,7 @@ public:
 	unsigned int		Size();
 
 	// 比较两个Obj
-	int					Compare(WSJsonObject JsonObj);
+	int					Compare(NSJsonObject JsonObj);
 
 	// 清空
 	void				Clear();
@@ -162,8 +161,8 @@ public:
 	// 获取Json格式字符串
 	std::string			ToString(bool bStyled = true);
 
-	// 转换成GSJsonArray
-	WSJsonArray			ToArray();
+	// 转换成NSJsonArray
+	NSJsonArray			ToArray();
 
 
 private:
@@ -171,20 +170,20 @@ private:
 	Json::Value		m_Obj;
 };
 
-class WSJsonArray
+class NSJsonArray
 {
 
 public:
 
 	// 构造函数
-	WSJsonArray();
+	NSJsonArray();
 
-	WSJsonArray(const std::vector<int> &vectList);
+	NSJsonArray(const std::vector<int> &vectList);
 
-	WSJsonArray(const std::vector<std::string> &vectList);
+	NSJsonArray(const std::vector<std::string> &vectList);
 
 	// 析构函数
-	~WSJsonArray();
+	~NSJsonArray();
 
 public:
 
@@ -204,8 +203,8 @@ public:
 	// 数组个数
 	unsigned int		Size();
 
-	// 获取GSJsonObject
-	WSJsonObject		Get(unsigned int unIndex);
+	// 获取NSJsonObject
+	NSJsonObject		Get(unsigned int unIndex);
 
 	std::string			GetString(unsigned int unIndex);
 
@@ -214,7 +213,7 @@ public:
 	bool				GetBool(unsigned int unIndex);
 
 	// 添加
-	void				Add(WSJsonObject JsonObj);
+	void				Add(NSJsonObject JsonObj);
 
 	void				AddInt(int nValue);
 
@@ -226,8 +225,8 @@ public:
 	// 清空
 	void				Clear();
 
-	// 转换成GSJsonObject
-	WSJsonObject		ToObject();
+	// 转换成NSJsonObject
+	NSJsonObject		ToObject();
 
 	// 获取Json格式字符串
 	std::string			ToString(bool bStyled = true);
@@ -239,26 +238,25 @@ private:
 };
 
 
-class GSJson
+class NSJson
 {
 public:
 
 	// 构造函数
-	GSJson();
+	NSJson();
 
 	// 析构函数
-	~GSJson();
+	~NSJson();
 
 public:
 
 	// 解析Json格式字符串
-	static WSJsonObject ParseStr(std::string strJson);
+	static NSJsonObject ParseStr(std::string strJson);
 
 	// 读取文件，解析json
-	static WSJsonObject ParaseFile(std::string strFile);
+	static NSJsonObject ParaseFile(std::string strFile);
 
 	// 保存到文件
-	static bool SaveToFile(std::string strFile, WSJsonObject JsonObj);
+	static bool SaveToFile(std::string strFile, NSJsonObject JsonObj);
 };
 
-#endif
