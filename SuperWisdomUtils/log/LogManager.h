@@ -1,6 +1,11 @@
 #pragma once
 #include "Logger.h"
+
+
+#define _WINSOCKAPI_
+
 #include <windows.h>
+
 #include <thread>
 #define _CRT_SECURE_NO_WARNINGS
 class CLogManager

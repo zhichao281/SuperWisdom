@@ -8,36 +8,24 @@ extern std::unique_ptr<Logger> g_logPtr;
 
 void  _log_write(EnumLogLevel nLevel, const char *pFmt, ...)
 {
-	if (g_logPtr.get() == nullptr)
-	{
-		g_logPtr.reset(new Logger);
-	}
+
 
 	char pTemp[2048 * 100] = { 0 };
 	va_list arg_ptr;
 	va_start(arg_ptr, pFmt);
 	vsprintf(pTemp + strlen(pTemp), pFmt, arg_ptr);
 	va_end(arg_ptr);
-	if (g_logPtr)
-	{
-		g_logPtr->Write2Caching(nLevel, pTemp);
-	}
+	
+	Logger::GetInstance()->Write2Caching(nLevel, pTemp);
+	
 }
 void  _log_level(int nLevel)
 {
-	if (g_logPtr.get() == nullptr)
-	{
-		g_logPtr.reset(new Logger);
-	}
-	g_logPtr->SetLogLevel(nLevel);
+	Logger::GetInstance()->SetLogLevel(nLevel);
 
 }
 
 void  _log_filename(const char *pfilename)
 {
-	if (g_logPtr.get() == nullptr)
-	{
-		g_logPtr.reset(new Logger);
-	}
-	g_logPtr->SetLogFileName(pfilename);
+	Logger::GetInstance()->SetLogFileName(pfilename);
 }

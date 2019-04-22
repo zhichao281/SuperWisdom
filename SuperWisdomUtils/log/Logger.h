@@ -5,6 +5,7 @@
 #include <vector>
 #include <mutex>
 
+
 class Logger
 {
 public:
@@ -24,6 +25,21 @@ public:
 	void  SetLogLevel(int log_level_);
 
 	void  SetLogFileName(const char * pStrFileName);
+
+
+
+	// 获取单例实例
+	static Logger* GetInstance();
+
+	static void Destory()
+	{
+		if (nullptr != s_plogPtr)
+		{
+			delete s_plogPtr;
+			s_plogPtr = nullptr;
+		}
+	};
+
 private:
 
 	std::string Time2String(time_t time_t_);
@@ -34,6 +50,9 @@ private:
 	void CreateLogPath();
 
 	const char* logLevelToString(int l);
+
+
+
 
 private:
 	// 
@@ -51,7 +70,8 @@ private:
 
 	int  m_nCurrentDay;
 	std::mutex  mutex_;
-
+public:
+	static Logger*		s_plogPtr;
 
 };
 #endif

@@ -11,7 +11,11 @@
 #include <memory>
 #include <crtdbg.h>
 
-std::unique_ptr<Logger> g_logPtr;
+#include <winsock2.h>   
+#pragma comment(lib,"ws2_32.lib")  
+
+
+
 // 
 #ifdef _WIN32  
 #include <direct.h>  
@@ -66,6 +70,30 @@ int CreatDir(char *pDir)
 	iRet = MKDIR(pszDir);
 	return iRet;
 }
+std::string  GetExeName()
+{
+	//获取应用程序目录
+	char szapipath[MAX_PATH];//（D:\Documents\Downloads\TEST.exe）
+	memset(szapipath, 0, MAX_PATH);
+	GetModuleFileNameA(NULL, szapipath, MAX_PATH);
+
+	//获取应用程序名称
+	char szExe[MAX_PATH] = "";//（TEST.exe）
+	char *pbuf = NULL;
+	char* szLine = strtok_s(szapipath, "\\", &pbuf);
+	while (NULL != szLine)
+	{
+		strcpy_s(szExe, szLine);
+		szLine = strtok_s(NULL, "\\", &pbuf);
+	}
+
+	//删除.exe
+	strncpy_s(szapipath, szExe, strlen(szExe) - 4);
+	return szapipath;
+
+}
+
+Logger* Logger::s_plogPtr = nullptr;
 Logger::Logger(int log_level_,const char * strLogPath,const char* pStrFileName)
 {
 	m_pFileStream = NULL;
@@ -75,7 +103,7 @@ Logger::Logger(int log_level_,const char * strLogPath,const char* pStrFileName)
 	sprintf(sBuf,"%s/%s",scurdir,strLogPath);
 	printf("LogPath:%s\n",sBuf);
 	m_strLogPath = sBuf;
-	m_strCurLogName = pStrFileName;
+	m_strCurLogName = GetExeName().c_str();
 	m_nCurrentDay = 0;
 	m_log_level_ = log_level_;
 	CreateLogPath();
@@ -101,6 +129,7 @@ int gettimeofday(struct timeval *tp, void *tzp)
 	tp->tv_usec = wtm.wMilliseconds * 1000;
 	return (0);
 }
+
 std::string GetWsCurrentTime()
 {
 	struct timeval tv;
@@ -245,6 +274,18 @@ void  Logger::SetLogFileName(const char * pStrFileName)
 		}
 	}
 ;
+}
+Logger * Logger::GetInstance()
+{
+	if (NULL != s_plogPtr)
+	{
+		return s_plogPtr;
+	}
+
+	s_plogPtr = new Logger();
+	
+	//atexit(Destory);
+	return s_plogPtr;
 }
 //������־�ļ������
 void Logger::GenerateLogName()
