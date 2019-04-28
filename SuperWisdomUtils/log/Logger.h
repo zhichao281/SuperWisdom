@@ -8,6 +8,8 @@
 #include <atomic>
 
 #include "log_deffine.h"
+
+
 class NLogger
 {
 public:
@@ -36,14 +38,14 @@ public:
 	// 获取单例实例
 	static NLogger* GetInstance();
 
-	static void Destory()
-	{
- 		if (nullptr != s_plogPtr)
-		{
-			delete s_plogPtr;
-			s_plogPtr = nullptr;
-		}
-	};
+	//static void Destory()
+	//{
+ //		if (nullptr != s_plogPtr)
+	//	{
+	//		delete s_plogPtr;
+	//		s_plogPtr = nullptr;
+	//	}
+	//};
 
 private:
 
@@ -57,6 +59,22 @@ private:
 	const char* logLevelToString(int l);
 
 
+	// This is important
+	class GarbageCollector  // 垃圾回收类
+	{
+	public:
+
+		~GarbageCollector()
+		{
+			// We can destory all the resouce here, eg:db connector, file handle and so on
+			if (s_plogPtr != nullptr)
+			{
+				delete s_plogPtr;
+				s_plogPtr = NULL;		
+			}
+		}
+	};
+	static GarbageCollector  gc;  //垃圾回收类的静态成员
 
 
 private:

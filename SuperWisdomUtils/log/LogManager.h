@@ -27,8 +27,37 @@ public:
 
 	void Stop();
 
+	static void Destory()
+	{
+		if (nullptr != s_pLogManager)
+		{
+			delete s_pLogManager;
+			s_pLogManager = nullptr;
+		}
+	};
+
 private:
-	static CLoggerManager* m_pLogManager;
+	// This is important
+	class GarbageCollector  // 垃圾回收类
+	{
+	public:
+
+		~GarbageCollector()
+		{
+			// We can destory all the resouce here, eg:db connector, file handle and so on
+			if (s_pLogManager != nullptr)
+			{
+				delete s_pLogManager;
+				s_pLogManager = nullptr;
+			}
+		}
+	};
+	static GarbageCollector  gc;  //垃圾回收类的静态成员
+
+
+
+private:
+	static CLoggerManager* s_pLogManager;
 
 	std::vector<NLogger*> m_loggerList;
 

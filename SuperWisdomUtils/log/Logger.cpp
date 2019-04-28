@@ -93,6 +93,8 @@ std::string  GetExeName()
 }
 
 NLogger* NLogger::s_plogPtr = nullptr;
+NLogger::GarbageCollector  NLogger::gc; //类的静态成员需要类外部初始化，
+
 NLogger::NLogger(int log_level_,const char * strLogPath,const char* pStrFileName)
 {
 	m_pFileStream = NULL;
@@ -144,9 +146,6 @@ std::string GetWsCurrentTime()
 NLogger::~NLogger()
 {
 	m_bRunning.store(false);
-
-	CLoggerManager::GetInstance()->Stop();
-
  	if (m_pFileStream)
 	{
 		fclose(m_pFileStream);
@@ -169,6 +168,7 @@ void  NLogger::Stop()
 }
 void NLogger::Write2Caching(int log_level_,const char * strInfo, ...)
 {
+
 	if (!m_bRunning.load())
 	{
 		return;
@@ -318,7 +318,7 @@ NLogger * NLogger::GetInstance()
 
 	s_plogPtr = new NLogger();
 	
-	atexit(Destory);
+	//atexit(Destory);
 	return s_plogPtr;
 }
 //������־�ļ������
