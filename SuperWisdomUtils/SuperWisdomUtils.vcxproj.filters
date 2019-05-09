@@ -61,6 +61,9 @@
     <Filter Include="http">
       <UniqueIdentifier>{6d43f9ca-c74d-4bcf-9fa0-b78845f3b983}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sigslot">
+      <UniqueIdentifier>{61b728e4-03e0-45fa-b8cf-5e18bc868a6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WisdomMain.cpp">
@@ -115,9 +118,6 @@
       <Filter>thread_pool</Filter>
     </ClCompile>
     <ClCompile Include="Json\jsoncpp.cpp">
-      <Filter>Json</Filter>
-    </ClCompile>
-    <ClCompile Include="Json\WSJson.cpp">
       <Filter>Json</Filter>
     </ClCompile>
     <ClCompile Include="log\Logger.cpp">
@@ -207,6 +207,15 @@
     <ClCompile Include="Download.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="sigslot\sigslot.cc">
+      <Filter>sigslot</Filter>
+    </ClCompile>
+    <ClCompile Include="sigslot\sigslot_unittest.cpp">
+      <Filter>sigslot</Filter>
+    </ClCompile>
+    <ClCompile Include="Json\NSJson.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WisdomUtils.h">
@@ -261,9 +270,6 @@
       <Filter>Json</Filter>
     </ClInclude>
     <ClInclude Include="Json\json\json-forwards.h">
-      <Filter>Json</Filter>
-    </ClInclude>
-    <ClInclude Include="Json\WSJson.h">
       <Filter>Json</Filter>
     </ClInclude>
     <ClInclude Include="log\log_deffine.h">
@@ -346,6 +352,12 @@
     </ClInclude>
     <ClInclude Include="auto_tchar.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sigslot\sigslot.h">
+      <Filter>sigslot</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\NSJson.h">
+      <Filter>Json</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
