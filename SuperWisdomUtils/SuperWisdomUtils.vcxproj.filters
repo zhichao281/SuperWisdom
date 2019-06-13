@@ -216,6 +216,9 @@
     <ClCompile Include="Json\NSJson.cpp">
       <Filter>Json</Filter>
     </ClCompile>
+    <ClCompile Include="HDSerial.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WisdomUtils.h">
@@ -358,6 +361,9 @@
     </ClInclude>
     <ClInclude Include="Json\NSJson.h">
       <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="HDSerial.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
