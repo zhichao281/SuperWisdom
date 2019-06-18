@@ -1,7 +1,10 @@
-#ifndef _C_HARD_INFO_H_
-#define _C_HARD_INFO_H_
+
+#pragma  once
+
 #include <string>
 #include <vector>
+
+
 class CHardInfo
 {
 public:
@@ -9,7 +12,9 @@ public:
 	static std::string GetMachineCode();
 	static bool VerifyMachineCode(const std::string strCode);
 	static std::string GetPrintabeMaichineCode();
+	//cpuid
 	static std::string Get_CPU_ID();
+
 	static std::vector<std::string> Get_ALL_MAC_ADDR_ID();
 	static std::vector<std::string> Get_ALL_DISK_ID();
 	static std::string Get_MotherBoard_ID();
@@ -27,4 +32,3 @@ public:
 	static std::string  ArrayToMachinCode(const std::vector<std::string> strArray);
 	static int GetStringCommonPrefix(const std::string strFirst, const std::string strSecond);
 };
-#endif

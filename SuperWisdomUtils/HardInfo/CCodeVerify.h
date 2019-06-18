@@ -1,20 +1,36 @@
-#ifndef _C_CODE_VERIFY_H_
-#define _C_CODE_VERIFY_H_
+
+#pragma once 
+
 #include <string>
 class CCodeVerify
 {
 public:
+
+
 	static bool GetSerialNumber(const std::string strPemFile,std::string& strSerialNumber);
+
+
 	static bool CreateActiveNumber(const std::string strPemFile, const std::string strSerialNumber, const std::string strDate, const std::string otherInfo,std::string& strAcitveNumber);
 	static bool VerifyActiveNumber(const std::string strPemFile, const std::string strAcitveNumber, std::string& strDate,std::string& otherInfo);
-	static std::string EncodeRSA_PriKeyFile(const std::string& strPemFileName, const std::string& strData);
-	static std::string DecodeRSA_PubKeyFile(const std::string& strPemFileName, const std::string& strData);
 
 	static std::string EncodeRSA_PubKeyFile(const std::string& strPemFileName, const std::string& strData);
+	static std::string DecodeRSA_PubKeyFile(const std::string& strPemFileName, const std::string& strData);
+
+
+	static std::string EncodeRSA_PriKeyFile(const std::string& strPemFileName, const std::string& strData);
 	static std::string DecodeRSA_PriKeyFile(const std::string& strPemFileName, const std::string& strData);
 
-	
-	
+	static int MakeKey();
+
+
+	// 函数方法生成密钥对    公钥
+	static std::string  GenerateRSAPubKey(std::string strPemFileName="");
+
+	// 函数方法生成密钥对    私钥
+	static std::string  GenerateRSAPriKey(std::string strPemFileName="");
+
+	// 私钥加密
+	static std::string EncodeRSA_PriKey(const std::string &clearText, std::string &pubKey);
 
 	static std::string StrToHex(const std::string strIn)
 	{
@@ -58,4 +74,3 @@ public:
 	}
 
 };
-#endif

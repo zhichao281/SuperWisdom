@@ -68,7 +68,7 @@ int main()
 	int x = 1;
 	while (x > 0)
 	{
-		if (CCodeVerify::GetSerialNumber("pubKey.pem", strSerivalNumber))
+		if (CCodeVerify::GetSerialNumber("E:\\study\\SuperWisdom\\SuperWisdomUtils\\HardInfo\\pubKey.pem", strSerivalNumber))
 		{
 			std::cout << " SerialNumberLen	:  " << strSerivalNumber.length() << std::endl;
 			std::cout << "SerivalNumber		:  " << strSerivalNumber << std::endl;
@@ -77,14 +77,14 @@ int main()
 		std::string strActiveCode;
 		std::string strSignDate = "20190430";
 		std::string strSignOther = "ABCDEFGH";
-		if (CCodeVerify::CreateActiveNumber("prikey.pem", strSerivalNumber, strSignDate, strSignOther, strActiveCode))
+		if (CCodeVerify::CreateActiveNumber("E:\\study\\SuperWisdom\\SuperWisdomUtils\\HardInfo\\prikey.pem", strSerivalNumber, strSignDate, strSignOther, strActiveCode))
 		{
 			std::cout << "ActiveCodeLen:  " << strActiveCode.length() << std::endl;
 			std::cout << "ActiveCode : " << strActiveCode << std::endl;
 		}
 		std::string strVerifyDate;
 		std::string strVerifyOther;
-		if (CCodeVerify::VerifyActiveNumber("pubKey.pem", strActiveCode, strVerifyDate, strVerifyOther))
+		if (CCodeVerify::VerifyActiveNumber("E:\\study\\SuperWisdom\\SuperWisdomUtils\\HardInfo\\pubKey.pem", strActiveCode, strVerifyDate, strVerifyOther))
 		{
 			std::cout << "UntilDate " << strVerifyDate << "   OtherInfo:" << strVerifyOther << std::endl;
 		}

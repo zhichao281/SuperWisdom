@@ -1,10 +1,17 @@
 ﻿
 #include "CHardInfo.h"
+#include <winsock2.h>
+#include <iphlpapi.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 #include <array>
+#pragma comment(lib, "IPHLPAPI.lib")
 //注册码一共8行，每行16个字符
 //所以单行长度为16
-const int SINGLE_LINE_LEN=16;
-const int MAC_ADDR_LEN=12;
+const int SINGLE_LINE_LEN = 16;
+const int MAC_ADDR_LEN = 12;
+
 //CPUID
 //MAC_ADDR1+4
 //MAC_ADDR2+4
@@ -42,11 +49,7 @@ std::string CHardInfo::Get_CPU_ID()
 	sprintf_s(buff, "%08X%08X", s1, s2);
 	return buff;
 }
-#include <winsock2.h>
-#include <iphlpapi.h>
-#include <stdio.h>
-#include <stdlib.h>
-#pragma comment(lib, "IPHLPAPI.lib")
+
 
 #define MALLOC(x) HeapAlloc(GetProcessHeap(), 0, (x))
 #define FREE(x) HeapFree(GetProcessHeap(), 0, (x))
@@ -145,7 +148,7 @@ std::string CHardInfo::Get_MotherBoard_ID()
 {
 	char lpszBaseBoard[256] = { 0 };
 
-//ԭhttps ://blog.csdn.net/aoshilang2249/article/details/44958985 
+	//ԭhttps ://blog.csdn.net/aoshilang2249/article/details/44958985 
 
 	const long MAX_COMMAND_SIZE = 10000; //
 	WCHAR szFetCmd[] = L"wmic BaseBoard get SerialNumber"; //	
@@ -203,7 +206,7 @@ std::string CHardInfo::Get_MotherBoard_ID()
 	strBuffer = szBuffer;
 	ipos = strBuffer.find(strEnSearch);
 
-	if (ipos < 0) 
+	if (ipos < 0)
 	{
 		goto END;
 	}
@@ -312,7 +315,7 @@ std::vector<std::string>  CHardInfo::GetFormatALL_DISK_ID()
 std::string  CHardInfo::GetFormatMotherBoard_ID()
 {
 	std::string strResult = Get_MotherBoard_ID();
-	if(!strResult.empty())
+	if (!strResult.empty())
 	{
 		if (strResult.length() > SINGLE_LINE_LEN)
 		{
@@ -366,13 +369,13 @@ std::string CHardInfo::GetMachineCode()
 bool CHardInfo::VerifyMachineCode(const std::string strCode)
 {
 	std::vector<std::string> allArray = MachineCodeToArray(strCode);
-	
-	if(allArray.size() != 8)
+
+	if (allArray.size() != 8)
 	{
 		return false;
 	}
-	
-	if(!VerifyCPUID(allArray[0]))
+
+	if (!VerifyCPUID(allArray[0]))
 	{
 		return false;
 	}
@@ -382,25 +385,25 @@ bool CHardInfo::VerifyMachineCode(const std::string strCode)
 		macAddrArray.push_back(allArray[1]);
 		macAddrArray.push_back(allArray[2]);
 		macAddrArray.push_back(allArray[3]);
-		if(!VerifyAllMAC(macAddrArray))
+		if (!VerifyAllMAC(macAddrArray))
 		{
 			return false;
 		}
 	}
 	{
-		std::vector<std::string> diskIdArray;
-		diskIdArray.push_back(allArray[4]);
-		diskIdArray.push_back(allArray[5]);
-		if(!VerifyDiskID(diskIdArray))
-		{
-			return false;
-		}
+		//std::vector<std::string> diskIdArray;
+		//diskIdArray.push_back(allArray[4]);
+		//diskIdArray.push_back(allArray[5]);
+		//if (!VerifyDiskID(diskIdArray))
+		//{
+		//	return false;
+		//}
 	}
 	{
-		if(!VerifyMotherBoardID(allArray[6]))
-		{
-			return false;
-		}
+		//if (!VerifyMotherBoardID(allArray[6]))
+		//{
+		//	return false;
+		//}
 	}
 	return true;
 }
@@ -474,7 +477,7 @@ bool CHardInfo::VerifyAllMAC(const std::vector<std::string> strMacAddrArray)
 	for (int index = 0; index < 3; ++index)
 	{
 		std::string macAddr = strInputArray[index].substr(0, MAC_ADDR_LEN);
-		if(cpuId.end() != std::find(cpuId.begin(),cpuId.end(),macAddr))
+		if (cpuId.end() != std::find(cpuId.begin(), cpuId.end(), macAddr))
 		{
 			sameCount++;
 		}
@@ -494,7 +497,7 @@ bool CHardInfo::VerifyDiskID(const std::vector<std::string> strDiskIDArray)
 	}
 
 	int sameCount = 0;
-	for (int index = 0; index < 2; ++index)
+	for (int index = 0; index < 1; ++index)
 	{
 		if (GetStringCommonPrefix(strInputArray[index], diskIdArray[index]) == diskIdArray[index].length())
 		{
@@ -507,8 +510,8 @@ bool CHardInfo::VerifyDiskID(const std::vector<std::string> strDiskIDArray)
 bool CHardInfo::VerifyMotherBoardID(const std::string strBoardId)
 {
 	std::string strMotherBoardId = Get_MotherBoard_ID();
-	std::size_t length = std::min<std::size_t>(strMotherBoardId.length(),16);
-	return GetStringCommonPrefix(strBoardId,strMotherBoardId)==length;
+	std::size_t length = std::min<std::size_t>(strMotherBoardId.length(), 16);
+	return GetStringCommonPrefix(strBoardId, strMotherBoardId) == length;
 }
 
 

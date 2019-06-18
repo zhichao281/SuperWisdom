@@ -3,7 +3,7 @@
 
 #include <string>
 #include <list>
-
+#include <map>
 
 #include <Shlwapi.h>
 

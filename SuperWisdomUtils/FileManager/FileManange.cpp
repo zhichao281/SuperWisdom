@@ -286,3 +286,80 @@ string WisdomUtils::CFileManange::GetImageHead(wstring wstrPath)
 	}
 	return strFomat;
 }
+
+std::string GetFileType(const std::string& strPath)
+{
+	std::string strType = "";
+	static const char hex_chars[] = "0123456789ABCDEF";
+	FILE* fp = fopen(strPath.c_str(), "rb");
+	if (fp)
+	{
+		fseek(fp, 0L, SEEK_END);
+		int nFileSize = ftell(fp);
+		rewind(fp);
+
+		unsigned char *pData = new unsigned char[nFileSize];
+
+		while (!feof(fp))
+		{
+			int nRet = fread(pData, sizeof(char), nFileSize, fp);
+		}
+
+		fclose(fp);
+
+		static std::map<std::string, std::string>	s_mapFileTypes;
+		s_mapFileTypes.insert(std::make_pair("FFD8FF", "jpg"));
+		s_mapFileTypes.insert(std::make_pair("89504E47", "png"));
+		s_mapFileTypes.insert(std::make_pair("47494638", "gif"));
+		s_mapFileTypes.insert(std::make_pair("49492A00", "tif"));
+		s_mapFileTypes.insert(std::make_pair("424D", "bmp"));
+		s_mapFileTypes.insert(std::make_pair("41433130", "dwg"));
+		s_mapFileTypes.insert(std::make_pair("38425053", "psd"));
+		s_mapFileTypes.insert(std::make_pair("7B5C727466", "rtf"));
+		s_mapFileTypes.insert(std::make_pair("3C3F786D6C", "xml"));
+		s_mapFileTypes.insert(std::make_pair("68746D6C3E", "html"));
+		s_mapFileTypes.insert(std::make_pair("44656C69766572792D646174653A", "eml"));
+		s_mapFileTypes.insert(std::make_pair("CFAD12FEC5FD746F", "dbx"));
+		s_mapFileTypes.insert(std::make_pair("2142444E", "pst"));
+		s_mapFileTypes.insert(std::make_pair("D0CF11E0", "doc"));
+		s_mapFileTypes.insert(std::make_pair("5374616E64617264204A", "mdb"));
+		s_mapFileTypes.insert(std::make_pair("FF575043", "wpd"));
+		s_mapFileTypes.insert(std::make_pair("255044462D312E", "pdf"));
+		s_mapFileTypes.insert(std::make_pair("AC9EBD8F", "qdf"));
+		s_mapFileTypes.insert(std::make_pair("E3828596", "pwl"));
+		s_mapFileTypes.insert(std::make_pair("504B0304", "zip"));
+		s_mapFileTypes.insert(std::make_pair("52617221", "rar"));
+		s_mapFileTypes.insert(std::make_pair("57415645", "wav"));
+		s_mapFileTypes.insert(std::make_pair("41564920", "avi"));
+		s_mapFileTypes.insert(std::make_pair("2E7261FD", "ram"));
+		s_mapFileTypes.insert(std::make_pair("2E524D46", "rm"));
+		s_mapFileTypes.insert(std::make_pair("000001B", "mpg"));
+		s_mapFileTypes.insert(std::make_pair("6D6F6F76", "mov"));
+		s_mapFileTypes.insert(std::make_pair("3026B2758E66CF11", "asf"));
+		s_mapFileTypes.insert(std::make_pair("4D546864", "mid"));
+
+		std::string strTemp;
+		unsigned int c = 0;
+		for (int i = 0; i < 50; i++)
+		{
+			unsigned int x = 0;
+			x = pData[i];
+			x = pData[i] >> 4;
+
+			c = (pData[i] >> 4) & 0x0f;
+			strTemp += hex_chars[c];
+			strTemp += hex_chars[pData[i] & 0x0f];
+		}
+
+		std::map<std::string, std::string>::iterator iter = s_mapFileTypes.begin();
+		for (; iter != s_mapFileTypes.end(); iter++)
+		{
+			int nLen = iter->first.size();
+			std::string strHex = strTemp.substr(0, nLen);
+			if (iter->first.c_str() == strHex)
+				return iter->second;
+		}
+	}
+
+	return strType;
+}

@@ -32,7 +32,7 @@ public:
 	}
 };
 
-int main()
+int main11()
 {
 	CSender sender;
 	CReceiver recever;

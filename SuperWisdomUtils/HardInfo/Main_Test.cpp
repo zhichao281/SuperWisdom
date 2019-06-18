@@ -4,7 +4,8 @@
 int program();
 void some_program_code(int argc, char** argv);
 
-int main(int argc, char** argv) {
+int main_Trst(int argc, char** argv)
+{
     doctest::Context context;
 
     // !!! THIS IS JUST AN EXAMPLE SHOWING HOW DEFAULTS/OVERRIDES ARE SET !!!
