@@ -663,7 +663,7 @@ void CryptoMD5::MD5Init(MD5_CONTEXT *context)
 {
 	context->count[0] = context->count[1] = 0;
 	/* Load magic initialization constants. */
-	context->state[0] = 0x67452301;
+	context->state[0] = 0x67452301;//链接变量，注意与大端字节序的区别，内存中是小端字节序
 	context->state[1] = 0xEFCDAB89;
 	context->state[2] = 0x98BADCFE;
 	context->state[3] = 0x10325476;
@@ -679,22 +679,22 @@ void CryptoMD5::MD5Update(MD5_CONTEXT *context, unsigned char *input, unsigned i
 	unsigned int i, index, partLen;
 
 	/* Compute number of bytes mod 64 */
-	index = (unsigned int)((context->count[0] >> 3) & 0x3F);
-
+	index = (unsigned int)((context->count[0] >> 3) & 0x3F);//模64字节的余数，第一次调用为0
+	  //预留最前面的64位存放数据长度
 	/* Update number of bits */
-	if ((context->count[0] += ((unsigned long)inputLen << 3))
+	if ((context->count[0] += ((unsigned long)inputLen << 3))//文本总的位数,低32位
 		< ((unsigned long)inputLen << 3))
 		context->count[1]++;
-	context->count[1] += ((unsigned long)inputLen >> 29);
+	context->count[1] += ((unsigned long)inputLen >> 29);//先左移3,求出位数,再右移32位，求出左32位
 
-	partLen = 64 - index;
+	partLen = 64 - index;//第一次partlen为64
 
 	/* Transform as many times as possible. */
 	if (inputLen >= partLen) {
 		MD5Memcpy((unsigned char*)&context->buffer[index], (unsigned char*)input, partLen);
 		MD5Transform(context->state, context->buffer);
 
-		for (i = partLen; i + 63 < inputLen; i += 64)
+		for (i = partLen; i + 63 < inputLen; i += 64)   //512位为1组
 			MD5Transform(context->state, &input[i]);
 
 		index = 0;
@@ -703,6 +703,7 @@ void CryptoMD5::MD5Update(MD5_CONTEXT *context, unsigned char *input, unsigned i
 		i = 0;
 
 	/* Buffer remaining input */
+	//最后剩下的一部分
 	MD5Memcpy((unsigned char*)&context->buffer[index], (unsigned char*)&input[i], inputLen - i);
 }
 
@@ -719,12 +720,12 @@ void CryptoMD5::MD5Final(unsigned char digest[16], MD5_CONTEXT *context)
 	Encode(bits, context->count, 8);
 
 	/* Pad out to 56 mod 64. */
-	index = (unsigned int)((context->count[0] >> 3) & 0x3f);
-	padLen = (index < 56) ? (56 - index) : (120 - index);
+	index = (unsigned int)((context->count[0] >> 3) & 0x3f);//模64字节的余数
+	padLen = (index < 56) ? (56 - index) : (120 - index); //需要填充的长度，注意长度占8字节
 	MD5Update(context, PADDING, padLen);
 
 	/* Append length (before padding) */
-	MD5Update(context, bits, 8);
+	MD5Update(context, bits, 8);//这里调用时,index=0
 
 	/* Store state in digest */
 	Encode(digest, context->state, 16);
@@ -732,8 +733,32 @@ void CryptoMD5::MD5Final(unsigned char digest[16], MD5_CONTEXT *context)
 	/* Zeroize sensitive information. */
 	MD5Memset((unsigned char*)context, 0, sizeof(*context));
 }
-std::wstring CryptoMD5::MD5String(std::wstring  Source)
+std::wstring CryptoMD5::MD5String32(std::wstring  Source)
 {
+	int size = Source.size();
+	BYTE*   pSource = new BYTE[size * 2];
+	ZeroMemory(pSource, size * 2);
+	WideCharToMultiByte(CP_ACP, 0, Source.c_str(), size, (LPSTR)pSource, size * 2, NULL, NULL);
+
+	MD5_CONTEXT context;
+	BYTE  digest[16] = { 0 };
+	MD5Init(&context);
+	MD5Update(&context, pSource, Source.size() );
+	MD5Final(digest, &context);
+	delete[]pSource;
+	wchar_t  CheckCode[33] = { 0 };     // 保存校验码，个数+null-terminal
+	for (int Index = 0; Index < 16; ++Index)
+	{
+		CheckCode[2 * Index] = HEX_DIGIT_TO_ASCII((digest[Index] >> 4) & 0x0F);
+		CheckCode[2 * Index  + 1] = HEX_DIGIT_TO_ASCII(digest[Index] & 0x0F);
+	}
+	std::wstring str(CheckCode);
+	return  str;
+}
+
+std::wstring CryptoMD5::MD5String16(std::wstring  Source)
+{
+
 	int size = Source.size();
 
 	BYTE*   pSource = new BYTE[size * 2];
@@ -744,33 +769,16 @@ std::wstring CryptoMD5::MD5String(std::wstring  Source)
 	MD5_CONTEXT context;
 	BYTE  digest[16] = { 0 };
 	MD5Init(&context);
-	MD5Update(&context, pSource, Source.size() * 2);
+	MD5Update(&context, pSource, Source.size());
 	MD5Final(digest, &context);
 
-
-
-
-
-
-	printf("加密前:%s\n加密后16位:", pSource);
-	for (int i = 4; i < 12; i++) {
-		printf("%02x", digest[i]);
-	}
-
-
-	printf("\n加密前:%s\n加密后32位:", pSource);
-	for (int i = 0; i < 16; i++) {
-		printf("%02x", digest[i]);
-	}
-
 	delete[]pSource;
-	wchar_t  CheckCode[33] = { 0 };     // 保存校验码，个数+null-terminal
-	for (int Index = 0; Index < 16; ++Index)
+	wchar_t  CheckCode[17] = { 0 };     // 保存校验码，个数+null-terminal
+	for (int Index = 4; Index < 12; ++Index)
 	{
-		CheckCode[2 * Index] = HEX_DIGIT_TO_ASCII((digest[Index] >> 4) & 0x0F);
-		CheckCode[2 * Index + 1] = HEX_DIGIT_TO_ASCII(digest[Index] & 0x0F);
+		CheckCode[2 * (Index - 4)] = HEX_DIGIT_TO_ASCII((digest[Index] >> 4) & 0x0F);
+		CheckCode[2 * (Index - 4) + 1] = HEX_DIGIT_TO_ASCII(digest[Index] & 0x0F);
 	}
-
 	std::wstring str(CheckCode);
 	return  str;
 }

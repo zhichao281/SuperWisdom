@@ -21,7 +21,7 @@ public:
 	static const wchar_t CHAR_64 = '-';
 
 	// Char used for padding
-	static const wchar_t CHAR_PAD = '[';
+	static const wchar_t CHAR_PAD = '=';
 
 public:
 
@@ -238,6 +238,11 @@ Rotation is separate from addition to prevent recomputation.
     (a) += (b); \
     }
 
+//1）md5存取的数据长度仅为64位，位于数据的最前端，大于令其自然溢出。
+
+//（2）update函数和final函数处理得很繁琐，需要仔细分析。
+
+//（3）16位md5码取32位md5码的中间16位。
 class CryptoMD5
 {
 
@@ -285,7 +290,7 @@ public:
 	*/
 	static void MD5Final(unsigned char digest[16], MD5_CONTEXT *context);
 
-	static std::wstring MD5String(std::wstring  Source);
+	static std::wstring MD5String32(std::wstring  Source);
 
-
+	static std::wstring MD5String16(std::wstring  Source);
 };

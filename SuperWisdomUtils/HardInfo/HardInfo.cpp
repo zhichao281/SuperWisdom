@@ -66,11 +66,12 @@ int main()
 {
  
 	std::string  str = "12345";
-	std::wstring wstr2=CryptoMD5::MD5String(L"admin");
+	std::wstring wstr=CryptoMD5::MD5String32(L"admin");
 
-
-
-
+	std::wstring wstr2 = CryptoMD5::MD5String16(L"admin");
+	unsigned char encrypt[] = "7A57A5A743894A0E";
+	std::wstring wstr3;
+	CryptoBase64::Encode(encrypt, (int)strlen((char *)encrypt), wstr3);
 
 	std::string strSerivalNumber;
 	
