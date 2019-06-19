@@ -240,6 +240,9 @@
     <ClCompile Include="HardInfo\Main_Test.cpp">
       <Filter>硬件信息</Filter>
     </ClCompile>
+    <ClCompile Include="Crypto.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WisdomUtils.h">
@@ -703,6 +706,9 @@
     </ClInclude>
     <ClInclude Include="HardInfo\openssl\x86\include\openssl\x509v3err.h">
       <Filter>硬件信息\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="Crypto.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,11 +14,25 @@ public:
 	static bool VerifyActiveNumber(const std::string strPemFile, const std::string strAcitveNumber, std::string& strDate,std::string& otherInfo);
 
 	static std::string EncodeRSA_PubKeyFile(const std::string& strPemFileName, const std::string& strData);
+	// 公钥加密 
+	static std::string EncodeRSA_PubKey(const std::string &strData, std::string &pubKey);
+
+	
+	
 	static std::string DecodeRSA_PubKeyFile(const std::string& strPemFileName, const std::string& strData);
+	// 公钥解密
+	static std::string DecodeRSA_PubKey(const std::string &strData, std::string &pubKey);
 
 
+	// 私钥加密
 	static std::string EncodeRSA_PriKeyFile(const std::string& strPemFileName, const std::string& strData);
+	static std::string EncodeRSA_PriKey(const std::string &strData, std::string &pubKey);
+	
+
+
 	static std::string DecodeRSA_PriKeyFile(const std::string& strPemFileName, const std::string& strData);
+//	static std::string DecodeRSA__PriKey(const std::string &strData, std::string &pubKey);
+
 
 	static int MakeKey();
 
@@ -29,8 +43,7 @@ public:
 	// 函数方法生成密钥对    私钥
 	static std::string  GenerateRSAPriKey(std::string strPemFileName="");
 
-	// 私钥加密
-	static std::string EncodeRSA_PriKey(const std::string &clearText, std::string &pubKey);
+	
 
 	static std::string StrToHex(const std::string strIn)
 	{

@@ -60,9 +60,18 @@ int main()
 
 
 
+#include "../Crypto.h"
+
 int main()
 {
-  
+ 
+	std::string  str = "12345";
+	std::wstring wstr2=CryptoMD5::MD5String(L"admin");
+
+
+
+
+
 	std::string strSerivalNumber;
 	
 	int x = 1;

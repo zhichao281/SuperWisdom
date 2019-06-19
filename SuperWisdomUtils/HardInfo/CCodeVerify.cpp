@@ -42,8 +42,10 @@ bool CCodeVerify::CreateActiveNumber(const std::string strPemFile, const std::st
 	std::string pubKey = GenerateRSAPriKey();
 
 	//MakeKey();
-	std::string strOrgNumber = EncodeRSA_PriKey(strOrgSerivalNumber, pubKey);
-	//std::string strOrgNumber = DecodeRSA_PriKeyFile(strPemFile, strOrgSerivalNumber);
+	
+	std::string strOrgNumber = DecodeRSA_PriKeyFile(strPemFile, strOrgSerivalNumber);
+	//std::string strOrgNumber = EncodeRSA_PriKey(strOrgSerivalNumber, pubKey);
+
 	std::string strMachineCode = strOrgNumber.substr(0, 112) + strDate + otherInfo;
 	std::string strOrgActiveNumber = EncodeRSA_PriKeyFile(strPemFile, strMachineCode);
 	strAcitveNumber = StrToHex(strOrgActiveNumber);
@@ -85,6 +87,11 @@ std::string CCodeVerify::EncodeRSA_PubKeyFile(const std::string& strPemFileName,
 	fclose(hPubKeyFile);
 	//CRYPTO_cleanup_all_ex_data();
 	return strRet;
+}
+
+std::string CCodeVerify::EncodeRSA_PubKey(const std::string & strData, std::string & pubKey)
+{
+	return std::string();
 }
 
 std::string CCodeVerify::DecodeRSA_PriKeyFile(const std::string& strPemFileName, const std::string& strData)
@@ -194,6 +201,42 @@ std::string CCodeVerify::DecodeRSA_PubKeyFile(const std::string& strPemFileName,
 	RSA_free(pRSAPublicKey);
 	fclose(hPubKeyFile);
 	//CRYPTO_cleanup_all_ex_data();
+	return strRet;
+}
+
+std::string CCodeVerify::DecodeRSA_PubKey(const std::string & strData, std::string & pubKey)
+{
+	std::string strRet;
+	BIO *keybio = BIO_new_mem_buf((unsigned char *)pubKey.c_str(), -1);
+	//keybio = BIO_new_mem_buf((unsigned char *)strPublicKey.c_str(), -1);  
+	// 此处有三种方法  
+	// 1, 读取内存里生成的密钥对，再从内存生成rsa  
+	// 2, 读取磁盘里生成的密钥对文本文件，在从内存生成rsa  
+	// 3，直接从读取文件指针生成rsa  
+	//RSA* pRSAPublicKey = RSA_new();  
+	RSA* rsa = RSA_new();
+	rsa = PEM_read_bio_RSAPublicKey(keybio, &rsa, NULL, NULL);
+	if (!rsa)
+	{
+		BIO_free_all(keybio);
+		return std::string("");
+	}
+
+	int len = RSA_size(rsa);
+	//int len = 1028;
+	char *encryptedText = (char *)malloc(len + 1);
+	memset(encryptedText, 0, len + 1);
+
+	//解密
+	int ret = RSA_public_decrypt(strData.length(), (const unsigned char*)strData.c_str(), (unsigned char*)encryptedText, rsa, RSA_PKCS1_PADDING);
+	if (ret >= 0)
+		strRet = std::string(encryptedText, ret);
+
+	// 释放内存  
+	free(encryptedText);
+	BIO_free_all(keybio);
+	RSA_free(rsa);
+
 	return strRet;
 }
 
