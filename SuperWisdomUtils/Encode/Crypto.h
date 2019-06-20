@@ -15,10 +15,10 @@ class CryptoBase64
 public:
 
 	// 63rd char used for Base64 code
-	static const wchar_t CHAR_63 = '*';
+	static const wchar_t CHAR_63 = '/';
 
 	// 64th char used for Base64 code
-	static const wchar_t CHAR_64 = '-';
+	static const wchar_t CHAR_64 = '+';
 
 	// Char used for padding
 	static const wchar_t CHAR_PAD = '=';

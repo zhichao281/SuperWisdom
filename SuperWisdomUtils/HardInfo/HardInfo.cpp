@@ -59,19 +59,28 @@ int main()
 #endif
 
 
-
-#include "../Crypto.h"
+#include "../Encode/AesEncryptor.h"
+#include "../Encode/Crypto.h"
+#include <windows.h>
+#include <iostream>
+#include <fstream>
+#include <string>
 
 //软件的认证部分， 如果不通过， 则不可以用
 bool  checklicense()
 {
+
+	unsigned char szKey[] = "zhichao281@163.com";
+	AesEncryptor Aes(szKey);
+	std::string  strPass = Aes.EncryptString("admin");
+	std::string  strPass1 = Aes.DecryptString("71e9d6a5f1f83628e5265dcdef1e32655f01349a9032382d4d59f6920dc3341b");
+
+
 	// 获取所在目录下的license.txt文件的第一行
-	char szLicenseFile[2049] = { 0 };
-	getExePath(szLicenseFile, sizeof(szLicenseFile));
-
+	char szLicenseFile[MAX_PATH] = { 0 };
 	char szModuleFileName[MAX_PATH] = "";
-	GetModuleFileNameA(NULL, szModuleFileName, MAX_PATH);
 
+	GetModuleFileNameA(NULL, szModuleFileName, MAX_PATH);
 	char* pRchr = strrchr(szModuleFileName, '\\');
 	if (NULL == pRchr)
 	{
@@ -83,22 +92,48 @@ bool  checklicense()
 		pRchr++;
 		*pRchr = '\0';
 	}
+	strcat_s(szModuleFileName, "license1.txt"); 
+	strcpy_s(szLicenseFile, szModuleFileName);
 
-	strcpy(pszRootDir, szModuleFileName);
+	// 校验license.txt文件是否存在
+	ifstream filein(szLicenseFile);
+	//filein.open(szLicenseFile);
+	if (filein)
+	{
+		std::string strFile((std::istreambuf_iterator<char>(filein)),
+			std::istreambuf_iterator<char>());
+		filein.close();
+		if (strFile.length() >1)
+		{
+		
+		}
+		cout << "license.txt文件错误" << endl;
+		system("pause");
+		return -1;
+	}
+
+	else
+	{
+		// 获取license.txt文件指纹
+		
+		cout << "无license.txt文件， 认证失败" << endl;
+		system("pause");
+		return -1;
+	}
+	
 
 
 
 
 
-	strcat(szLicenseFile, "\\license.txt"); // strcat不安全哈
 
-
+	return true;
 }
 
 
 int main()
 {
-
+	checklicense();
 
 	std::string  str = "12345";
 	std::wstring wstr=CryptoMD5::MD5String32(L"admin1111111121212121");

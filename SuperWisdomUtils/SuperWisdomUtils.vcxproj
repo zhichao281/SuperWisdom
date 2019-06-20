@@ -82,10 +82,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Crypto.cpp" />
     <ClCompile Include="DebugView\DebugView.cpp" />
     <ClCompile Include="Download.cpp" />
     <ClCompile Include="Dump\Crash_Dumper.cpp" />
+    <ClCompile Include="Encode\AES.cpp" />
+    <ClCompile Include="Encode\AesEncryptor.cpp" />
+    <ClCompile Include="Encode\Crypto.cpp" />
     <ClCompile Include="FileManager\FileManange.cpp" />
     <ClCompile Include="gtest-1.7.0\gtest\gtest-all.cc" />
     <ClCompile Include="gtest-1.7.0\gtest\gtest_main.cc" />
@@ -144,11 +146,13 @@
     <ClInclude Include="AutoLockClass.h" />
     <ClInclude Include="AutoLockMacro.h" />
     <ClInclude Include="auto_tchar.h" />
-    <ClInclude Include="Crypto.h" />
     <ClInclude Include="DebugView\DebugView.h" />
     <ClInclude Include="DllLoader.h" />
     <ClInclude Include="Download.h" />
     <ClInclude Include="Dump\Crash_Dumper.h" />
+    <ClInclude Include="Encode\AES.h" />
+    <ClInclude Include="Encode\AesEncryptor.h" />
+    <ClInclude Include="Encode\Crypto.h" />
     <ClInclude Include="FileManager\FileManange.h" />
     <ClInclude Include="gtest-1.7.0\gtest\gtest.h" />
     <ClInclude Include="HardInfo\CCodeVerify.h" />

@@ -70,6 +70,9 @@
     <Filter Include="硬件信息\openssl">
       <UniqueIdentifier>{eb209c2c-c5cf-4900-a9df-bc655f71fb73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="加解密">
+      <UniqueIdentifier>{61286862-1173-4421-88c0-4b4ac0effdf3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WisdomMain.cpp">
@@ -240,8 +243,14 @@
     <ClCompile Include="HardInfo\Main_Test.cpp">
       <Filter>硬件信息</Filter>
     </ClCompile>
-    <ClCompile Include="Crypto.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="Encode\Crypto.cpp">
+      <Filter>加解密</Filter>
+    </ClCompile>
+    <ClCompile Include="Encode\AesEncryptor.cpp">
+      <Filter>加解密</Filter>
+    </ClCompile>
+    <ClCompile Include="Encode\AES.cpp">
+      <Filter>加解密</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -707,8 +716,14 @@
     <ClInclude Include="HardInfo\openssl\x86\include\openssl\x509v3err.h">
       <Filter>硬件信息\openssl</Filter>
     </ClInclude>
-    <ClInclude Include="Crypto.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="Encode\Crypto.h">
+      <Filter>加解密</Filter>
+    </ClInclude>
+    <ClInclude Include="Encode\AesEncryptor.h">
+      <Filter>加解密</Filter>
+    </ClInclude>
+    <ClInclude Include="Encode\AES.h">
+      <Filter>加解密</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
