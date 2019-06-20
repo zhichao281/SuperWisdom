@@ -62,14 +62,49 @@ int main()
 
 #include "../Crypto.h"
 
+//软件的认证部分， 如果不通过， 则不可以用
+bool  checklicense()
+{
+	// 获取所在目录下的license.txt文件的第一行
+	char szLicenseFile[2049] = { 0 };
+	getExePath(szLicenseFile, sizeof(szLicenseFile));
+
+	char szModuleFileName[MAX_PATH] = "";
+	GetModuleFileNameA(NULL, szModuleFileName, MAX_PATH);
+
+	char* pRchr = strrchr(szModuleFileName, '\\');
+	if (NULL == pRchr)
+	{
+		pRchr = strrchr(szModuleFileName, '/');
+	}
+
+	if (NULL != pRchr)
+	{
+		pRchr++;
+		*pRchr = '\0';
+	}
+
+	strcpy(pszRootDir, szModuleFileName);
+
+
+
+
+
+	strcat(szLicenseFile, "\\license.txt"); // strcat不安全哈
+
+
+}
+
+
 int main()
 {
- 
+
+
 	std::string  str = "12345";
-	std::wstring wstr=CryptoMD5::MD5String32(L"admin");
+	std::wstring wstr=CryptoMD5::MD5String32(L"admin1111111121212121");
 
 	std::wstring wstr2 = CryptoMD5::MD5String16(L"admin");
-	unsigned char encrypt[] = "7A57A5A743894A0E";
+	unsigned char encrypt[] = "6FC8FACBDF38336C3FBE054E75DBB1FD";
 	std::wstring wstr3;
 	CryptoBase64::Encode(encrypt, (int)strlen((char *)encrypt), wstr3);
 
