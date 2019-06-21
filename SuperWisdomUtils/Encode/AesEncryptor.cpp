@@ -53,17 +53,17 @@ string AesEncryptor::EncryptString(string strInfor) {
 	memcpy_s(pBuffer, nLength + spaceLength, strInfor.c_str(), nLength);
 	m_pEncryptor->Cipher(pBuffer, nLength + spaceLength);
 
-	wstring outCode;
-	CryptoBase64::Encode(pBuffer, nLength + spaceLength, outCode);
+
+
+
 
 	// 这里需要把得到的字符数组转换成十六进制字符串 
-	char* pOut = new char[2 * (nLength + spaceLength)];
-	memset(pOut, '\0', 2 * (nLength + spaceLength));
+	char* pOut = new char[2 * (nLength + spaceLength)+1];
+	memset(pOut, '\0', 2 * (nLength + spaceLength)+1);
 	Byte2Hex(pBuffer, nLength + spaceLength, pOut);
-
-	string retValue(pOut);
+	string retValue = string(pOut);
+	delete[] pOut;	
 	delete[] pBuffer;
-	//delete[] pOut;
 	return retValue;
 }
 
