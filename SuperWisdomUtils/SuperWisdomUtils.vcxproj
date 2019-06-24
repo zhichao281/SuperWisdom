@@ -87,7 +87,12 @@
     <ClCompile Include="Dump\Crash_Dumper.cpp" />
     <ClCompile Include="Encode\AES.cpp" />
     <ClCompile Include="Encode\AesEncryptor.cpp" />
+    <ClCompile Include="Encode\Base64.cpp" />
+    <ClCompile Include="Encode\base64New.cpp" />
     <ClCompile Include="Encode\Crypto.cpp" />
+    <ClCompile Include="Encode\Md5.cpp" />
+    <ClCompile Include="Encode\Sha1.cpp" />
+    <ClCompile Include="Encode\Sha256.cpp" />
     <ClCompile Include="FileManager\FileManange.cpp" />
     <ClCompile Include="gtest-1.7.0\gtest\gtest-all.cc" />
     <ClCompile Include="gtest-1.7.0\gtest\gtest_main.cc" />
@@ -152,7 +157,13 @@
     <ClInclude Include="Dump\Crash_Dumper.h" />
     <ClInclude Include="Encode\AES.h" />
     <ClInclude Include="Encode\AesEncryptor.h" />
+    <ClInclude Include="Encode\Base64.h" />
+    <ClInclude Include="Encode\base64New.h" />
     <ClInclude Include="Encode\Crypto.h" />
+    <ClInclude Include="Encode\macros.h" />
+    <ClInclude Include="Encode\Md5.h" />
+    <ClInclude Include="Encode\Sha1.h" />
+    <ClInclude Include="Encode\Sha256.h" />
     <ClInclude Include="FileManager\FileManange.h" />
     <ClInclude Include="gtest-1.7.0\gtest\gtest.h" />
     <ClInclude Include="HardInfo\CCodeVerify.h" />

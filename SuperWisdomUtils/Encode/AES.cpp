@@ -1,9 +1,6 @@
 ///////////////////////////////
-// http://mingcn.cnblogs.com //
-//  xelz CopyRight (c) 2010  //
-///////////////////////////////
 
-#include "string.h"
+#include <string.h>
 #include "AES.h"
 #include "Base64.h"
 

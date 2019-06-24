@@ -46,9 +46,6 @@
     <Filter Include="Json">
       <UniqueIdentifier>{7fdbb269-2098-4077-b401-6d728edcec22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Log">
-      <UniqueIdentifier>{03e3995a-02d7-4ddc-940f-720d10a5f4b6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="gtest">
       <UniqueIdentifier>{c9bf3f8d-9b19-426e-bd5e-50846218159d}</UniqueIdentifier>
     </Filter>
@@ -72,6 +69,9 @@
     </Filter>
     <Filter Include="加解密">
       <UniqueIdentifier>{61286862-1173-4421-88c0-4b4ac0effdf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="日记类\Log">
+      <UniqueIdentifier>{03e3995a-02d7-4ddc-940f-720d10a5f4b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -130,10 +130,10 @@
       <Filter>Json</Filter>
     </ClCompile>
     <ClCompile Include="log\Logger.cpp">
-      <Filter>Log</Filter>
+      <Filter>日记类\Log</Filter>
     </ClCompile>
     <ClCompile Include="log\LogManager.cpp">
-      <Filter>Log</Filter>
+      <Filter>日记类\Log</Filter>
     </ClCompile>
     <ClCompile Include="gtest-1.7.0\gtest\gtest_main.cc">
       <Filter>gtest</Filter>
@@ -142,7 +142,7 @@
       <Filter>gtest</Filter>
     </ClCompile>
     <ClCompile Include="log\log_deffine.cpp">
-      <Filter>Log</Filter>
+      <Filter>日记类\Log</Filter>
     </ClCompile>
     <ClCompile Include="zip\ZipOperation.cpp">
       <Filter>Zip</Filter>
@@ -249,7 +249,22 @@
     <ClCompile Include="Encode\AesEncryptor.cpp">
       <Filter>加解密</Filter>
     </ClCompile>
+    <ClCompile Include="Encode\base64New.cpp">
+      <Filter>加解密</Filter>
+    </ClCompile>
+    <ClCompile Include="Encode\Md5.cpp">
+      <Filter>加解密</Filter>
+    </ClCompile>
+    <ClCompile Include="Encode\Sha1.cpp">
+      <Filter>加解密</Filter>
+    </ClCompile>
+    <ClCompile Include="Encode\Sha256.cpp">
+      <Filter>加解密</Filter>
+    </ClCompile>
     <ClCompile Include="Encode\AES.cpp">
+      <Filter>加解密</Filter>
+    </ClCompile>
+    <ClCompile Include="Encode\Base64.cpp">
       <Filter>加解密</Filter>
     </ClCompile>
   </ItemGroup>
@@ -309,13 +324,13 @@
       <Filter>Json</Filter>
     </ClInclude>
     <ClInclude Include="log\log_deffine.h">
-      <Filter>Log</Filter>
+      <Filter>日记类\Log</Filter>
     </ClInclude>
     <ClInclude Include="log\Logger.h">
-      <Filter>Log</Filter>
+      <Filter>日记类\Log</Filter>
     </ClInclude>
     <ClInclude Include="log\LogManager.h">
-      <Filter>Log</Filter>
+      <Filter>日记类\Log</Filter>
     </ClInclude>
     <ClInclude Include="gtest-1.7.0\gtest\gtest.h">
       <Filter>gtest</Filter>
@@ -722,7 +737,25 @@
     <ClInclude Include="Encode\AesEncryptor.h">
       <Filter>加解密</Filter>
     </ClInclude>
+    <ClInclude Include="Encode\base64New.h">
+      <Filter>加解密</Filter>
+    </ClInclude>
+    <ClInclude Include="Encode\macros.h">
+      <Filter>加解密</Filter>
+    </ClInclude>
+    <ClInclude Include="Encode\Md5.h">
+      <Filter>加解密</Filter>
+    </ClInclude>
+    <ClInclude Include="Encode\Sha1.h">
+      <Filter>加解密</Filter>
+    </ClInclude>
+    <ClInclude Include="Encode\Sha256.h">
+      <Filter>加解密</Filter>
+    </ClInclude>
     <ClInclude Include="Encode\AES.h">
+      <Filter>加解密</Filter>
+    </ClInclude>
+    <ClInclude Include="Encode\Base64.h">
       <Filter>加解密</Filter>
     </ClInclude>
   </ItemGroup>

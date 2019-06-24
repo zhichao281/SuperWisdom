@@ -15,7 +15,7 @@ public:
 	std::string Decrypt( std::string strSrc, std::string strKey );
 
 private:
-	void StringToHex( const char* pSrc, unsigned char* pDest );
+	void StringToHex( const char* pSrc, unsigned char* pDest, int nDestLen);
 	void Padding( unsigned char* pSrc, int nSrcLen );
 };
 

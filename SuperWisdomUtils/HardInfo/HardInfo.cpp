@@ -70,10 +70,15 @@ int main()
 bool  checklicense()
 {
 
-	unsigned char szKey[] = "zhichao281@163.com";
+	unsigned char str1[] = "这个是测试";
+	wstring strOut;
+	CryptoBase64::Encode(str1,13, strOut);
+
+
+	unsigned char szKey[] = "1234567890123456";
 	AesEncryptor Aes(szKey);
 	std::string  strPass = Aes.EncryptString("admin");
-	std::string  strPass1 = Aes.DecryptString("71e9d6a5f1f83628e5265dcdef1e32655f01349a9032382d4d59f6920dc3341b");
+	std::string  strPass1 = Aes.DecryptString("7ae2d4a63d1c3e1a187a1fd89f471ef5");
 
 
 	// 获取所在目录下的license.txt文件的第一行
@@ -130,9 +135,22 @@ bool  checklicense()
 	return true;
 }
 
+#include "../Encode/AES.h"
+
 
 int main()
 {
+	AES ae((unsigned char*)"1234567890123456");
+
+	std::string str1 = "admin";
+	char szOut[256];
+
+
+	ae.CipherToBase64((char*)str1.c_str(), str1.length()+1, szOut,256);
+
+
+
+
 	checklicense();
 
 	std::string  str = "12345";
