@@ -65,15 +65,18 @@ int main()
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "../Encode/AES.h"
+#include "../Encode/base64New.h"
 
 //软件的认证部分， 如果不通过， 则不可以用
 bool  checklicense()
 {
 
 	unsigned char str1[] = "这个是测试";
-	wstring strOut;
-	CryptoBase64::Encode(str1,13, strOut);
-
+	wstring wstrOut;
+	CryptoBase64::Encode(str1,13, wstrOut);
+	string  strInput = "这个是测试";
+	string  strout=Base64New::encode64(strInput);
 
 	unsigned char szKey[] = "1234567890123456";
 	AesEncryptor Aes(szKey);
@@ -135,19 +138,10 @@ bool  checklicense()
 	return true;
 }
 
-#include "../Encode/AES.h"
 
 
 int main()
 {
-	AES ae((unsigned char*)"1234567890123456");
-
-	std::string str1 = "admin";
-	char szOut[256];
-
-
-	ae.CipherToBase64((char*)str1.c_str(), str1.length()+1, szOut,256);
-
 
 
 
@@ -181,7 +175,7 @@ int main()
 			std::cout << "ActiveCode : " << strActiveCode << std::endl;
 		}
 		std::string strVerifyDate;
-		std::string strVerifyOther;
+		std::string strVerifyOther; 
 		if (CCodeVerify::VerifyActiveNumber("E:\\study\\SuperWisdom\\SuperWisdomUtils\\HardInfo\\pubKey.pem", strActiveCode, strVerifyDate, strVerifyOther))
 		{
 			std::cout << "UntilDate " << strVerifyDate << "   OtherInfo:" << strVerifyOther << std::endl;

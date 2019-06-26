@@ -14,13 +14,13 @@
     <ProjectGuid>{4E123B7B-F981-4DA0-ACFE-8BCB0DCD45D1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>AES_Test</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -81,6 +81,8 @@
   <ItemGroup>
     <ClInclude Include="aes.h" />
     <ClInclude Include="AesHelper.h" />
+    <ClInclude Include="CCodeVerify.h" />
+    <ClInclude Include="CHardInfo.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="zbase64.h" />
@@ -89,6 +91,8 @@
     <ClCompile Include="aes.cpp" />
     <ClCompile Include="AesHelper.cpp" />
     <ClCompile Include="AES_Test.cpp" />
+    <ClCompile Include="CCodeVerify.cpp" />
+    <ClCompile Include="CHardInfo.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="zbase64.cpp" />
   </ItemGroup>
