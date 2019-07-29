@@ -14,7 +14,7 @@
 #include <sys/stat.h>
 
 
-int main()
+int hardmain()
 {
 	struct udev            *ud = NULL;
 	struct stat             statbuf;
@@ -139,13 +139,57 @@ bool  checklicense()
 }
 
 
+#include "../FileManager/FileManange.h"
 
-int main()
+/*
+*	Function:		GetFileSize
+*	Explanation:	获取文件大小
+*	Input:			strFilePath		文件路径
+*  Output:			pHighSize		高阶大小
+*	Return:			低阶大小
+*/
+double GetFileSize(std::string strFilePath)
 {
 
+	double filesize = 0;
+	struct _stat64 buf;
+	if (_stat64(strFilePath.c_str(), &buf) < 0)
+	{
+		filesize = 0;
+	}
+	else
+	{
+		filesize = (double)buf.st_size;
+	}
+	return filesize;
+}
+string wstr2str(const wstring& wstr)
+{
+	if (wstr.empty() == true)
+	{
+		return "";
+	}
+	const wchar_t* unicodeString = wstr.c_str();
+	int nsize = wcslen(unicodeString);
+	int utf8Len = WideCharToMultiByte(936, 0, unicodeString, nsize, NULL, 0, NULL, NULL);
 
+	char* utf8String = new char[utf8Len + 1];
+	memset(utf8String, 0x00, utf8Len + 1);
+	WideCharToMultiByte(936, 0, unicodeString, nsize, utf8String, utf8Len, NULL, NULL);
 
-	checklicense();
+	string dest = utf8String;
+	delete[] utf8String;
+	return dest;
+}
+int hardmain()
+{
+	TCHAR m_szSIFile[MAX_PATH] = L"E:\\新建文件夹\\232.dmp";
+
+	if (GetFileSize(wstr2str(m_szSIFile)) < 1)
+	{
+		checklicense();
+	}
+	
 
 	std::string  str = "12345";
 	std::wstring wstr=CryptoMD5::MD5String32(L"admin1111111121212121");

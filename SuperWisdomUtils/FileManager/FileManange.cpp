@@ -189,9 +189,17 @@ int WisdomUtils::CFileManange::DeleteDir( const char* pDir )
 
 long WisdomUtils::CFileManange::GetFileSize( const char* pFile )
 {
-	struct _stat info;
-	_stat((char*)pFile, &info);
-	return info.st_size;
+	double filesize = 0;
+	struct _stat64 buf;
+	if (_stat64(pFile, &buf) < 0)
+	{
+		filesize = 0;
+	}
+	else
+	{
+		filesize = (double)buf.st_size;
+	}
+	return filesize;
 }
 
 //描述：获取当前程序所在路径

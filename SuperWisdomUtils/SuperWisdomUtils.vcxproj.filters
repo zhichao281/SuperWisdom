@@ -73,6 +73,9 @@
     <Filter Include="日记类\Log">
       <UniqueIdentifier>{03e3995a-02d7-4ddc-940f-720d10a5f4b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GetSysInfo">
+      <UniqueIdentifier>{e18dca56-f421-4583-bf6b-c46864a54a7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WisdomMain.cpp">
@@ -266,6 +269,21 @@
     </ClCompile>
     <ClCompile Include="Encode\Base64.cpp">
       <Filter>加解密</Filter>
+    </ClCompile>
+    <ClCompile Include="GetSysInfo\GetSysInfo.cpp">
+      <Filter>GetSysInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="GetSysInfo\SRMATIGPUInfo.cpp">
+      <Filter>GetSysInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="GetSysInfo\SRMNvidiaGPUInfo.cpp">
+      <Filter>GetSysInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="GetSysInfo\WMIInfo.cpp">
+      <Filter>GetSysInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="GetSysInfo\sysinfoTest.cpp">
+      <Filter>GetSysInfo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -757,6 +775,21 @@
     </ClInclude>
     <ClInclude Include="Encode\Base64.h">
       <Filter>加解密</Filter>
+    </ClInclude>
+    <ClInclude Include="GetSysInfo\GetSysInfo.h">
+      <Filter>GetSysInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="GetSysInfo\SRMATIGPUInfo.h">
+      <Filter>GetSysInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="GetSysInfo\SRMGPUInfoInf.h">
+      <Filter>GetSysInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="GetSysInfo\SRMNvidiaGPUInfo.h">
+      <Filter>GetSysInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="GetSysInfo\WMIInfo.h">
+      <Filter>GetSysInfo</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

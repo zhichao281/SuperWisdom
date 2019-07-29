@@ -94,6 +94,11 @@
     <ClCompile Include="Encode\Sha1.cpp" />
     <ClCompile Include="Encode\Sha256.cpp" />
     <ClCompile Include="FileManager\FileManange.cpp" />
+    <ClCompile Include="GetSysInfo\GetSysInfo.cpp" />
+    <ClCompile Include="GetSysInfo\SRMATIGPUInfo.cpp" />
+    <ClCompile Include="GetSysInfo\SRMNvidiaGPUInfo.cpp" />
+    <ClCompile Include="GetSysInfo\sysinfoTest.cpp" />
+    <ClCompile Include="GetSysInfo\WMIInfo.cpp" />
     <ClCompile Include="gtest-1.7.0\gtest\gtest-all.cc" />
     <ClCompile Include="gtest-1.7.0\gtest\gtest_main.cc" />
     <ClCompile Include="HardInfo\CCodeVerify.cpp" />
@@ -165,6 +170,11 @@
     <ClInclude Include="Encode\Sha1.h" />
     <ClInclude Include="Encode\Sha256.h" />
     <ClInclude Include="FileManager\FileManange.h" />
+    <ClInclude Include="GetSysInfo\GetSysInfo.h" />
+    <ClInclude Include="GetSysInfo\SRMATIGPUInfo.h" />
+    <ClInclude Include="GetSysInfo\SRMGPUInfoInf.h" />
+    <ClInclude Include="GetSysInfo\SRMNvidiaGPUInfo.h" />
+    <ClInclude Include="GetSysInfo\WMIInfo.h" />
     <ClInclude Include="gtest-1.7.0\gtest\gtest.h" />
     <ClInclude Include="HardInfo\CCodeVerify.h" />
     <ClInclude Include="HardInfo\CHardInfo.h" />
