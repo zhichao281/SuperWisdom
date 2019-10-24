@@ -163,7 +163,9 @@ BOOL FileAttributes(LPCSTR lpszFilePath/*ÎÄ¼þÂ·¾¶*/)
 }
 
 #include "Download.h"
-int wisdommain()
+#include ""
+
+int main()
 {	
 
 	http_downloadfile("http://s.funnycore.com/funnyCore_190116_2695.exe",

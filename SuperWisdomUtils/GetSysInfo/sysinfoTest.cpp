@@ -7,8 +7,12 @@
 #include "SRMNvidiaGPUInfo.h"
 using namespace std;
 // Application entry point
-int main(int argc, char* argv[])
+
+
+int sysmain(int argc, char* argv[])
 {
+
+
 
 	SRMGPUInfoInf* m_pGPUInfoInf;
 	m_pGPUInfoInf = SRMNvidiaGPUInfo::createGPUInfoInf();

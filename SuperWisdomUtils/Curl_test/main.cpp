@@ -1,173 +1,241 @@
 
+
+
+#include <windows.h>
 #include <iostream>
-#include <list>
-#include <string>
+#include "include/curl/curl.h"
+#include <string.h>
+#include <codecvt>
+#include <locale>
+#include <vector>
 using namespace std;
-//双端队列
-class Deque
+std::string Utf2Ansi(const std::string & str)
 {
-public:
-	void push_back(int x) { cout<<"Deque push_back"<<endl; }
-	void push_front(int x) { cout<<"Deque push_front"<<endl; }
-	void pop_back() { cout<<"Deque pop_back"<<endl; }
-	void pop_front() { cout<<"Deque pop_front"<<endl; }
-};
-//顺序容器
-class Sequence
-{
-public:
-	virtual void push(int x) = 0;
-	virtual void pop() = 0;
-};
-//栈
-class Stack: public Sequence
-{
-public:
-	void push(int x) { deque.push_back(x); }
-	void pop() { deque.pop_back(); }
-private:
-	Deque deque; //双端队列
-};
-//队列
-class Queue: public Sequence
-{
-public:
-	void push(int x) { deque.push_front(x); }
-	void pop() { deque.pop_front(); }
-private:
-	Deque deque; //双端队列
-};
+	int nwLen = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, NULL, 0);
 
-#include <tchar.h>
-#include "CHttpClient.h"
-#include "ZipCompress.h"
-void DownloadTest();
-void PostTest();
-void GetTest();
-int main()
+	wchar_t * pwBuf = new wchar_t[nwLen + 1];//一定要加1，不然会出现尾巴
+	memset(pwBuf, 0, nwLen * 2 + 2);
+
+	MultiByteToWideChar(CP_UTF8, 0, str.c_str(), str.length(), pwBuf, nwLen);
+
+	int nLen = WideCharToMultiByte(CP_ACP, 0, pwBuf, -1, NULL, NULL, NULL, NULL);
+
+	char * pBuf = new char[nLen + 1];
+	memset(pBuf, 0, nLen + 1);
+
+	WideCharToMultiByte(CP_ACP, 0, pwBuf, nwLen, pBuf, nLen, NULL, NULL);
+
+	std::string retStr = pBuf;
+
+	delete[]pBuf;
+	delete[]pwBuf;
+
+	pBuf = NULL;
+	pwBuf = NULL;
+
+	return retStr;
+}
+std::string gb2312_to_utf8(std::string const &strGb2312)
 {
-	time_t start, stop;
-	start = time(NULL);
-	CZipCompress zipObj;
-	zipObj.Zip_UnPackFiles(L"E:\\1.zip",L"E:\\2");
-	stop = time(NULL);
-	printf("Use Time:%ld\n", (stop - start));
+	std::vector<wchar_t> buff(strGb2312.size());
+#ifdef _MSC_VER
+	std::locale loc("zh-CN");
+#else
+	std::locale loc("zh_CN.GB18030");
+#endif
+	wchar_t* pwszNext = nullptr;
+	const char* pszNext = nullptr;
+	mbstate_t state = {};
+	int res = std::use_facet<std::codecvt<wchar_t, char, mbstate_t> >
+		(loc).in(state,
+			strGb2312.data(), strGb2312.data() + strGb2312.size(), pszNext,
+			buff.data(), buff.data() + buff.size(), pwszNext);
 
+	if (std::codecvt_base::ok == res)
+	{
+		std::wstring_convert<std::codecvt_utf8<wchar_t>> cutf8;
+		return cutf8.to_bytes(std::wstring(buff.data(), pwszNext));
+	}
 
-	
-	system("pause");
-	GetTest();
- 	Sequence *s1 = new Stack();
-  	Sequence *s2 = new Queue();
-	s1->push(1); s1->pop();
-	s2->push(1); s2->pop();
-	delete s1; delete s2;
+	return "";
+
+}
+std::string utf8_to_gb2312(std::string const &strUtf8)
+{
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> cutf8;
+	std::wstring wTemp = cutf8.from_bytes(strUtf8);
+#ifdef _MSC_VER
+	std::locale loc("zh-CN");
+#else
+	std::locale loc("zh_CN.GB18030");
+#endif
+	const wchar_t* pwszNext = nullptr;
+	char* pszNext = nullptr;
+	mbstate_t state = {};
+
+	std::vector<char> buff(wTemp.size() * 2);
+	int res = std::use_facet<std::codecvt<wchar_t, char, mbstate_t> >
+		(loc).out(state,
+			wTemp.data(), wTemp.data() + wTemp.size(), pwszNext,
+			buff.data(), buff.data() + buff.size(), pszNext);
+
+	if (std::codecvt_base::ok == res)
+	{
+		return std::string(buff.data(), pszNext);
+	}
+	return "";
+}
+//回调函数  得到响应内容
+int write_data(void* buffer, int size, int nmemb, void* userp) {
+	std::string * str = dynamic_cast<std::string *>((std::string *)userp);
+	str->append((char *)buffer, size * nmemb);
+	return nmemb;
+}
+int upload(string url, string &body, string* response);
+
+int main(int argc, char** argv) {
+
+	std::string body;
+	std::string response;
+
+	int status_code = upload("http://120.78.180.184:10086/api?apiname=bit.api.dianzhenzhi.uploadteacherpdf&params=%7B++%22addressJson%22+%3A+%221536.675.59.95%2C1536.675.59.99%22%2C++%22fileName%22+%3A+%22E%3A%5C%5Cstudy%5C%5Clove-study%5C%5CXClassTool-demo%5C%5CXclass%5C%5C2019-08-15%5C%5CTemp%5C%5C%E9%94%99%E9%98%BF%E6%96%AF%E8%BE%BE_140606961.pdf%22%2C++%22liencesId%22+%3A+%225d2fd9a356f8012d0235856c%22%2C++%22pageCount%22+%3A+4%2C++%22pdfId%22+%3A+%22347a4c1166e1469b813f8537f9982d19%22+%7D+&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjoie1wiaWRcIjpcIjBkNzNkMjllZTViYzRiOTE5NmNlNGMzODYzN2U5YzIwXCIsXCJ1c2VySWRcIjpcIjEwMlwiLFwiYWNjZXNzVG9rZW5cIjpudWxsLFwiY3JlYXRlZFRpbWVcIjoxNTY1ODQ5MzA0MDE3LFwiZXhwaXJlc1RpbWVcIjoxNTY1OTM1NzA0MDE3LFwiY2xpZW50SXBcIjpudWxsLFwiY2xpZW50VHlwZVwiOm51bGwsXCJlQ29kZVwiOm51bGwsXCJ1Q29kZVwiOm51bGx9In0.xdGiHKvDix06pXPhNN73RFLpieobePmRlTR0-ijfHoE", 
+		body, &response);
+	if (status_code != CURLcode::CURLE_OK) {
+		return -1;
+	}
+	body = Utf2Ansi(body);
+	response = Utf2Ansi(response);
 	return 0;
 }
+#include <tchar.h>
+int upload(string url, string &body, string* response)
+{
+
+	ShellExecute(NULL, _T("open"), _T("E:/"), _T(""), _T(""), SW_SHOW);
 
 
-// LibcurlLoad.cpp : 定义控制台应用程序的入口点。
+	 url = gb2312_to_utf8(url);
+	CURL *curl;
+	CURLcode ret;
+	curl = curl_easy_init();
+	struct curl_httppost* post = NULL;
+	struct curl_httppost* last = NULL;
+	if (curl)
+	{
+		curl_easy_setopt(curl, CURLOPT_URL, (char *)url.c_str());           //指定url
+		//curl_formadd(&post, &last, CURLFORM_PTRNAME, "path", CURLFORM_PTRCONTENTS, "device_cover", CURLFORM_END);//form-data key(path) 和 value(device_cover)
+		//curl_formadd(&post, &last, 
+		//	CURLFORM_PTRNAME, "file",
+		//	CURLFORM_FILE, "E:\\study\\love-study\\XClassTool-demo\\Xclass\\2019-08-15\\Temp\\错阿斯达_141530577.pdf", 
+
+		//	 CURLFORM_END);// form-data key(file) "./test.jpg"为文件路径  "hello.jpg" 为文件上传时文件名
+		curl_formadd(&post, &last,
+			CURLFORM_PTRNAME, "错阿斯达_141530577.pdf",
+			CURLFORM_FILE, "E:\\study\\love-study\\XClassTool-demo\\Xclass\\2019-08-15\\Temp\\错阿斯达_141530577.pdf",
+			CURLFORM_END);
+
+		curl_easy_setopt(curl, CURLOPT_HTTPPOST, post);                     //构造post参数    
+		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);          //绑定相应
+		curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)response);        //绑定响应内容的地址
+
+		ret = curl_easy_perform(curl);                          //执行请求
+		if (ret == 0) {
+			curl_easy_cleanup(curl);
+			return 0;
+		}
+		else {
+			return ret;
+		}
+	}
+	else {
+		return -1;
+	}
+}
+
+
+//int upload(string url, string &body, string* response)
+//{
+//	CURL *curl;
+//	CURLcode ret;
+//	curl = curl_easy_init();
+//	struct curl_httppost* post = NULL;
+//	struct curl_httppost* last = NULL;
+//	if (curl)
+//	{
 //
-
-
-
-class CLibcurlCallbackEx
-	: public CLibcurlCallback
-{
-public:
-	virtual void Progress(void* lpParam, double dTotal, double dLoaded)
-	{
-		if (dTotal == 0.0)
-			return;
-		double bPercent = (dLoaded / dTotal) * 100;
-		printf("下载进度：%0.2lf%%\n", bPercent);
-	}
-	virtual void	WriteCallback(void* pBuffer, size_t nSize, size_t nMemByte, void* pParam)
-	{
-		m_strBody.append((char *)pBuffer, nSize * nMemByte);
-		m_nSize = nSize * nMemByte;
-	}
-public:
-	// 接收数据
-	std::string		m_strBody;
-	int  m_nSize;
-
-};
-
-
-
-
-void DownloadTest()
-{
-	const char* pUrl = "http://doc.cloudv.haplat.net/160612/ovptest/201804/f1ae15a601621000d6b2ed9000000000/f1ae15a601621000d6b2ed9000000000_1.png";
-	CLibcurl libcurl;
-	CLibcurlCallbackEx cb;
-	//libcurl.SetUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36");
-	libcurl.SetConnectTimeout(2);
-	libcurl.SetResumeFrom(0);
-	libcurl.SetCallback(&cb, NULL);
-	libcurl.DownloadToFile(pUrl, "d:\\1.png");
-	std::string	strBody=cb.m_strBody;
-
-
-
-	FILE* wfile;
-	wfile = _wfopen(L"D:\\2.png", L"wb");
-
-	if (strBody.size() > 0)
-	{
-		int nsize = strBody.size();
-		int nsize1 = cb.m_nSize;
-		//写人数据到文件中  
-		fwrite(strBody.data(), strBody.size(), 1, wfile);
-		strBody.clear();
-	}
-	fclose(wfile);
-}
-
-void PostTest()
-{
-	CLibcurl libcurl;
-	libcurl.SetUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36");
-	libcurl.SetPort(80);
-	libcurl.SetConnectTimeout(2);
-	libcurl.AddHeader("name", "Jelin");
-	libcurl.AddHeader("sex", "man");
-	libcurl.SetCookieFile("c:\\cookie");
-	char* pData = "maintype=10001&subtype=100&appver=2.5.19.3753&sysver=Microsoft Windows 7&applist=100:15,200:2&sign=2553d888bc922275eca2fc539a5f0c1b";
-	libcurl.Post("http://interface.***********.com/v2/stat/index/jingpin", pData);
-	string strRet = libcurl.GetRespons();
-
-}
-
-void GetTest()
-{
-	CLibcurl libcurl;
-	//libcurl.SetUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36");
-	libcurl.Get("http://doc.cloudv.haplat.net/160612/ovptest/201804/f1ae15a601621000d6b2ed9000000000/f1ae15a601621000d6b2ed9000000000_1.png");
-
-
-	std::string	strBody = libcurl.GetRespons();
-	FILE* wfile;
-	wfile = _wfopen(L"D:\\2.png", L"wb");
-
-	if (strBody.size() > 0)
-	{
-		int nsize = strBody.size();
-		//写人数据到文件中  
-		fwrite(strBody.data(), strBody.size(), 1, wfile);
-		strBody.clear();
-	}
-	fclose(wfile);
-	
-	const char* pError = libcurl.GetError();
-}
-
-
-
-
-
-
-
-
-
+//		struct curl_slist *headers = NULL;
+//		//headers = curl_slist_append(headers, "Content-Type: application/x-www-form-urlencoded");
+//	
+//		//set headers
+//		//curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+//
+//		curl_easy_setopt(curl, CURLOPT_URL, (char *)url.c_str());           //指定url
+//
+//
+//		//curl_formadd(&post, &last,
+//		//	CURLFORM_COPYNAME, "uploadfile",
+//		//	CURLFORM_FILE, "D:/1.pdf",//imagepath
+//		//	CURLFORM_CONTENTTYPE, "application/pdf",
+//		//	CURLFORM_END);
+//
+//		//curl_formadd(&post, &last,
+//		//	CURLFORM_COPYNAME, "filename",
+//		//	CURLFORM_COPYCONTENTS, "1.pdf",
+//		//	CURLFORM_END);
+//	/*	HANDLE hFile;
+//		hFile = CreateFileA("d:/1.pdf", GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+//
+//		if (hFile == INVALID_HANDLE_VALUE)
+//		{
+//			return false;
+//		}
+//
+//		DWORD dFileSize = GetFileSize(hFile, NULL);
+//		char * pBuffer = new char[dFileSize + 1];
+//
+//		if (pBuffer == NULL)
+//			return false;
+//
+//		memset(pBuffer, 0, dFileSize);
+//
+//		DWORD dReadSize(0);
+//		if (!ReadFile(hFile, pBuffer, dFileSize, &dReadSize, NULL))
+//		{
+//			delete[]pBuffer;
+//			CloseHandle(hFile);
+//			return false;
+//		}
+//
+//
+//
+//		curl_formadd(&post, &last,
+//			CURLFORM_COPYNAME, "file",
+//			CURLFORM_BUFFER, "1.pdf",
+//			CURLFORM_BUFFERPTR, pBuffer,
+//			CURLFORM_BUFFERLENGTH, dReadSize,
+//			CURLFORM_CONTENTTYPE, "application/pdf",
+//			CURLFORM_END);
+//*/
+//		curl_formadd(&post, &last, 
+//			CURLFORM_PTRNAME, "file",
+//			CURLFORM_FILE, "D:/1.pdf", 
+//			CURLFORM_FILENAME, "1.pdf",
+//			CURLFORM_CONTENTTYPE, "application/pdf",
+//			CURLFORM_END);// form-data key(file) "./test.jpg"为文件路径  "hello.jpg" 为文件上传时文件名
+//		curl_easy_setopt(curl, CURLOPT_HTTPPOST, post);                     //构造post参数    
+//		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);          //绑定相应
+//		curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)response);        //绑定响应内容的地址
+//
+//		ret = curl_easy_perform(curl);                          //执行请求
+//		if (ret == 0) {
+//			curl_easy_cleanup(curl);
+//			return 0;
+//		}
+//		else {
+//			return ret;
+//		}
+//	}
+//	else {
+//		return -1;
+//	}
+//}
