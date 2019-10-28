@@ -140,3 +140,4 @@ PathIsURL
 路径是否是http格式。
 PathYetAnotherMakeUniqueName 
 基于已存在的文件,自动创建一个唯一的文件名。比如存在"新建文件",此函数会创建文件名"新建文件(2)" 
+11
