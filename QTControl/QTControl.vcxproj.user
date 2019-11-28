@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <QmlDebugSettings>file:$(ProjectGuid),block</QmlDebugSettings>
+    <QmlDebug>-qmljsdebugger=$(QmlDebugSettings)</QmlDebug>
+    <LocalDebuggerCommandArguments>$(QmlDebug)</LocalDebuggerCommandArguments>
+    <QTDIR>D:\zzc\QT\5.13.0\msvc2017</QTDIR>
+    <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <QmlDebugSettings>file:$(ProjectGuid),block</QmlDebugSettings>
+    <QmlDebug>-qmljsdebugger=$(QmlDebugSettings)</QmlDebug>
+    <LocalDebuggerCommandArguments>$(QmlDebug)</LocalDebuggerCommandArguments>
+    <QTDIR>D:\zzc\QT\5.13.0\msvc2017</QTDIR>
+    <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
+  </PropertyGroup>
+</Project>
