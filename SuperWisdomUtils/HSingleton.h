@@ -1,12 +1,5 @@
-ï»¿/*
- * Author   : zzc
- * Version  : 1.0
- * DateTime : 2017-06-09
- * Describe : å•å®ä¾‹æ¨¡æ¿
- */
 
 #pragma once
-
 #include <mutex>
 
 template<typename T>
@@ -22,9 +15,9 @@ public:
 			{
 				m_instance = new T;;
 				_mutex.unlock();
-				atexit(Destory);
+				//atexit(Destory);
 			}
-		
+
 		}
 		return m_instance;
 	};
@@ -45,13 +38,33 @@ private:
 		}
 	};
 
+public:
+	// This is important
+	class GarbageCollector  // À¬»ø»ØÊÕÀà
+	{
+	public:
+
+		~GarbageCollector()
+		{
+			// We can destory all the resouce here, eg:db connector, file handle and so on
+			if (m_instance != nullptr)
+			{
+				delete m_instance;
+				m_instance = nullptr;
+			}
+		}
+	};
+public:
+	static GarbageCollector  m_gc;  //À¬»ø»ØÊÕÀàµÄ¾²Ì¬³ÉÔ±
+
 private:
 	static T*  m_instance;
 	static std::mutex _mutex;
 };
 
 template<typename T> T*  HSingletonTemplatePtr<T>::m_instance = nullptr;
+
+
 template<typename T> std::mutex HSingletonTemplatePtr<T>::_mutex;
 
-//#define gblXXXGet HSingletonTemplatePtr<XXX>::get()
-
+//#define gblDownloadMgrGet HSingletonTemplatePtr<CDownloadManager>::Instance()

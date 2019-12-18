@@ -48,7 +48,7 @@ bool ThreadPool::stop(void)
 		{
 			if (thread->joinable())
 			{
-				thread->detach();
+				thread->join();
 			}
 		}
 	}
