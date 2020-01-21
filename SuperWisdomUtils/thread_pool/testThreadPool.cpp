@@ -89,18 +89,18 @@ std::string utf8_to_gb2312(std::string const &strUtf8)
 //void ma11in(void)
 //{
 //	
-//	CLogManager::GetInstance();
-//	g_logPtr.reset(new Logger);
-//	LOG_INFO("main");
-//	GSThreadPool_AddFun(std::bind
-//	(
-//		[=](int x, int y)
-//	{
-//		x = x + 1;
-//		std::cout << "中文dsf :" << x << y << endl;
-//	}, 5, 7));
-//	system("pause");
-//
+CLogManager::GetInstance();
+g_logPtr.reset(new Logger);
+LOG_INFO("main");
+GSThreadPool_AddFun(std::bind
+(
+	[=](int x, int y)
+	{
+		x = x + 1;
+		std::cout << "中文dsf :" << x << y << endl;
+	}, 5, 7));
+system("pause");
+
 //
 //
 //	return ;
