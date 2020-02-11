@@ -1,12 +1,8 @@
 #include "AesEncryptor.h"
-
-
 #include "aes.h"
-
-
-
 #include <fstream>
 using namespace std;
+
 
 AesEncryptor::AesEncryptor(unsigned char* key)
 {
@@ -44,7 +40,7 @@ int AesEncryptor::Char2Int(char c) {
 	}
 	return -1;
 }
-#include "Crypto.h"
+
 string AesEncryptor::EncryptString(string strInfor) {
 	int nLength = strInfor.length();
 	int spaceLength = 16 - (nLength % 16);
