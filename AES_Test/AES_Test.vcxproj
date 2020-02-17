@@ -14,14 +14,14 @@
     <ProjectGuid>{4E123B7B-F981-4DA0-ACFE-8BCB0DCD45D1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>AES_Test</RootNamespace>
-    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -81,6 +81,7 @@
   <ItemGroup>
     <ClInclude Include="aes.h" />
     <ClInclude Include="AesHelper.h" />
+    <ClInclude Include="base64New.h" />
     <ClInclude Include="CCodeVerify.h" />
     <ClInclude Include="CHardInfo.h" />
     <ClInclude Include="stdafx.h" />
@@ -91,6 +92,7 @@
     <ClCompile Include="aes.cpp" />
     <ClCompile Include="AesHelper.cpp" />
     <ClCompile Include="AES_Test.cpp" />
+    <ClCompile Include="base64New.cpp" />
     <ClCompile Include="CCodeVerify.cpp" />
     <ClCompile Include="CHardInfo.cpp" />
     <ClCompile Include="stdafx.cpp" />

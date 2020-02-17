@@ -27,9 +27,10 @@ void CAesHelper::Padding(unsigned char* pSrc, int nSrcLen)
 	if (nSrcLen < KEYCODELENGTH)
 	{
 		unsigned char ucPad = KEYCODELENGTH - nSrcLen;
+
 		for (int nID = KEYCODELENGTH; nID > nSrcLen; --nID)
 		{
-			pSrc[nID - 1] = ucPad;
+			pSrc[nID - 1] = '\0';
 		}
 	}
 }

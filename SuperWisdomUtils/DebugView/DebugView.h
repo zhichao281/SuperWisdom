@@ -11,6 +11,8 @@
 
 #include <vector>
 #include <map>
+#include <string>
+using namespace std;
 typedef void(*pPrintCallback)(const char* pProcessName, const int nPid, char* pBuff);
 
 namespace WisdomUtils
