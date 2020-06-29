@@ -29,10 +29,11 @@ public:
 	{
 		//printf("%s ==> %d", strMsg.c_str(), nVal);  
 		cout << strMsg.c_str() << " ==> " << nVal << endl;
+		Sleep(3000);
 	}
 };
 
-int main11()
+int main()
 {
 	CSender sender;
 	CReceiver recever;

@@ -14,21 +14,21 @@
     <ProjectGuid>{B3B17314-4280-4A5F-B60B-C7CE72D658B3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SuperWisdomUtils</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -61,7 +61,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <UACExecutionLevel>AsInvoker</UACExecutionLevel>
-      <AdditionalDependencies>libeay32.lib;ssleay32.lib;DXGI.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -101,13 +101,6 @@
     <ClCompile Include="GetSysInfo\WMIInfo.cpp" />
     <ClCompile Include="gtest-1.7.0\gtest\gtest-all.cc" />
     <ClCompile Include="gtest-1.7.0\gtest\gtest_main.cc" />
-    <ClCompile Include="gtestmain.cpp" />
-    <ClCompile Include="HardInfo\CCodeVerify.cpp" />
-    <ClCompile Include="HardInfo\CHardInfo.cpp" />
-    <ClCompile Include="HardInfo\CHardInfo_Test.cpp" />
-    <ClCompile Include="HardInfo\HardInfo.cpp" />
-    <ClCompile Include="HardInfo\Main_Test.cpp" />
-    <ClCompile Include="HDSerial.cpp" />
     <ClCompile Include="HttpClientLib\HttpClient.cpp" />
     <ClCompile Include="Json\jsoncpp.cpp" />
     <ClCompile Include="Json\NSJson.cpp" />
@@ -177,112 +170,6 @@
     <ClInclude Include="GetSysInfo\SRMNvidiaGPUInfo.h" />
     <ClInclude Include="GetSysInfo\WMIInfo.h" />
     <ClInclude Include="gtest-1.7.0\gtest\gtest.h" />
-    <ClInclude Include="HardInfo\CCodeVerify.h" />
-    <ClInclude Include="HardInfo\CHardInfo.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\aes.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\asn1.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\asn1err.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\asn1t.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\asn1_mac.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\async.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\asyncerr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\bio.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\bioerr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\blowfish.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\bn.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\bnerr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\buffer.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\buffererr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\camellia.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\cast.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\cmac.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\cms.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\cmserr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\comp.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\comperr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\conf.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\conferr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\conf_api.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\crypto.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\cryptoerr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ct.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\cterr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\des.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\dh.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\dherr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\dsa.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\dsaerr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\dtls1.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ebcdic.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ec.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ecdh.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ecdsa.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ecerr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\engine.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\engineerr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\err.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\evp.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\evperr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\e_os2.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\hmac.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\idea.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\kdf.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\kdferr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\lhash.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\md2.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\md4.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\md5.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\mdc2.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\modes.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\objects.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\objectserr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\obj_mac.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ocsp.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ocsperr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\opensslconf.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\opensslv.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ossl_typ.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\pem.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\pem2.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\pemerr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\pkcs12.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\pkcs12err.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\pkcs7.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\pkcs7err.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\rand.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\randerr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\rand_drbg.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\rc2.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\rc4.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\rc5.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ripemd.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\rsa.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\rsaerr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\safestack.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\seed.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\sha.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\srp.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\srtp.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ssl.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ssl2.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ssl3.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\sslerr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\stack.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\store.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\storeerr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\symhacks.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\tls1.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ts.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\tserr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\txt_db.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\ui.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\uierr.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\whrlpool.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\x509.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\x509err.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\x509v3.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\x509v3err.h" />
-    <ClInclude Include="HardInfo\openssl\x86\include\openssl\x509_vfy.h" />
     <ClInclude Include="HDSerial.h" />
     <ClInclude Include="head.h" />
     <ClInclude Include="HSingleton.h" />
