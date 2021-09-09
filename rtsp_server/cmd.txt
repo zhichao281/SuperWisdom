@@ -1,0 +1,7 @@
+export LD_LIBRARY_PATH=./live555/lib:$LD_LIBRARY_PATH
+
+sudo docker exec -it a6150ca6b6e0 /bin/bash
+
+show variables like 'character%';
+
+curl -H "Content-Type:applicatopn/json" -X POST -d '{"device_id":200000003}' http://45.4.149.3:7999/api/get_rtsp_addr
