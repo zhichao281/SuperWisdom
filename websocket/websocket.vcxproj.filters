@@ -62,13 +62,13 @@
     <ClCompile Include="NSLog.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="requestparser.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="HttpServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ServerListener.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SimpleHTTP\requestparser.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
