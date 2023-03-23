@@ -42,7 +42,7 @@ namespace netlib
 		// 线程池是否在运行
 		bool IsRunning();
 		
-
+		int ThreadPool::getCompletedTaskCount() const;
 		// 获取线程池实例
 		static ThreadPool* GetInstance();
 
@@ -72,6 +72,7 @@ private:
 		std::vector<std::shared_ptr<std::thread>> m_vecThread;     //用来保存线程对象指针
 		//空闲线程数量
 		std::atomic<int>  m_idlThrNum;
+		std::atomic<int> m_nCompletedTasks{ 0 };
 
 	};
 }
